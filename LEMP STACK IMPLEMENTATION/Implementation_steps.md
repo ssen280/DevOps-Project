@@ -33,4 +33,9 @@ sudo systemctl status nginx
 
 <img width="1410" alt="Screenshot 2022-05-15 at 7 13 06 PM" src="https://user-images.githubusercontent.com/105562242/168476001-f0ba00fc-9882-4da2-b933-a3258ead37d7.png">
 
+<img width="883" alt="Screenshot 2022-05-15 at 7 20 06 PM" src="https://user-images.githubusercontent.com/105562242/168476303-cc5c9858-7d9e-4c21-933a-b38a438a78d8.png">
+
+<img width="891" alt="Screenshot 2022-05-15 at 7 21 16 PM" src="https://user-images.githubusercontent.com/105562242/168476367-f3675b8c-4133-43be-be4e-b62658ef7565.png">
+
+
 
