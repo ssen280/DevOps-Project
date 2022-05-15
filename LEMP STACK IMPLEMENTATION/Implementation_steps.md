@@ -103,6 +103,7 @@ sudo vim /etc/nginx/sites-available/web-lemp
 ##### This will create a new blank file. Paste in the following bare-bones configuration:
 
 <img width="888" alt="Screenshot 2022-05-16 at 1 07 38 AM" src="https://user-images.githubusercontent.com/105562242/168490937-b5bcc96d-5b55-4b9a-8d55-fd453539dce7.png">
+
 ```
 sudo ln -s /etc/nginx/sites-available/web-lemp /etc/nginx/sites-enabled/
 sudo nginx -t
