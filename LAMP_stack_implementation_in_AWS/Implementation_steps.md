@@ -22,3 +22,18 @@
 2. We will open port 80 to access web page from outside, using EC2 instance's public ip address
 
 <img width="1393" alt="Screenshot 2022-05-15 at 3 04 03 AM" src="https://user-images.githubusercontent.com/105562242/168448812-b75e5a36-1245-4fec-bab0-85990bde8037.png">
+
+### Installing Apache in OS
+
+##### Apache HTTP Server is the most widely used web server software. Developed and maintained by Apache Software Foundation, Apache is an open source software available for free. It runs on 67% of all webservers in the world. It is fast, reliable, and secure.
+
+* update a list of packages in package manager
+  ##### sudo apt update
+
+* run apache2 package installation
+  ##### sudo apt install apache2
+* Check the status 
+  ##### sudo systemctl status apache2
+  
+  <img width="888" alt="Screenshot 2022-05-15 at 2 04 34 PM" src="https://user-images.githubusercontent.com/105562242/168464216-aad6d4ab-b044-4d29-bd77-bb1cabbb267b.png">
+
