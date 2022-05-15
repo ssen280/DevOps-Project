@@ -36,4 +36,9 @@
   ##### sudo systemctl status apache2
   
   <img width="888" alt="Screenshot 2022-05-15 at 2 04 34 PM" src="https://user-images.githubusercontent.com/105562242/168464216-aad6d4ab-b044-4d29-bd77-bb1cabbb267b.png">
+  
+* We can access page from internet browser with public IP address of EC2 instace on port 80 
+
+<img width="1257" alt="Screenshot 2022-05-15 at 2 06 14 PM" src="https://user-images.githubusercontent.com/105562242/168464316-f2ef6d78-b02b-464b-89e0-33263fb03d1a.png">
+
 
