@@ -86,9 +86,53 @@
 
 ##### now use a2ensite command to enable the new virtual host:
 
-sudo a2ensite web-lamp
+##### sudo a2ensite web-lamp
+
+##### We might want to disable the default website that comes installed with Apache. This is required if we are not using a custom domain name, because in this case Apache’s default configuration would overwrite our virtual host. To disable Apache’s default website use a2dissite command
+
+##### sudo a2dissite 000-default
+
+##### To make sure our configuration file doesn’t contain syntax errors, run:
+
+##### sudo apache2ctl configtest
+
+##### Finally, reload Apache so these changes take effect:
+
+##### sudo systemctl reload apache2
 
 
+<img width="807" alt="Screenshot 2022-05-15 at 2 44 31 PM" src="https://user-images.githubusercontent.com/105562242/168465814-ba529d83-c315-47fb-ad12-88ac5f6eb089.png">
+
+
+##### but the web root /var/www/projectlamp is still empty. We will create an index.html file in that location so that we can test that the virtual host works as expected:
+
+<img width="886" alt="Screenshot 2022-05-15 at 2 53 34 PM" src="https://user-images.githubusercontent.com/105562242/168466037-a6c3f2d1-450d-423d-815e-8e84527cdd17.png">
+<img width="896" alt="Screenshot 2022-05-15 at 2 54 47 PM" src="https://user-images.githubusercontent.com/105562242/168466039-d24862fd-ea18-421d-8506-8c9f28ae5c3b.png">
+
+<img width="992" alt="Screenshot 2022-05-15 at 2 55 10 PM" src="https://user-images.githubusercontent.com/105562242/168466046-ca6dfdba-5a50-416f-ab7d-baccc82f4502.png">
+
+<img width="862" alt="Screenshot 2022-05-15 at 2 58 10 PM" src="https://user-images.githubusercontent.com/105562242/168466152-2abcfbbd-d471-4cd0-9fc4-933b7771a0d1.png">
+<img width="1064" alt="Screenshot 2022-05-15 at 2 58 22 PM" src="https://user-images.githubusercontent.com/105562242/168466156-0189a4c4-8bb6-47cc-8de1-e723d0873e2d.png">
+
+
+##### We can leave this file in place as a temporary landing page for your application until we set up an index.php file to replace it. Once we do that, remember to remove or rename the index.html file from our document root, as it would take precedence over an index.php file by default.
+
+#### Enable PHP on the website
+
+##### With the default DirectoryIndex settings on Apache, a file named index.html will always take precedence over an index.php file. This is useful for setting up maintenance pages in PHP applications, by creating a temporary index.html file containing an informative message to visitors. Because this page will take precedence over the index.php page, it will then become the landing page for the application. Once maintenance is over, the index.html is renamed or removed from the document root, bringing back the regular application page.
+
+##### In case we want to change this behavior, we’ll need to edit the /etc/apache2/mods-enabled/dir.conf file and change the order in which the index.php file is listed within the DirectoryIndex directive:
+
+##### sudo vim /etc/apache2/mods-enabled/dir.conf
+
+---
+<IfModule mod_dir.c>
+        #Change this:
+        #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+        #To this:
+        DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+--- 
 
 
 
