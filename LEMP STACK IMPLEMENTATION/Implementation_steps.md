@@ -101,7 +101,19 @@ sudo vim /etc/nginx/sites-available/web-lemp
 
 ##### This will create a new blank file. Paste in the following bare-bones configuration:
 
-<img width="888" alt="Screenshot 2022-05-15 at 11 36 43 PM" src="https://user-images.githubusercontent.com/105562242/168487425-dfedb8e0-0a8e-407f-982d-2eb576d5a063.png">
+<img width="888" alt="Screenshot 2022-05-16 at 1 07 38 AM" src="https://user-images.githubusercontent.com/105562242/168490937-b5bcc96d-5b55-4b9a-8d55-fd453539dce7.png">
+```
+sudo ln -s /etc/nginx/sites-available/web-lemp /etc/nginx/sites-enabled/
+sudo nginx -t
+```
+##### We shall see following message:
+
+```
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+```
+##### Activate  configuration by linking to the config file from Nginx’s sites-enabled directory:
 
 <img width="889" alt="Screenshot 2022-05-15 at 11 23 57 PM" src="https://user-images.githubusercontent.com/105562242/168486925-f7da77f6-8ceb-4403-a01e-df2ab2de72b2.png">
 
