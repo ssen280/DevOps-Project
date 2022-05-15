@@ -133,6 +133,39 @@
         DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
 ```
+##### After saving and closing the file, we will need to reload Apache so the changes take effect:
+
+##### sudo systemctl reload apache2
+
+##### Finally, we will create a PHP script to test that PHP is correctly installed and configured on your server.
+
+##### Now that we have a custom location to host our website’s files and folders, we’ll create a PHP test script to confirm that Apache is able to handle and process requests for PHP files.
+
+##### Create a new file named index.php inside custom web root folder:
+
+``` vim /var/www/projectlamp/index.php ```
+##### This will open a blank file. Add the following text, which is valid PHP code, inside the file:
+
+``` 
+<?php
+phpinfo(); 
+```
+
+<img width="888" alt="Screenshot 2022-05-15 at 3 07 04 PM" src="https://user-images.githubusercontent.com/105562242/168466723-9850ba44-6694-42b3-8eff-e8b07a4a4eca.png">
+
+
+<img width="1108" alt="Screenshot 2022-05-15 at 3 07 20 PM" src="https://user-images.githubusercontent.com/105562242/168466731-3713225c-14cf-428c-9079-a81bb5bc65ce.png">
+
+
+##### This page provides information about our server from the perspective of PHP. It is useful for debugging and to ensure that your settings are being applied correctly.
+
+##### If we can see this page in browser, then  PHP installation is working as expected.
+
+##### After checking the relevant information about PHP server through that page, it’s best to remove the file we created as it contains sensitive information about our PHP environment -and our Ubuntu server. we can use rm to do so:
+
+``` sudo rm /var/www/projectlamp/index.php ```
+
+
 
 
 
