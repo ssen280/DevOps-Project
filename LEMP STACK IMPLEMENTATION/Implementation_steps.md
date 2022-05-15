@@ -55,7 +55,8 @@ sudo systemctl status nginx
 ```
 sudo apt install mysql-server
 sudo mysql
-````
+
+```
 
 <img width="882" alt="Screenshot 2022-05-15 at 8 01 46 PM" src="https://user-images.githubusercontent.com/105562242/168478168-2b297430-f30a-4712-867f-ad20c64a96ab.png">
 
@@ -152,10 +153,85 @@ phpinfo();
 <img width="886" alt="Screenshot 2022-05-16 at 1 06 13 AM" src="https://user-images.githubusercontent.com/105562242/168490789-58f807ac-33ac-462d-aa87-00f0c2970c8f.png">
 
 
+<img width="1286" alt="Screenshot 2022-05-16 at 1 14 54 AM" src="https://user-images.githubusercontent.com/105562242/168491127-f1ff781c-bebf-4fc9-98d7-f97cbb44149b.png">
+
+##### Retrieving data from MySQL database with PHP:
+
+##### In this step you will create a test database (DB) with simple "To do list" and configure access to it, so the Nginx website would be able to query data from the DB and display it.
+
+##### At the time of this writing, the native MySQL PHP library mysqlnd doesn’t support caching_sha2_authentication, the default authentication method for MySQL 8. We’ll need to create a new user with the mysql_native_password authentication method in order to be able to connect to the MySQL database from PHP.
+
+##### We will create a database named example_database and a user named example_user, but you can replace these names with different values
+
+##### First, connect to the MySQL console using the root account:
+```
+sudo mysql
+```
+##### To create a new database, run the following command from your MySQL console:
+```
+mysql> CREATE DATABASE `example_database`;
+```
+##### Now you can create a new user and grant him full privileges on the database you have just created.
+
+##### The following command creates a new user named example_user, using mysql_native_password as default authentication method. We’re defining this user’s password as password, but you should replace this value with a secure password of your own choosing.
+```
+mysql>  CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+##### Now we need to give this user permission over the example_database database:
+```
+mysql> GRANT ALL ON example_database.* TO 'example_user'@'%';
+```
+##### This will give the example_user user full privileges over the example_database database, while preventing this user from creating or modifying other databases on your server.
+
+##### Now exit the MySQL shell with:
+```
+mysql> exit
+```
+##### We can test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials:
+```
+mysql -u example_user -p
+```
+##### Notice the -p flag in this command, which will prompt you for the password used when creating the example_user user. After logging in to the MySQL console, confirm that you have access to the example_database database:
+```
+mysql> SHOW DATABASES;
+```
+
+<img width="890" alt="Screenshot 2022-05-16 at 1 28 11 AM" src="https://user-images.githubusercontent.com/105562242/168492113-1f3ddcaf-1f60-4715-bac3-4b12b8f05bc9.png">
+
+<img width="885" alt="Screenshot 2022-05-16 at 1 29 20 AM" src="https://user-images.githubusercontent.com/105562242/168492156-c8aee3c2-b715-4a1b-a77d-7688b7ff6da0.png">
 
 
+##### Next, we’ll create a test table named todo_list. From the MySQL console, run the following statement:
+```
+CREATE TABLE example_database.todo_list (
+mysql>     item_id INT AUTO_INCREMENT,
+mysql>     content VARCHAR(255),
+mysql>     PRIMARY KEY(item_id)
+mysql> );
+```
+##### Insert a few rows of content in the test table. You might want to repeat the next command a few times, using different VALUES:
+```
+mysql> INSERT INTO example_database.todo_list (content) VALUES ("My first important item");
+```
+##### To confirm that the data was successfully saved to your table, run:
+```
+mysql>  SELECT * FROM example_database.todo_list;
+```
+
+<img width="888" alt="Screenshot 2022-05-16 at 1 34 08 AM" src="https://user-images.githubusercontent.com/105562242/168492255-e66e157e-9c92-4d14-bb38-9f1b55c0685b.png">
+
+##### Now we can create a PHP script that will connect to MySQL and query for your content. Create a new PHP file in  custom web root directory using preferred editor. We’ll use vi for that:
+```
+nano /var/www/projectLEMP/todo_list.php
+```
+##### The following PHP script connects to the MySQL database and queries for the content of the todo_list table, displays the results in a list. If there is a problem with the database connection, it will throw an exception.
+
+<img width="889" alt="Screenshot 2022-05-16 at 1 37 01 AM" src="https://user-images.githubusercontent.com/105562242/168492315-7065624b-f55a-4cd1-a646-ee8c1403db64.png">
+
+##### We should see a page like this, showing the content we’ve inserted in  test table:
 
 
+<img width="973" alt="Screenshot 2022-05-16 at 1 51 30 AM" src="https://user-images.githubusercontent.com/105562242/168492351-e27c1362-a0c3-4f84-9491-4ab96b520c97.png">
 
 
 
