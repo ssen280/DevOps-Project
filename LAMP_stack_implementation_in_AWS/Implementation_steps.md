@@ -68,9 +68,25 @@
 
 ### Creating a virtual host for our website using apache
 
-##### In this project, we will set up a domain called web-lamp
+#### In this project, we will set up a domain called web-lamp
+
+##### Create the directory for projectlamp using ‘mkdir’ command and provide owner ship as follows(Here we are using root user hence ownership change is not required):
+
+##### sudo mkdir /var/www/projectlamp
+#####  sudo chown -R $USER:$USER /var/www/projectlamp. ( prefered username & group name)
+
+<img width="848" alt="Screenshot 2022-05-15 at 2 33 16 PM" src="https://user-images.githubusercontent.com/105562242/168465351-5f1ed522-e0a0-4090-8d23-f65efa90a527.png">
+
+##### Then, create and open a new configuration file in Apache’s sites-available directory using preferred command-line editor
+
+##### sudo vi /etc/apache2/sites-available/web-lamp.conf
+
+<img width="887" alt="Screenshot 2022-05-15 at 2 40 45 PM" src="https://user-images.githubusercontent.com/105562242/168465586-3d70d60e-9be3-4ba0-9750-35a470f8c775.png">
 
 
+##### now use a2ensite command to enable the new virtual host:
+
+sudo a2ensite web-lamp
 
 
 
