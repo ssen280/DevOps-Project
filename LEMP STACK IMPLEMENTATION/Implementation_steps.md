@@ -127,7 +127,7 @@ sudo vim /etc/nginx/sites-available/web-lemp
 ##### We can do this by creating a test PHP file in our document root. Open a new file called info.php within our document root in text editor:
 
 ```
-sudo nano /var/www/web-lemp/info.php
+sudo nano /var/www/web-lemp/index.php
 ```
 ```
 Type or paste the following lines into the new file. This is valid PHP code that will return information about server:
@@ -136,7 +136,9 @@ Type or paste the following lines into the new file. This is valid PHP code that
 phpinfo();
 
 ```
-<img width="887" alt="Screenshot 2022-05-15 at 11 52 29 PM" src="https://user-images.githubusercontent.com/105562242/168488010-7b405d2d-60fb-4280-a0e3-ab60eb6cabb6.png">
+
+<img width="886" alt="Screenshot 2022-05-16 at 1 06 13 AM" src="https://user-images.githubusercontent.com/105562242/168490789-58f807ac-33ac-462d-aa87-00f0c2970c8f.png">
+
 
 
 
