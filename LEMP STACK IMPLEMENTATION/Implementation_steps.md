@@ -37,5 +37,13 @@ sudo systemctl status nginx
 
 <img width="891" alt="Screenshot 2022-05-15 at 7 21 16 PM" src="https://user-images.githubusercontent.com/105562242/168476367-f3675b8c-4133-43be-be4e-b62658ef7565.png">
 
+##### Our server is running and we can access it locally and from the Internet (Source 0.0.0.0/0 means ‘from any IP address’).
+
+##### First, let us try to check how we can access it locally in our Ubuntu shell, run:
+
+<img width="885" alt="Screenshot 2022-05-15 at 7 39 24 PM" src="https://user-images.githubusercontent.com/105562242/168477315-86be23f9-5789-4e3b-8ed6-66ba703f447b.png">
+
+
+
 
 
