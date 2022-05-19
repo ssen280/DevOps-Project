@@ -21,5 +21,8 @@
 
 ##### In this project, we will have the hands-on experience that showcases Three-tier Architecture while also ensuring that the disks used to store files on the Linux servers are adequately partitioned and managed through programs such as gdisk and LVM respectively.
 
-
+##### 3-Tier Setup : 
+* A Laptop or PC to serve as a client
+* An EC2 Linux Server as a web server (This is where you will install WordPress)
+* An EC2 Linux server as a database (DB) server( RedHat OS )
 
