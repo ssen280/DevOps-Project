@@ -148,4 +148,27 @@ Locate the log folder for Apache on the Web Server and mount it to NFS server’
 
 <img width="888" alt="Screenshot 2022-07-13 at 2 00 52 AM" src="https://user-images.githubusercontent.com/105562242/178589674-ac4464f7-05a8-4b02-b0b5-0b1ee5ba2900.png">
 
+Deploy the tooling website’s code (https://github.com/ssen280/tooling.git) to the Webserver. We will ensure that the html folder from the repository is deployed to /var/www/html
+
+<img width="1204" alt="Screenshot 2022-07-12 at 1 31 16 AM" src="https://user-images.githubusercontent.com/105562242/178590282-54edb181-bbbb-418e-a9a8-67cbe693d049.png">
+
+Note 2: If we encounter 403 Error – check permissions to /var/www/html folder and also disable SELinux sudo setenforce 0
+To make this change permanent – open following config file sudo vi /etc/sysconfig/selinux and set SELINUX=disabledthen restrt httpd.
+
+Update the website’s configuration to connect to the database (in /var/www/html/functions.php file). Apply tooling-db.sql script to database using this command mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql
+
+<img width="1204" alt="Screenshot 2022-07-12 at 1 31 16 AM" src="https://user-images.githubusercontent.com/105562242/178590847-5133ea74-ad5e-496f-8376-57a7c664cf4c.png">
+
+Create in MySQL a new admin user with username: admin and password: password:
+ 
+```
+ INSERT INTO users (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES
+-> ('1', ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
+  
+```
+  
+Now we can access and login to page :
+  
+<img width="889" alt="Screenshot 2022-07-13 at 1 51 16 AM" src="https://user-images.githubusercontent.com/105562242/178592317-dc2185d5-a12c-4f65-b828-b9c502ad931d.png">
+
 
