@@ -169,6 +169,7 @@ Create in MySQL a new admin user with username: admin and password: password:
   
 Now we can access and login to page :
   
-<img width="889" alt="Screenshot 2022-07-13 at 1 51 16 AM" src="https://user-images.githubusercontent.com/105562242/178592317-dc2185d5-a12c-4f65-b828-b9c502ad931d.png">
+
+<img width="1612" alt="Screenshot 2022-07-13 at 2 17 23 AM" src="https://user-images.githubusercontent.com/105562242/178592475-40f1dd08-5c8a-49c9-8849-f7898cf86e7a.png">
 
 
