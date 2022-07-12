@@ -163,7 +163,7 @@ Create in MySQL a new admin user with username: admin and password: password:
  
 ```
  INSERT INTO users (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES
--> ('1', ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
+-> ('1', ‘admin’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
   
 ```
   
