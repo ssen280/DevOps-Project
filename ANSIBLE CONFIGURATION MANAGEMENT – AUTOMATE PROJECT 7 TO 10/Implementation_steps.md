@@ -135,7 +135,8 @@ ssh -A ubuntu@public-ip-of jenkin-ansibel server
 
 <img width="1724" alt="Screenshot 2022-07-26 at 4 47 04 AM" src="https://user-images.githubusercontent.com/105562242/181066952-3b0ee4d4-f826-4907-9697-c8b3f5e13064.png">
 
-![Uploading Screenshot 2022-07-26 at 4.48.30 AM.png…]()
+
+<img width="1200" alt="Screenshot 2022-07-26 at 4 48 30 AM" src="https://user-images.githubusercontent.com/105562242/181067413-6232d392-af8b-42d9-ba73-0aa7ef81df93.png">
 
 
 
