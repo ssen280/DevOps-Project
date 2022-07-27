@@ -1,4 +1,4 @@
-
+## PROJECT 11
 In Projects 7 to 10 we had to perform a lot of manual operations to seet up virtual servers, install and configure required software, deploy  web application.
 
 In this project we will automate manual jobs by using Ansible 
@@ -138,6 +138,7 @@ ssh -A ubuntu@public-ip-of jenkin-ansibel server
 
 <img width="1200" alt="Screenshot 2022-07-26 at 4 48 30 AM" src="https://user-images.githubusercontent.com/105562242/181067413-6232d392-af8b-42d9-ba73-0aa7ef81df93.png">
 
+<img width="1027" alt="Screenshot 2022-07-27 at 7 33 34 AM" src="https://user-images.githubusercontent.com/105562242/181144511-be14340c-4ced-4220-afe0-7c302fab087a.png">
 
 
 
