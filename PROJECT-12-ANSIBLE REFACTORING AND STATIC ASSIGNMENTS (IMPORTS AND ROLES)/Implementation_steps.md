@@ -168,7 +168,8 @@ ansible-galaxy init webserver
 <img width="1678" alt="Screenshot 2022-07-26 at 7 13 08 AM" src="https://user-images.githubusercontent.com/105562242/181162832-d1bdafc9-6233-49f4-a28c-c52db2d705ef.png">
 <img width="960" alt="Screenshot 2022-07-26 at 7 15 40 AM" src="https://user-images.githubusercontent.com/105562242/181162861-75b45b2f-63cd-49d9-9233-b473fb03a8a7.png">
 
-![Uploading Screenshot 2022-07-26 at 7.16.57 AM.png…]()
+<img width="1054" alt="Screenshot 2022-07-26 at 7 16 57 AM" src="https://user-images.githubusercontent.com/105562242/181166825-ac622b62-c405-467e-8520-2c361ad7a85e.png">
+
 
 <img width="1349" alt="Screenshot 2022-07-26 at 7 21 04 AM" src="https://user-images.githubusercontent.com/105562242/181162949-49118599-e1dd-4e62-8b7a-de239c71c6cb.png">
 <img width="1233" alt="Screenshot 2022-07-26 at 7 21 15 AM" src="https://user-images.githubusercontent.com/105562242/181162967-c056d161-1489-4483-a012-8424767d64ba.png">
