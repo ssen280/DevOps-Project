@@ -198,12 +198,73 @@ pipeline {
 
 <img width="1721" alt="Screenshot 2022-08-12 at 1 05 13 AM" src="https://user-images.githubusercontent.com/105562242/185844143-5db7ceee-1299-491c-bcb7-c19e013ccd1c.png">
 
-  <img width="1687" alt="Screenshot 2022-08-22 at 10 48 07 AM" src="https://user-images.githubusercontent.com/105562242/185844587-8a82da71-3ab0-4553-9bd9-d16931d7ffd2.png">
+<img width="1687" alt="Screenshot 2022-08-22 at 10 48 07 AM" src="https://user-images.githubusercontent.com/105562242/185844587-8a82da71-3ab0-4553-9bd9-d16931d7ffd2.png">
 
+ <img width="1713" alt="Screenshot 2022-08-12 at 1 05 32 AM" src="https://user-images.githubusercontent.com/105562242/185844749-3dcf6c46-27c8-4a47-ba4e-2b7f99640981.png">
+
+ <img width="1728" alt="Screenshot 2022-08-12 at 1 06 19 AM" src="https://user-images.githubusercontent.com/105562242/185844775-e4c5127e-d1ed-4c27-be7d-9f97dedb3816.png">
+
+    ##### We will create a new branch, add more stages into the Jenkins file to simulate below phases. (Just add an echo command like we have in build and test stages)
+   1. Package 
+   2. Deploy 
+   3. Clean up
+
+##### - Verify in Blue Ocean that all the stages are working, then merge your feature branch to the main branch
+##### - Eventually, your main branch should have a successful pipeline like this in blue ocean
   
+```
+  pipeline {
+   agent any
 
+ stages {
+   stage("Initial cleanup"){
+     steps {
+       dir("${WORKSPACE}"){
+         deleteDir()
+       }
+     }
+   }
+   
+    stage('Build') {
+      steps {
+        script {
+         sh 'echo "Building Stage"'
+       }
+     }
+   }
 
+   stage('Test') {
+     steps {
+       script {
+         sh 'echo "Testing Stage"'
+       }
+     }
+   }
+   stage('Package') {
+     steps {
+       script {
+         sh 'echo "Packaging Stage"'
+       }
+     }
+   }
+   stage('Deploy') {
+     steps {
+       script {
+         sh 'echo "Deploying Stage"'
+       }
+     }
+   }
+   stage('Clean up') {
+     steps {
+       cleanWs()
+       }
+     }
   
+   }
+ }
+```
+<img width="1718" alt="Screenshot 2022-08-12 at 5 23 49 AM" src="https://user-images.githubusercontent.com/105562242/185845977-44e3eb86-3817-40de-aa52-6dd7f216da41.png">
+
 
 
 
