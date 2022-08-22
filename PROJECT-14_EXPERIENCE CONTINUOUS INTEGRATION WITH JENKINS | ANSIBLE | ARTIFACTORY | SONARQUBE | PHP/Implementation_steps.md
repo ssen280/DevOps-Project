@@ -265,7 +265,9 @@ pipeline {
 ```
 <img width="1718" alt="Screenshot 2022-08-12 at 5 23 49 AM" src="https://user-images.githubusercontent.com/105562242/185845977-44e3eb86-3817-40de-aa52-6dd7f216da41.png">
 
-
+#### Running Ansible playbook from Jenkins
+    
+    
 
 
 
