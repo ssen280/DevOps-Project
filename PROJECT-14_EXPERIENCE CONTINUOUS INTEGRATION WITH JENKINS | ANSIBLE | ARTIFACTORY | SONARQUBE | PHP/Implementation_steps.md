@@ -266,8 +266,42 @@ pipeline {
 <img width="1718" alt="Screenshot 2022-08-12 at 5 23 49 AM" src="https://user-images.githubusercontent.com/105562242/185845977-44e3eb86-3817-40de-aa52-6dd7f216da41.png">
 
 #### Running Ansible playbook from Jenkins
+
+##### Installing Ansible plugin from manage plugins on Jenkins to run ansible commands
+##### Clearing the codes in the Jenkinsfile to start from the scratch
+##### For ansible to be able to locate the roles in my playbook, the ansible.cfg is copied to '/deploy' folder and then exported from the Jenkinsfile code
     
+##### The structure of the deployment folder now 
     
+<img width="822" alt="Screenshot 2022-08-22 at 11 24 41 AM" src="https://user-images.githubusercontent.com/105562242/185848951-5c1316f8-4804-4de2-bbca-5213853a8333.png">
+
+##### Ansible config file details :
+    
+```
+[defaults]
+timeout = 160
+callback_whitelist = profile_tasks
+log_path=~/ansible.log
+host_key_checking = False
+gathering = smart
+ansible_python_interpreter=/usr/bin/python3
+allow_world_readable_tmpfiles=true
 
 
+[ssh_connection]
+ssh_args = -o ControlMaster=auto -o ControlPersist=30m -o ControlPath=/tmp/ansible-ssh-%h-%p-%r -o ServerAliveInterval=60 -o ServerAliveCountMax=60 -o ForwardAgent=yes
+```
+ ##### We will use jenkins pipeline syntax Ansible tool to generate syntax for executing playbook.
+ 
+ ##### We have to populate below fileds. 
+ - Playbook file path in workspace ( playbook: 'playbooks/site.yaml')
+ - Inventory file path in workspace ( inventory: 'inventory/dev.yaml')
+ - We have select ssh communication so that Jenkin can communication with server through ssh cert. same cert which we use to access servers. and we have to click on 'generate pipeline script button'
+ - After pupulating above mentioned fileds and generating script. we have to use that script in our jenkinsfile. which is look like as below 
+    
+ ```
+ ansiblePlaybook become: true, colorized: true, credentialsId: 'ssh-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yaml', playbook: 'playbooks/site.yaml'
+ ```
+
+<img width="1266" alt="Screenshot 2022-08-22 at 11 38 47 AM" src="https://user-images.githubusercontent.com/105562242/185850826-1893c355-1924-4612-9fba-615dc5f5de18.png">
 
