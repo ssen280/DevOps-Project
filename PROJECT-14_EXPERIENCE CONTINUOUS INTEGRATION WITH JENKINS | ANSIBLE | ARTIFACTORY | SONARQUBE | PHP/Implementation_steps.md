@@ -305,3 +305,81 @@ ssh_args = -o ControlMaster=auto -o ControlPersist=30m -o ControlPath=/tmp/ansib
 
 <img width="1266" alt="Screenshot 2022-08-22 at 11 38 47 AM" src="https://user-images.githubusercontent.com/105562242/185850826-1893c355-1924-4612-9fba-615dc5f5de18.png">
 
+##### Introducing parameterization which enables us to input the appropriate values for the inventory file we want playbook to run against:
+```
+  parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+```
+<img width="1597" alt="Screenshot 2022-08-22 at 7 26 45 PM" src="https://user-images.githubusercontent.com/105562242/185938680-2ed98c6c-7fa5-40d6-bb34-f083bab274fb.png">
+
+##### Now in the Ansible execution section, We will remove the hardcoded inventory/dev and replace with `${inventory} so that we can get option to choose our desire dev/test/pod environment. 
+    
+##### Final ansible file looks like as below 
+    
+```
+pipeline {
+  agent any
+
+  environment {
+      ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
+    }
+
+  parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+
+  stages{
+      stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+      stage('Checkout SCM') {
+         steps{
+            git branch: 'main', url: 'https://github.com/ssen280/PROJECT-14-ansible-configuration-management.git'
+         }
+       }
+
+      stage('Prepare Ansible For Execution') {
+        steps {
+          sh 'echo ${WORKSPACE}' 
+          sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
+        }
+     }
+
+      stage('Run Ansible playbook') {
+        steps {
+           ansiblePlaybook become: true, colorized: true, credentialsId: 'ssh-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yaml'
+         }
+      }
+
+      stage('Clean Workspace after build'){
+        steps{
+          cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
+        }
+      }
+   }
+
+}
+```
+#### Setting Up The Artifactory Server:
+-------------------------------------------------
+##### Since the goal here is to deploy applications directory from Artifactory rather than git, the following step is taken:
+
+##### - We will create one account on artifactory server.
+##### - We will the repository where the artifacts will be uploaded to from the Jenkins server
+<img width="1718" alt="Screenshot 2022-08-22 at 7 44 09 PM" src="https://user-images.githubusercontent.com/105562242/185942729-45621993-b7ee-4401-9a02-2f337163c7b6.png">
+
+#####  Integrating Artifactory Repository With Jenkins:
+--------------------------------------------------
+##### - Installing plot plugin to display tests reports and code coverage and Artifactory plugins to easily upload code artifacts into an Artifactory server
+##### - Configuring Artifactory in Jenkins on ‘configure systems’
+<img width="1243" alt="Screenshot 2022-08-22 at 10 45 23 PM" src="https://user-images.githubusercontent.com/105562242/185980456-895cf202-6ddc-4f69-998d-474664d1e740.png">
+
+##### - Forking the repository into my Github account: https://github.com/darey-devops/php-todo.git
+##### - On database server, installing mysql: $ sudo yum install mysql-server
+
