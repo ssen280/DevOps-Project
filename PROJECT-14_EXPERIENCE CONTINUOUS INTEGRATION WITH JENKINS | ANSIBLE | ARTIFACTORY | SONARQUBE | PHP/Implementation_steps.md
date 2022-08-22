@@ -129,9 +129,81 @@ These are the major metrics that any DevOps team should track and monitor to und
 
 <img width="1061" alt="Screenshot 2022-08-22 at 9 05 36 AM" src="https://user-images.githubusercontent.com/105562242/185833529-4b78cd8d-18be-4f76-a08f-faee5ead47ac.png">
 
-##### Create a new Pipeline, choose the new repo and click on complete
+##### Create a new Pipeline, choose the new repo and click on complete. our newly created pipeline. It will take name of selected GitHub repository.
+<img width="992" alt="Screenshot 2022-08-22 at 9 15 36 AM" src="https://user-images.githubusercontent.com/105562242/185834453-9a9bce0c-6d1d-4ec4-8614-a96c09daf53a.png">
 
-<img width="1149" alt="Screenshot 2022-08-22 at 9 13 38 AM" src="https://user-images.githubusercontent.com/105562242/185834280-665f5f46-f0cd-4b97-93b0-f32802d5a9c1.png">
+##### Inside the Ansible project, create a new directory deploy and start a new file Jenkinsfile inside the directory.
+
+<img width="237" alt="Screenshot 2022-08-22 at 9 36 55 AM" src="https://user-images.githubusercontent.com/105562242/185837611-d54f2422-3c12-47ae-a2e5-952c2dc80a97.png">
+
+##### Add the code snippet below to start building the Jenkinsfile gradually. This pipeline currently has just one stage called Build and the only thing we are doing is using the shell script module to echo Building Stage
+
+```
+pipeline {
+    agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          sh 'echo "Building Stage"'
+        }
+      }
+    }
+    }
+}
+```
+
+##### Now go back into the Ansible pipeline in Jenkins, and select configure
+
+##### Now go back into the Ansible pipeline in Jenkins, and select configure
+##### Back to the pipeline again, this time click "Build now"
+##### This will trigger a build and you will be able to see the effect of our basic Jenkinsfile configuration by going through the console output of the build.
+
+##### To really appreciate and feel the difference of Cloud Blue UI, it is recommended to try triggering the build again from Blue Ocean interface.Select the project. Click on the play button against the branch
+
+##### Notice that this pipeline is a multibranch one. This means, if there were more than one branch in GitHub, Jenkins would have scanned the repository to discover them all and we would have been able to trigger a build for each branch.
+
+##### Let us see this in action.
+
+##### Create a new git branch and name it feature/<repo name>. Currently we only have the Build stage. Let us add another stage called Test. Paste the code snippet below and push the new changes to GitHub.
+
+```
+   pipeline {
+    agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          sh 'echo "Building Stage"'
+        }
+      }
+    }
+
+    stage('Test') {
+      steps {
+        script {
+          sh 'echo "Testing Stage"'
+        }
+      }
+    }
+    }
+}
+```
+##### To make our new branch show up in Jenkins, we need to tell Jenkins to scan the repository. Click on the "Administration" button
+##### Navigate to the Ansible project and click on "Scan repository now"
+##### Refresh the page and both branches will start building automatically. You can go into Blue Ocean and see both branches there too.
+##### In Blue Ocean, we can now see how the Jenkinsfile has caused a new step in the pipeline launch build for the new branch.
+
+<img width="1721" alt="Screenshot 2022-08-12 at 1 05 13 AM" src="https://user-images.githubusercontent.com/105562242/185844143-5db7ceee-1299-491c-bcb7-c19e013ccd1c.png">
+
+  <img width="1687" alt="Screenshot 2022-08-22 at 10 48 07 AM" src="https://user-images.githubusercontent.com/105562242/185844587-8a82da71-3ab0-4553-9bd9-d16931d7ffd2.png">
+
+  
+
+
+  
 
 
 
