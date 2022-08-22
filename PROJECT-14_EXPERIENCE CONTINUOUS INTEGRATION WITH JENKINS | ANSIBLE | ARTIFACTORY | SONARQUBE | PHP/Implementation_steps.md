@@ -99,3 +99,40 @@ These are the major metrics that any DevOps team should track and monitor to und
 ##### I launched 3 EC2 Instances, one for Jenkins server, another for MySQL database(RedHat) and another is used for SonarQube Server
 
 #### 2. Configuring Ansible For Jenkins Deployment:
+
+##### In previous projects, you have been launching Ansible commands manually from a CLI. Now, with Jenkins, we will start running Ansible from Jenkins UI.To do this,
+
+##### Navigate to Jenkins URL
+
+##### Install & Open Blue Ocean Jenkins Plugin
+
+##### Create a new pipeline
+
+
+<img width="1052" alt="Screenshot 2022-08-22 at 8 59 08 AM" src="https://user-images.githubusercontent.com/105562242/185832887-a0d82989-33b6-48ec-bbfb-bc62c64f75d6.png">
+
+##### Select GitHub
+<img width="1084" alt="Screenshot 2022-08-22 at 8 59 34 AM" src="https://user-images.githubusercontent.com/105562242/185832918-c03a81b1-33b3-4fb6-b9ae-6c5d8e6a03f5.png">
+
+##### Connect Jenkins with GitHub
+
+<img width="1085" alt="Screenshot 2022-08-22 at 9 03 25 AM" src="https://user-images.githubusercontent.com/105562242/185833299-0015fbc9-5438-4ce2-a1e7-6326a250ccee.png">
+
+
+<img width="1078" alt="Screenshot 2022-08-22 at 9 04 07 AM" src="https://user-images.githubusercontent.com/105562242/185833358-c478d507-d99a-4938-998a-3d4c1f70073b.png">
+<img width="1027" alt="Screenshot 2022-08-22 at 9 04 25 AM" src="https://user-images.githubusercontent.com/105562242/185833387-2cb1c47f-7731-4dac-9d41-cd821b070ac8.png">
+
+##### Copy Access Token
+<img width="1066" alt="Screenshot 2022-08-22 at 9 05 09 AM" src="https://user-images.githubusercontent.com/105562242/185833473-fcdaa093-c214-473e-8c3e-e99b0d8a9dd3.png">
+
+##### Paste the token and connect
+
+<img width="1061" alt="Screenshot 2022-08-22 at 9 05 36 AM" src="https://user-images.githubusercontent.com/105562242/185833529-4b78cd8d-18be-4f76-a08f-faee5ead47ac.png">
+
+##### Create a new Pipeline, choose the new repo and click on complete
+
+<img width="1149" alt="Screenshot 2022-08-22 at 9 13 38 AM" src="https://user-images.githubusercontent.com/105562242/185834280-665f5f46-f0cd-4b97-93b0-f32802d5a9c1.png">
+
+
+
+
