@@ -726,7 +726,7 @@ stage('Plot Code Coverage Report') {
 ##### - Here we can see our artiface upload to JFrog during Package Artifact and Upload Artifact to Artifactory pipeling jobs
     
 
-    <img width="1701" alt="Screenshot 2022-08-18 at 11 28 35 PM" src="https://user-images.githubusercontent.com/105562242/186090682-9e1a2c06-73b1-4711-a4cc-ce72d10860b5.png">
+<img width="1701" alt="Screenshot 2022-08-18 at 11 28 35 PM" src="https://user-images.githubusercontent.com/105562242/186091090-2aa26ed7-6e44-47a4-a47e-208d61c37ded.png">
 
 
 
