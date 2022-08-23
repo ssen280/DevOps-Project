@@ -393,9 +393,341 @@ GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'<Jenkins-ip-address>';
 <img width="1121" alt="Screenshot 2022-08-23 at 10 29 14 AM" src="https://user-images.githubusercontent.com/105562242/186073510-1b20378f-6458-48f9-8794-6f1e9ba7ee8a.png">
 ##### - Opening port 3306 in the database security group
 <img width="1364" alt="Screenshot 2022-08-23 at 10 30 03 AM" src="https://user-images.githubusercontent.com/105562242/186073630-1c215463-0fd4-4c39-ad5c-ca3086c3e9b0.png">
-##### - On the Jenkins server, installing PHP, its dependencies
+##### - On the Jenkins server, installing PHP, its dependencies. We have to make sure that we are installing php7.4, latest php version (v8) will give error. We will use below link to do the installtion
     
 https://www.digitalocean.com/community/tutorials/how-to-install-php-7-4-and-set-up-a-local-development-environment-on-ubuntu-18-04
+
+<img width="1039" alt="Screenshot 2022-08-23 at 11 11 10 AM" src="https://user-images.githubusercontent.com/105562242/186078881-1a6fb2e0-16ea-49be-973e-0aaca1fcefe0.png">
+
+##### - Updating the .env.sample with database server ip address
+<img width="641" alt="Screenshot 2022-08-23 at 11 12 32 AM" src="https://user-images.githubusercontent.com/105562242/186079054-6fe73e6a-e036-4754-8317-ad0439416bbc.png">
+
+##### - Creating Jenkinsfile for the php-todo repository on the main branch
+```
+pipeline {
+    agent any
+
+  stages {
+
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/ssen280/php-todo.git'
+      }
+    }
+
+    stage('Prepare Dependencies') {
+      steps {
+             sh 'mv .env.sample .env'
+             sh 'composer install'
+             sh 'php artisan migrate'
+             sh 'php artisan db:seed'
+             sh 'php artisan key:generate'
+      }
+    }
+  }
+}
+```
+##### The first stage performs a clean-up which always deletes the previous workspace before running a new one
+
+##### The second stage connects to the php-todo repository
+
+##### The third stage performs a shell scripting which renames .env.sample file to .env, then composer is used by PHP to install all the dependent libraries used by the application and then php artisan uses the .env to setup the required database objects
+
+##### Pushing the changes to the main branch: git push
+##### Creating php-todo pipeline job from the Blue Ocean UI
+##### Running the pipeline job
+ <img width="1685" alt="Screenshot 2022-08-23 at 11 22 34 AM" src="https://user-images.githubusercontent.com/105562242/186080463-443aba7f-4206-4862-ad8a-e2d42659e471.png">
+
+##### - After a successful run of the pipeline job, confirming on the database server by running SHOW TABLES command to see the tables being created
+ 
+ <img width="1143" alt="Screenshot 2022-08-23 at 11 25 47 AM" src="https://user-images.githubusercontent.com/105562242/186080889-a67efe74-df8a-4e95-bb96-cd0d8b5ef899.png">
+
+##### - Structuring The Jenkinsfile:
+------------------------------------------------------------------------------
+##### - Including unit test stage in the Jenkinsfile:
+```
+stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      } 
+    }
+```
+##### - Adding Code Quality stage with phploc tool and will save the output in build/logs/phploc.csv:
+```
+stage('Code Analysis') {
+      steps {
+        sh 'phploc app/ --log-csv build/logs/phploc.csv'
+
+      }
+    }
+```
+##### - Adding the plot code coverage report stage:
+```
+stage('Plot Code Coverage Report') {
+      steps {
+
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Lines of Code (LOC),Comment Lines of Code (CLOC),Non-Comment Lines of Code (NCLOC),Logical Lines of Code (LLOC)                          ', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'A - Lines of code', yaxis: 'Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Average Class Length (LLOC),Average Method Length (LLOC),Average Function Length (LLOC)', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'C - Average Length', yaxis: 'Average Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Directories,Files,Namespaces', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'B - Structures Containers', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Cyclomatic Complexity / Lines of Code,Cyclomatic Complexity / Number of Methods ', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'D - Relative Cyclomatic Complexity', yaxis: 'Cyclomatic Complexity by Structure'      
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Classes,Abstract Classes,Concrete Classes', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'E - Types of Classes', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Methods,Non-Static Methods,Static Methods,Public Methods,Non-Public Methods', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'F - Types of Methods', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Constants,Global Constants,Class Constants', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'G - Types of Constants', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Test Classes,Test Methods', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'I - Testing', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Logical Lines of Code (LLOC),Classes Length (LLOC),Functions Length (LLOC),LLOC outside functions or classes ', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'AB - Code Structure by Logical Lines of Code', yaxis: 'Logical Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Functions,Named Functions,Anonymous Functions', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'H - Types of Functions', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: true, exclusionValues: 'Interfaces,Traits,Classes,Methods,Functions,Constants', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'BB - Structure Objects', yaxis: 'Count'
+
+      }
+    }
+```
+##### - Adding the package artifacts stage which archives the application code
+```
+    stage('Package Artifact') {
+      steps {
+            sh 'zip -qr php-todo.zip ${WORKSPACE}/*'
+      }
+    }
+```
+##### - Uploading the artifacts to the Artifactory repository in this stage:
+```
+    stage('Upload Artifact to Artifactory') {
+      steps {
+        script { 
+                def server = Artifactory.server 'artifactory'                 
+                def uploadSpec = """{
+                    "files": [
+                      {
+                       "pattern": "php-todo.zip",
+                       "target": "artifacts-todo-php",
+                       "props": "type=zip;status=ready"
+
+                      }
+                    ]
+                }""" 
+
+              server.upload spec: uploadSpec
+        }
+      }
+    }
+ ```
+##### - Deploying the application to the dev environment by launching Ansible pipeline job(ansible-config-mgt)
+```
+    stage ('Deploy to Dev Environment') {
+      steps {
+        build job: 'ansible-config-mgt/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev']], propagate: false, wait: true
+      }
+    }
+```
+#### Setting Up The SonarQube Server:
+-----------------------------------------
+##### - We will follow steps from below link to install SonarQube on server
+
+https://www.vultr.com/docs/install-sonarqube-on-ubuntu-20-04-lts/
+
+
+##### - Opening TCP port 9000 on the security group
+<img width="1020" alt="Screenshot 2022-08-23 at 11 50 10 AM" src="https://user-images.githubusercontent.com/105562242/186084922-91498a9a-5d1d-41fb-aafa-0a3893a4f829.png">
+
+##### - Accessing SonarQube through the browser by entering the SonarQube server’s IP address followed by port 9000: http://<server_IP_adress>:9000
+
+#### Configuring Jenkins For SonarQube Quality Gate
+----------------------------------------------------------------
+##### - Generating authentication token in the SonarQube server by navigating from 'My Account' to 'security'
+##### - Configuring Quality Gate Jenkins Webhook in SonarQube by navigating from 'Administration' to 'Configuration' to 'webhook' and 'create' and then specifying the URL as this: http://<Jenkins ip address>/sonarqube-webhook/
+##### - Installing SonarScanner plugin in jenkins
+##### - Navigating to 'Configure System' in Jenkins to add SonarQube server details with the generated token
+##### - Setting the SonarQube scanner by navigating from 'manage jenkins' to 'Global Tool Configuration'
+
+  <img width="1249" alt="Screenshot 2022-08-23 at 11 59 43 AM" src="https://user-images.githubusercontent.com/105562242/186086604-5da75901-fe93-4564-8749-6df42d3063e5.png">
+
+##### - Updating the Jenkinsfile to include SonarQube Scanning and Quality Gate
+```
+
+stage('SonarQube Quality Gate') {
+      environment {
+          scannerHome = tool 'SonarQubeScanner'
+      }
+        steps {
+          withSonarQubeEnv('sonarqube') {
+              sh "${scannerHome}/bin/sonar-scanner"
+          }
+
+        }
+    }
+    
+```
+##### - Configuring the sonar-scanner.properties file in which SonarQube will require to function during pipeline execution: $ cd /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/conf/
+    
+##### - Editing and entering the following configuration: $ sudo vi sonar-scanner.properties
+    
+```
+sonar.host.url=http://<SonarQube-Server-IP-address>:9000
+sonar.projectKey=php-todo
+#----- Default source code encoding
+sonar.sourceEncoding=UTF-8
+sonar.php.exclusions=**/vendor/**
+sonar.php.coverage.reportPaths=build/logs/clover.xml
+sonar.php.tests.reportPath=build/logs/junit.xml
+```
+#### - Running The Pipeline Job
+---------------------------------------
+    
+##### - Our final jenkinsfile in php-todo repo looks like as below 
+```
+pipeline {
+    agent any
+
+  stages {
+
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/ssen280/php-todo.git'
+      }
+    }
+
+    stage('Prepare Dependencies') {
+      steps {
+             sh 'mv .env.sample .env'
+             sh 'composer install'
+             sh 'php artisan migrate'
+             sh 'php artisan db:seed'
+             sh 'php artisan key:generate'
+      }
+    }
+
+      stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      } 
+  }
+  stage('Code Analysis') {
+  steps {
+        sh 'phploc app/ --log-csv build/logs/phploc.csv'
+
+  }
+}
+
+stage('Plot Code Coverage Report') {
+      steps {
+
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Lines of Code (LOC),Comment Lines of Code (CLOC),Non-Comment Lines of Code (NCLOC),Logical Lines of Code (LLOC)', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'A - Lines of code', yaxis: 'Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Directories,Files,Namespaces', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'B - Structures Containers', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Average Class Length (LLOC),Average Method Length (LLOC),Average Function Length (LLOC)', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'C - Average Length', yaxis: 'Average Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Cyclomatic Complexity / Lines of Code,Cyclomatic Complexity / Number of Methods ', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'D - Relative Cyclomatic Complexity', yaxis: 'Cyclomatic Complexity by Structure'      
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Classes,Abstract Classes,Concrete Classes', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'E - Types of Classes', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Methods,Non-Static Methods,Static Methods,Public Methods,Non-Public Methods', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'F - Types of Methods', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Constants,Global Constants,Class Constants', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'G - Types of Constants', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Test Classes,Test Methods', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'I - Testing', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Logical Lines of Code (LLOC),Classes Length (LLOC),Functions Length (LLOC),LLOC outside functions or classes ', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'AB - Code Structure by Logical Lines of Code', yaxis: 'Logical Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Functions,Named Functions,Anonymous Functions', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'H - Types of Functions', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Interfaces,Traits,Classes,Methods,Functions,Constants', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'BB - Structure Objects', yaxis: 'Count'
+
+      }
+    }
+
+    stage('SonarQube Quality Gate') {
+        environment {
+            scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+
+        }
+    }
+
+    stage ('Package Artifact') {
+    steps {
+            sh 'zip -qr php-todo.zip ${WORKSPACE}/*'
+     }
+
+    }
+    stage ('Upload Artifact to Artifactory') {
+          steps {
+            script { 
+                 def server = Artifactory.server 'artifectory-project14'                 
+                 def uploadSpec = """{
+                    "files": [
+                      {
+                       "pattern": "php-todo.zip",
+                       "target": "Saikat/php-todo",
+                       "props": "type=zip;status=ready"
+                       }
+                    ]
+                 }""" 
+
+                 server.upload spec: uploadSpec
+               }
+            }
+  
+        }
+
+  stage ('Deploy to Dev Environment') {
+    steps {
+    build job: 'PROJECT-14-ansible-configuration-management/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev']], propagate: false, wait: true
+    }
+  }
+
+
+}
+}
+```
+##### - Here we can see we are getting error. 
+<img width="1650" alt="Screenshot 2022-08-23 at 12 06 47 PM" src="https://user-images.githubusercontent.com/105562242/186087776-2d2392b6-4b2f-4ee6-875c-d17b9ad9d88c.png">
+<img width="1316" alt="Screenshot 2022-08-23 at 12 07 41 PM" src="https://user-images.githubusercontent.com/105562242/186087923-453be404-fd86-4230-b899-283f2372f815.png">
+
+##### - So we will install node.js on jenkin server to avoide this error 
+    
+<img width="614" alt="Screenshot 2022-08-23 at 12 14 08 PM" src="https://user-images.githubusercontent.com/105562242/186089112-afb387aa-4e44-41fd-b40b-d62275db8d92.png">
+##### - Now we can see error is gone and pipeline jobs run successfully 
+  <img width="1693" alt="Screenshot 2022-08-23 at 12 15 28 PM" src="https://user-images.githubusercontent.com/105562242/186089346-743d00f0-7b57-44fb-b680-e503f5d57413.png">
+
+##### - Results from the SonarQube Server
+
+<img width="1612" alt="Screenshot 2022-08-18 at 11 27 35 PM" src="https://user-images.githubusercontent.com/105562242/186089873-41642950-6edb-4fb0-b8c2-cba1b5f356e2.png">
+##### - From the result it shows that there are bugs, and there is 0.0% code coverage(code coverage is a percentage of unit tests added by developers to test functions and objects in the code) and there is 6 hours’ worth of technical debt, code smells and security issues in the code. And therefore as DevOps Engineer working on the pipeline, we must ensure that the quality gate step causes the pipeline to fail if the conditions for quality are not met.
+
+##### - To ensure that only pipeline job that is run on either 'main' or 'develop' or 'hotfix' or 'release' branch gets to make it to the deploy stage, the Jenkinsfile is updated and a timeout step is also added to wait for SonarQube to complete analysis and successfully finish the pipeline only when code quality is acceptable.:
+
+```
+ stage('SonarQube Quality Gate') {
+      when { branch pattern: "^develop*|^hotfix*|^release*|^main*", comparator: "REGEXP"}
+        environment {
+            scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.projectKey=php-todo"
+            }
+            timeout(time: 1, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+    }
+```
+##### - Here we can see our artiface upload to JFrog during Package Artifact and Upload Artifact to Artifactory pipeling jobs
+    
+
+    <img width="1701" alt="Screenshot 2022-08-18 at 11 28 35 PM" src="https://user-images.githubusercontent.com/105562242/186090682-9e1a2c06-73b1-4711-a4cc-ce72d10860b5.png">
+
 
 
  
