@@ -382,4 +382,20 @@ pipeline {
 
 ##### - Forking the repository into my Github account: https://github.com/darey-devops/php-todo.git
 ##### - On database server, installing mysql: $ sudo yum install mysql-server
+##### - Creating a database and a remote user:
+<img width="1120" alt="Screenshot 2022-08-23 at 10 21 18 AM" src="https://user-images.githubusercontent.com/105562242/186072550-ee921441-e118-47f8-8eb5-4c9535b3186e.png">
+```
+Create database homestead;
+CREATE USER 'homestead'@'<Jenkins-ip-address>' IDENTIFIED BY 'sePret^i';
+GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'<Jenkins-ip-address>';
+```
+##### - Configuring the bind_address in the mysqld.cnf file:
+<img width="1121" alt="Screenshot 2022-08-23 at 10 29 14 AM" src="https://user-images.githubusercontent.com/105562242/186073510-1b20378f-6458-48f9-8794-6f1e9ba7ee8a.png">
+##### - Opening port 3306 in the database security group
+<img width="1364" alt="Screenshot 2022-08-23 at 10 30 03 AM" src="https://user-images.githubusercontent.com/105562242/186073630-1c215463-0fd4-4c39-ad5c-ca3086c3e9b0.png">
+##### - On the Jenkins server, installing PHP, its dependencies
+    
+https://www.digitalocean.com/community/tutorials/how-to-install-php-7-4-and-set-up-a-local-development-environment-on-ubuntu-18-04
 
+
+ 
