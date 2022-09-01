@@ -67,6 +67,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-o
 3. We will create MySQL container for the php-todo frontend
 <img width="1452" alt="Screenshot 2022-08-31 at 1 50 02 PM" src="https://user-images.githubusercontent.com/105562242/187886020-acd6990c-b61d-4f7e-bb28-77fe9bfa9279.png">
 4. We will update .env file in todo app folder before running docker build command to build docker image
+
 ```
 APP_ENV=local
 APP_DEBUG=true
