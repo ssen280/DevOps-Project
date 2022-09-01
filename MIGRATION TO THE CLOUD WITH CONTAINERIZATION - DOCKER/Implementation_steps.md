@@ -96,6 +96,7 @@ MAIL_ENCRYPTION=null
 
 5. We will run build command to create the Docker image of the app
 <img width="969" alt="Screenshot 2022-08-31 at 1 30 02 PM" src="https://user-images.githubusercontent.com/105562242/187887343-8a27b4f3-252d-465c-bd8d-acd48066ef3b.png">
+
 6. We will run the container 
 ``` Docker run —network tooling_app_network -p 8090:5001 -it php-todo:0.0.3 ```
 
