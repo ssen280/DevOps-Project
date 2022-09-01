@@ -59,3 +59,63 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-o
 <img width="1451" alt="Screenshot 2022-08-31 at 1 12 24 PM" src="https://user-images.githubusercontent.com/105562242/187882087-bc54a1f4-7a9f-4b66-80a1-7f8cf5231100.png">
 <img width="1518" alt="Screenshot 2022-08-31 at 1 12 13 PM" src="https://user-images.githubusercontent.com/105562242/187882117-00dbabcb-615f-48be-b901-2ca6f86c31ca.png">
 
+### Migrating PHP-Todo App Into A Containerized Application
+------------------------------------------------------------------
+1. Clone repo from https://github.com/darey-devops/php-todo.git
+2. We will write Dockerfile in todo app folder
+<img width="1006" alt="Screenshot 2022-09-01 at 3 19 27 PM" src="https://user-images.githubusercontent.com/105562242/187885613-ce8c4a5c-134c-452a-bee9-3210af51782e.png">
+3. We will create MySQL container for the php-todo frontend
+<img width="1452" alt="Screenshot 2022-08-31 at 1 50 02 PM" src="https://user-images.githubusercontent.com/105562242/187886020-acd6990c-b61d-4f7e-bb28-77fe9bfa9279.png">
+4. We will update .env file in todo app folder before running docker build command to build docker image
+```
+APP_ENV=local
+APP_DEBUG=true
+APP_KEY=SomeRandomString
+APP_URL=http://localhost
+
+DB_HOST=mysqlserverhost
+DB_DATABASE=homestead
+DB_USERNAME=saikat
+DB_PASSWORD=password123
+
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+```
+
+5. We will run build command to create the Docker image of the app
+<img width="969" alt="Screenshot 2022-08-31 at 1 30 02 PM" src="https://user-images.githubusercontent.com/105562242/187887343-8a27b4f3-252d-465c-bd8d-acd48066ef3b.png">
+6. We will run the container 
+``` Docker run —network tooling_app_network -p 8090:5001 -it php-todo:0.0.3 ```
+
+7. Here we can see we are getting error from todo webpage
+<img width="1312" alt="Screenshot 2022-08-31 at 1 52 41 PM" src="https://user-images.githubusercontent.com/105562242/187889578-57523577-16e4-463d-a1a1-0c34c4991827.png">
+
+8. We will create homestead database in sql which is associated to todo app
+9. Then we will run Php artisan migrate command in todo app container
+
+<img width="892" alt="Screenshot 2022-08-31 at 3 44 58 PM" src="https://user-images.githubusercontent.com/105562242/187899255-b9148069-abb8-40a3-8091-b6f2745ddc32.png">
+
+10. we are able to access todo app now
+<img width="1428" alt="Screenshot 2022-08-31 at 4 07 24 PM" src="https://user-images.githubusercontent.com/105562242/187899364-32c5389b-f11c-4ef5-8224-b66a751e4485.png">
+
+11. We will push todo docker image to docker repo. First we will create accunt on docker site. and creat a new repo and give it a name. then we will login to docker on system from were we want to push image. 
+
+<img width="1428" alt="Screenshot 2022-08-31 at 4 07 24 PM" src="https://user-images.githubusercontent.com/105562242/187899722-f7d04f56-3bbf-4072-98d1-86141ce5cfc9.png">
+
+12. We will use docker tag and docker push command to upload image to docker repo
+
+<img width="1428" alt="Screenshot 2022-08-31 at 4 07 24 PM" src="https://user-images.githubusercontent.com/105562242/187900781-2ef1f98c-c605-4e00-96ad-e63450c46ea2.png">
+<img width="1404" alt="Screenshot 2022-09-01 at 4 43 32 PM" src="https://user-images.githubusercontent.com/105562242/187900866-75b2fa2f-26d9-40c8-811b-d02759f04866.png">
+
