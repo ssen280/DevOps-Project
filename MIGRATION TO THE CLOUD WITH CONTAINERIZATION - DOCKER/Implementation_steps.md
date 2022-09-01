@@ -92,6 +92,7 @@ MAIL_PORT=2525
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
+
 ```
 
 5. We will run build command to create the Docker image of the app
