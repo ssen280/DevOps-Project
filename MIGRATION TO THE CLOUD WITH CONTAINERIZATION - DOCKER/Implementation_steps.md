@@ -7,5 +7,8 @@ In this project, the frontend and the backend(MySQL) of tooling application is b
 The following outlines the steps:
 
 
-#### STEP 1: Creating MySQL Container For Tooling App Backend
+#### STEP 1: Creating MySQL Container For Tooling App Backend :
+---------------------------------------------------------------------------
+1. We will install Docker on our Ubuntu system.
+2. 
 
