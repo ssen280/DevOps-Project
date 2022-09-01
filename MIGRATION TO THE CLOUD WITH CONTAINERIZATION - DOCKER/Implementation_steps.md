@@ -16,8 +16,10 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-o
 3. We will create environment variable to store sql root password and database schema to commect tooling application. we will add to /etc/environment file to keep it parmanently.
 
 <img width="994" alt="Screenshot 2022-09-01 at 2 34 08 PM" src="https://user-images.githubusercontent.com/105562242/187876179-eb829963-c611-4e3a-b5aa-cb04a067c420.png">
-4. We will Pull the MySQL image and running the container with our custom created docker network
+
+4. We will Pull the MySQL image and running the container with our custom created docker network.
 ``` docker run --network tooling_app_network -h mysqlserverhost --name=mysql-server -e MYSQL_ROOT_PASSWORD=$MYSQL_PW -d mysql/mysql-server:latest ```
+
 5. Because it's not a good practice to connect to MySQL server remotely using the root user. Creating a file create_user.sql and adding the following code in order to create a user:
 ``` CREATE USER 'saikat'@'%' IDENTIFIED BY 'password123'; GRANT ALL PRIVILEGES ON * . * TO 'saikat'@'%';```
 6. Running the script to create the new user ``` $ docker exec -i mysql-server mysql -uroot -p$MYSQL_PW < create_user.sql```
