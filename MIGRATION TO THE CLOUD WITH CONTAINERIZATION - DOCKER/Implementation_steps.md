@@ -122,3 +122,22 @@ MAIL_ENCRYPTION=null
 <img width="1428" alt="Screenshot 2022-08-31 at 4 07 24 PM" src="https://user-images.githubusercontent.com/105562242/187900781-2ef1f98c-c605-4e00-96ad-e63450c46ea2.png">
 <img width="1404" alt="Screenshot 2022-09-01 at 4 43 32 PM" src="https://user-images.githubusercontent.com/105562242/187900866-75b2fa2f-26d9-40c8-811b-d02759f04866.png">
 
+#### Running Docker Build And Docker Push on Jenkins
+--------------------------------------------------------------
+1. We will install Jenkin on our ubuntu docker server. We will follow below link to install jenkins
+
+https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-20-04
+
+2. We will setup Nexus repo server on ubuntu as seperate server. We will follow below link to istall Nexus. Latest download link
+
+https://download.sonatype.com/nexus/3/nexus-3.41.1-01-unix.tar.gz
+https://www.fosstechnix.com/how-to-install-nexus-repository-on-ubuntu/
+
+3. We will open 8080, 8081, 8083 ports to security group which both jenkin/docker server and nexus server both are using. 
+4. We will install docker and nexus plugins to Jenkin. 
+
+<img width="1409" alt="Screenshot 2022-09-07 at 12 17 53 AM" src="https://user-images.githubusercontent.com/105562242/188714876-bd45de00-ca1e-4376-94ef-fe1b68f9b811.png">
+
+<img width="1378" alt="Screenshot 2022-09-07 at 12 18 17 AM" src="https://user-images.githubusercontent.com/105562242/188714958-7dfbfc99-f189-4a70-b7c3-ae59aaa9a401.png">
+
+5. We will create two branches in my php-todo github repo: develop and feature
