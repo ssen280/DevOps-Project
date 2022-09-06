@@ -140,4 +140,94 @@ https://www.fosstechnix.com/how-to-install-nexus-repository-on-ubuntu/
 
 <img width="1378" alt="Screenshot 2022-09-07 at 12 18 17 AM" src="https://user-images.githubusercontent.com/105562242/188714958-7dfbfc99-f189-4a70-b7c3-ae59aaa9a401.png">
 
-5. We will create two branches in my php-todo github repo: develop and feature
+5. We will configure nexus in jenkins and test the connection.
+
+<img width="1241" alt="Screenshot 2022-09-07 at 12 23 32 AM" src="https://user-images.githubusercontent.com/105562242/188715902-883f87d1-8913-453e-914b-572c99219f60.png">
+
+6. We will create docker repo to Nexus and use port 8083 for this particular repo
+
+<img width="1329" alt="Screenshot 2022-09-07 at 12 29 52 AM" src="https://user-images.githubusercontent.com/105562242/188717050-83d793a8-bc06-4010-97a2-bf715ba4f924.png">
+
+<img width="1724" alt="Screenshot 2022-09-07 at 12 30 19 AM" src="https://user-images.githubusercontent.com/105562242/188717131-9262225a-6782-4e4d-ac0e-d70f5adf6b07.png">
+
+7. We will create two branches in my php-todo github repo: develop and feature
+8. We will create Jenkinsfile for the two branches which will run docker build and push the image to my nexus docker repo.
+
+```
+pipeline {
+    agent any
+
+    environment {
+        imageName = "php-todo"
+        registryCredentials = "nexus-new"
+        registry = "54.208.101.39:8083"
+        dockerImage = ''
+    }
+
+  stages {
+
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/ssen280/php-todo.git'
+      }
+    }
+    // Building Docker images
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build imageName
+        }
+      }
+    }
+    // Uploading Docker images into Nexus Registry
+    stage('Uploading to Nexus') {
+     steps{
+         script {
+             docker.withRegistry( 'http://'+registry, registryCredentials ) {
+             dockerImage.push('feature-latest')
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
+9. For feature branch we will use dockerImage.push('feature-latest') and for developer branch it would dockerImage.push('develop-latest')
+10. Nexus run on http and docker dont accept http request, docker only accpet https request.
+11. We will create daemon.json file in /etc/docker on docker server. we will configure below lines to daemon.json file
+
+<img width="649" alt="Screenshot 2022-09-07 at 12 39 06 AM" src="https://user-images.githubusercontent.com/105562242/188719021-64edad36-e80e-40a3-98a3-4aa6215e2230.png">
+
+12. We will create a multibranch pipeline job and linking it to the php-todo repository
+
+<img width="917" alt="Screenshot 2022-09-06 at 2 50 16 PM" src="https://user-images.githubusercontent.com/105562242/188719469-ac03f7da-24fc-4ece-bde8-df72fd356322.png">
+
+13. We will run pipeline job
+
+<img width="1352" alt="Screenshot 2022-09-07 at 12 43 08 AM" src="https://user-images.githubusercontent.com/105562242/188719615-a4843321-0239-4ad0-91ea-b69c9cf3cba7.png">
+
+ <img width="1681" alt="Screenshot 2022-09-07 at 12 44 03 AM" src="https://user-images.githubusercontent.com/105562242/188719780-b3f2f3b7-d61e-42c1-8a37-081e8936ba60.png">
+ 
+<img width="1692" alt="Screenshot 2022-09-07 at 12 44 34 AM" src="https://user-images.githubusercontent.com/105562242/188719857-f188c466-d58b-476e-9937-3dcb400e6386.png">
+
+<img width="1399" alt="Screenshot 2022-09-07 at 12 45 15 AM" src="https://user-images.githubusercontent.com/105562242/188719961-6f0e9d35-37f5-48b9-a80e-607b3a07cfaa.png">
+
+<img width="1431" alt="Screenshot 2022-09-07 at 12 45 38 AM" src="https://user-images.githubusercontent.com/105562242/188720017-f593ac9f-fa32-4703-ab2c-314aeeb9a896.png">
+
+14. Here we can docker image uploaded to nexus repo
+
+<img width="1725" alt="Screenshot 2022-09-07 at 12 48 05 AM" src="https://user-images.githubusercontent.com/105562242/188720432-b8951778-e8ac-4eab-ad97-b7187794546c.png">
+
+<img width="1727" alt="Screenshot 2022-09-07 at 12 48 33 AM" src="https://user-images.githubusercontent.com/105562242/188720509-61424843-7b59-4dce-8f73-c291e5ce5bf7.png">
+
+
