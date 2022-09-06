@@ -230,4 +230,48 @@ pipeline {
 
 <img width="1727" alt="Screenshot 2022-09-07 at 12 48 33 AM" src="https://user-images.githubusercontent.com/105562242/188720509-61424843-7b59-4dce-8f73-c291e5ce5bf7.png">
 
+#### Running Docker Compose
+---------------------------------------
 
+Docker Compose takes care of the hard work involved in running Docker commands on the terminal to create an image, launch an application inside it and get the applications up and running by writing a declarative code in YAML which gets all the applications and dependencies up and running with minimal effort by launching a single command.
+
+Refactoring the Tooling app POC in order to leverage the power of Docker Compose.
+Creating a file called tooling.yaml
+Writing the Docker Compose in yaml syntax, defining services, networks, and volumes:
+
+```
+version: "3.3"
+services:
+  tooling_frontend:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "5000:80"
+    volumes:
+      - tooling_frontend:/var/www/html
+    
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: toolingdb
+      MYSQL_USER: saikat
+      MYSQL_PASSWORD: password123
+      MYSQL_ROOT_PASSWORD: password123  
+    volumes:
+      - db:/var/lib/mysql
+      - .datadump.sql/:/docker-entrypoint-initdb.d/datadump.sql
+
+networks:
+  default:
+    external:
+      name: tooling_app_network
+  
+volumes:
+  tooling_frontend:
+  db:
+```
+
+<img width="656" alt="Screenshot 2022-09-07 at 1 30 59 AM" src="https://user-images.githubusercontent.com/105562242/188728349-1defbd36-96bf-4485-a571-016ba0af16a9.png">
