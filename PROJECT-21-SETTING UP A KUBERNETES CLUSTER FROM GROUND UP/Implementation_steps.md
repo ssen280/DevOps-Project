@@ -247,3 +247,55 @@ KUBERNETES_PUBLIC_ADDRESS=$(aws elbv2 describe-load-balancers \
 ```
 
 <img width="1354" alt="Screenshot 2022-09-08 at 7 58 14 AM" src="https://user-images.githubusercontent.com/105562242/193357346-50eaae25-3c3a-4989-9468-80a99b6bcacf.png">
+
+#### STEP 4: Creating Compute Resources
+-----------------------------------------------
+
+* Retrieving an image ID to create EC2 instances:
+
+```
+IMAGE_ID=$(aws ec2 describe-images --owners 099720109477 \
+  --filters \
+  'Name=root-device-type,Values=ebs' \
+  'Name=architecture,Values=x86_64' \
+  'Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*' \
+  | jq -r '.Images|sort_by(.Name)[-1]|.ImageId')
+```
+* Creating an SSH Key-Pair:
+
+```
+$ mkdir -p ssh
+
+$ aws ec2 create-key-pair \
+  --key-name ${NAME} \
+  --output text --query 'KeyMaterial' \
+  > ssh/${NAME}.id_rsa
+
+$ chmod 600 ssh/${NAME}.id_rsa
+
+```
+* Creating 3 Master nodes:
+
+```
+for i in 0 1 2; do
+  instance_id=$(aws ec2 run-instances \
+    --associate-public-ip-address \
+    --image-id ${IMAGE_ID} \
+    --count 1 \
+    --key-name ${NAME} \
+    --security-group-ids ${SECURITY_GROUP_ID} \
+    --instance-type t2.micro \
+    --private-ip-address 172.31.0.1${i} \
+    --user-data "name=master-${i}" \
+    --subnet-id ${SUBNET_ID} \
+    --output text --query 'Instances[].InstanceId')
+  aws ec2 modify-instance-attribute \
+    --instance-id ${instance_id} \
+    --no-source-dest-check
+  aws ec2 create-tags \
+    --resources ${instance_id} \
+    --tags "Key=Name,Value=${NAME}-master-${i}"
+done
+
+```
+<img width="1335" alt="Screenshot 2022-09-08 at 8 00 30 AM" src="https://user-images.githubusercontent.com/105562242/193358356-8c82fc42-0a3f-4735-979b-6c04be97df62.png">
