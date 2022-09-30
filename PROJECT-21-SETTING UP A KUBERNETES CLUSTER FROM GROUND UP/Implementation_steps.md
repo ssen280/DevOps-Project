@@ -32,3 +32,14 @@ The following outlines the steps:
 The cfssl is an open source tool by Cloudflare used to setup a Public Key Infrastructure(PKI) for generating, signing and bundling TLS certificates
 
 Downloading the binary:
+
+```
+$ wget -q --show-progress --https-only --timestamping \
+  https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/1.4.1/linux/cfssl \
+  https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/1.4.1/linux/cfssljson
+  
+```
+
+<img width="1541" alt="Screenshot 2022-09-08 at 7 47 23 AM" src="https://user-images.githubusercontent.com/105562242/193354078-ec3cbfa5-be3c-47a4-b4c6-1a4e1e1afcbc.png">
+
+
