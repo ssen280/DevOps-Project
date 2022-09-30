@@ -202,3 +202,48 @@ aws ec2 authorize-security-group-ingress \
   
 ```
 <img width="1130" alt="Screenshot 2022-09-08 at 7 56 45 AM" src="https://user-images.githubusercontent.com/105562242/193356607-b83cb3d7-1f48-434a-b488-0c375ba74764.png">
+
+* Creating a network Load balancer:
+```
+LOAD_BALANCER_ARN=$(aws elbv2 create-load-balancer \
+  --name ${NAME} \
+  --subnets ${SUBNET_ID} \
+  --scheme internet-facing \
+  --type network \
+  --output text --query 'LoadBalancers[].LoadBalancerArn')
+```
+* Creating a target group for it
+```
+TARGET_GROUP_ARN=$(aws elbv2 create-target-group \
+  --name ${NAME} \
+  --protocol TCP \
+  --port 6443 \
+  --vpc-id ${VPC_ID} \
+  --target-type ip \
+  --output text --query 'TargetGroups[].TargetGroupArn')
+```
+* Registering targets - though there are no real targets but the private IP addresses are selected so that when the nodes become available they will be used as targets:
+
+```
+aws elbv2 register-targets \
+  --target-group-arn ${TARGET_GROUP_ARN} \
+  --targets Id=172.31.0.1{0,1,2}
+```
+* Creating a listener to listen for requests and forward to the target nodes on TCP port 6443
+```
+aws elbv2 create-listener \
+--load-balancer-arn ${LOAD_BALANCER_ARN} \
+--protocol TCP \
+--port 6443 \
+--default-actions Type=forward,TargetGroupArn=${TARGET_GROUP_ARN} \
+--output text --query 'Listeners[].ListenerArn'
+```
+* Retrieving the Kubernetes Public address and storing it
+
+```
+KUBERNETES_PUBLIC_ADDRESS=$(aws elbv2 describe-load-balancers \
+--load-balancer-arns ${LOAD_BALANCER_ARN} \
+--output text --query 'LoadBalancers[].DNSName')
+```
+
+<img width="1354" alt="Screenshot 2022-09-08 at 7 58 14 AM" src="https://user-images.githubusercontent.com/105562242/193357346-50eaae25-3c3a-4989-9468-80a99b6bcacf.png">
