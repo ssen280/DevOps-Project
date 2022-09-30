@@ -44,4 +44,25 @@ $ wget -q --show-progress --https-only --timestamping \
 
 <img width="1541" alt="Screenshot 2022-09-08 at 7 47 23 AM" src="https://user-images.githubusercontent.com/105562242/193354078-ec3cbfa5-be3c-47a4-b4c6-1a4e1e1afcbc.png">
 
+#### STEP 3: Configuring The Network Infrastructure
+-------------------------------------------------------
+
+* Creating a directory named k8s-cluster-from-ground-up and changing directory:``` $ mkdir k8s-cluster-from-ground-up && cd k8s-cluster-from-ground-up ```
+* Creating a VPC and storing its ID as a variable:
+
+```
+$ VPC_ID=$(aws ec2 create-vpc \
+--cidr-block 172.31.0.0/16 \
+--output text --query 'Vpc.VpcId'
+)
+```
+* Tagging the VPC so that it is named:
+
+```
+$ NAME=k8s-cluster-from-ground-up
+
+$ aws ec2 create-tags \
+  --resources ${VPC_ID} \
+  --tags Key=Name,Value=${NAME}
+```
 
