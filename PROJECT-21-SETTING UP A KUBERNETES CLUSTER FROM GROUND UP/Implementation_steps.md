@@ -299,3 +299,29 @@ done
 
 ```
 <img width="1335" alt="Screenshot 2022-09-08 at 8 00 30 AM" src="https://user-images.githubusercontent.com/105562242/193358356-8c82fc42-0a3f-4735-979b-6c04be97df62.png">
+
+* Creating 3 worker nodes:
+
+```
+for i in 0 1 2; do
+  instance_id=$(aws ec2 run-instances \
+    --associate-public-ip-address \
+    --image-id ${IMAGE_ID} \
+    --count 1 \
+    --key-name ${NAME} \
+    --security-group-ids ${SECURITY_GROUP_ID} \
+    --instance-type t2.micro \
+    --private-ip-address 172.31.0.2${i} \
+    --user-data "name=worker-${i}|pod-cidr=172.20.${i}.0/24" \
+    --subnet-id ${SUBNET_ID} \
+    --output text --query 'Instances[].InstanceId')
+  aws ec2 modify-instance-attribute \
+    --instance-id ${instance_id} \
+    --no-source-dest-check
+  aws ec2 create-tags \
+    --resources ${instance_id} \
+    --tags "Key=Name,Value=${NAME}-worker-${i}"
+done
+
+```
+<img width="1541" alt="Screenshot 2022-09-08 at 8 13 40 AM" src="https://user-images.githubusercontent.com/105562242/193358628-361cc28e-2cc3-44f2-b9ea-ba38acdd1914.png">
