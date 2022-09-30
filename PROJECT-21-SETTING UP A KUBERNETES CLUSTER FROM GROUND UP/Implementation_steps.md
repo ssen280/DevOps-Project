@@ -102,3 +102,5 @@ $ aws ec2 associate-dhcp-options \
   --dhcp-options-id ${DHCP_OPTION_SET_ID} \
   --vpc-id ${VPC_ID}
 ```
+
+<img width="1371" alt="Screenshot 2022-09-08 at 7 50 01 AM" src="https://user-images.githubusercontent.com/105562242/193355507-1731af46-2fb9-4a64-9161-7ce8fff13417.png">
