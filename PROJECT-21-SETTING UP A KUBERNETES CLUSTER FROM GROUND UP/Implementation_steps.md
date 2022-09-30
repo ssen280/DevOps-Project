@@ -19,3 +19,8 @@ We will create 3 EC2 Instances, and in the end, we will have the following parts
 The following outlines the steps:
 
 #### STEP 1: Installing Kubectl On The Local Machine(Linux)
+---------------------------------------------------------------
+Downloading the binary: $ wget https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl
+Making it executable:$ chmod +x kubectl
+Moving the file to the Bin directory:$ sudo mv kubectl /usr/local/bin/
+Verifying that kubectl version 1.21.0 or higher is installed:$ kubectl version --client
