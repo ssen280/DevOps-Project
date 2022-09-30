@@ -24,3 +24,5 @@ The following outlines the steps:
 * Making it executable:$ chmod +x kubectl
 * Moving the file to the Bin directory:$ sudo mv kubectl /usr/local/bin/
 * Verifying that kubectl version 1.21.0 or higher is installed:$ kubectl version --client
+
+<img width="1539" alt="Screenshot 2022-09-08 at 7 46 11 AM" src="https://user-images.githubusercontent.com/105562242/193353585-11e36b01-0be8-4a1e-8ce6-d5116b783308.png">
