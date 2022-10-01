@@ -1449,6 +1449,7 @@ wget -q --show-progress --https-only --timestamping \
 
 ```
 #### STEP 13: Configuring The Worker Nodes Components
+#### Please note: We have to perform below steps on all three worker nodes
 ------------------------------------------------------------
 
 * Configuring the network
@@ -1600,7 +1601,46 @@ clusterCIDR: "172.31.0.0/16"
 EOF
 
 ```
+* Configuring the Kube Proxy systemd service:
 
+```
+cat <<EOF | sudo tee /etc/systemd/system/kube-proxy.service
+[Unit]
+Description=Kubernetes Kube Proxy
+Documentation=https://github.com/kubernetes/kubernetes
+[Service]
+ExecStart=/usr/local/bin/kube-proxy \\
+  --config=/var/lib/kube-proxy/kube-proxy-config.yaml
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
+EOF
+
+```
 <img width="1291" alt="Screenshot 2022-09-08 at 9 47 13 AM" src="https://user-images.githubusercontent.com/105562242/193399348-b2826ff1-4911-443e-aeb2-4c7171aadfb0.png">
 
 
+* Reloading configurations and starting both services:
+
+```
+{
+  sudo systemctl daemon-reload
+  sudo systemctl enable containerd kubelet kube-proxy
+  sudo systemctl start containerd kubelet kube-proxy
+}
+
+```
+* Checking the readiness of the worker nodes on all master nodes:```$ kubectl get nodes --kubeconfig admin.kubeconfig -o wide```
+
+<img width="1291" alt="Screenshot 2022-09-08 at 9 47 13 AM" src="https://user-images.githubusercontent.com/105562242/193399631-98a847a3-5703-4c2d-a254-9c99d1e25613.png">
+
+<img width="1302" alt="Screenshot 2022-09-08 at 9 54 15 AM" src="https://user-images.githubusercontent.com/105562242/193399596-512ab4a2-0e8c-4b52-9ed1-2081e068093a.png">
+
+<img width="1175" alt="Screenshot 2022-09-08 at 9 59 40 AM" src="https://user-images.githubusercontent.com/105562242/193399599-d2860948-86ff-4055-b0ce-74e58fa7fae6.png">
+
+<img width="1351" alt="Screenshot 2022-09-08 at 10 00 18 AM" src="https://user-images.githubusercontent.com/105562242/193399643-163ede50-3dfe-4a3c-9ea0-862dc999c1e5.png">
+
+<img width="1304" alt="Screenshot 2022-09-08 at 10 02 10 AM" src="https://user-images.githubusercontent.com/105562242/193399651-a3201ab1-3514-4813-9ea2-369f9e5ed402.png">
+
+<img width="1274" alt="Screenshot 2022-09-08 at 10 02 45 AM" src="https://user-images.githubusercontent.com/105562242/193399658-05990977-4359-48f4-bd0c-41477ae5d925.png">
