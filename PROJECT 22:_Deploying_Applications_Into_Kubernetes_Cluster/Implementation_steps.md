@@ -43,3 +43,11 @@ This project demonstrates how containerised applications are deployed as pods in
 
 * Editing the nginx-service.yml manifest file to expose the Nginx service in order to be accessible to the browser by adding NodePort as a type of service:
 
+<img width="1271" alt="Screenshot 2022-09-10 at 3 02 49 PM" src="https://user-images.githubusercontent.com/105562242/193416049-3be68d64-159e-4eb1-b3fc-39b761a392a5.png">
+
+* Accessing the nginx application from the browser with the value of the nodeport
+
+<img width="1199" alt="Screenshot 2022-09-10 at 3 02 56 PM" src="https://user-images.githubusercontent.com/105562242/193416069-40ca8e9d-b3d1-4673-91d5-d7cc4098a6cc.png">
+
+#### STEP 3: Creating Deployment
+------------------------------------
