@@ -802,3 +802,33 @@ done
 
 <img width="1539" alt="Screenshot 2022-09-08 at 8 39 11 AM" src="https://user-images.githubusercontent.com/105562242/193369949-c2c239c8-954d-40a2-a188-cf1ec91b740c.png">
 
+* For Worker nodes
+
+<img width="1537" alt="Screenshot 2022-09-08 at 8 48 50 AM" src="https://user-images.githubusercontent.com/105562242/193370272-0146d294-ffca-4ef5-a986-9f8da2d849e0.png">
+
+#### STEP 8: Preparing The ETCD Database For Encryption At Rest
+-----------------------------------------------------------------
+Kubernetes uses etcd (A distributed key value store) to store variety of data which includes the cluster state, application configurations, and secrets but since the data in it is stored as plain text, therefore the etcd is encrypted as follows
+
+* Generating encryption key and encoding it using base64:ETCD_ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
+* Creating an encryption-config.yaml file
+
+```
+cat > encryption-config.yaml <<EOF
+kind: EncryptionConfig
+apiVersion: v1
+resources:
+ - resources:
+     - secrets
+   providers:
+     - aescbc:
+         keys:
+           - name: key1
+             secret: ${ETCD_ENCRYPTION_KEY}
+     - identity: {}
+EOF
+
+```
+* Sending the encryption-config.yaml file to the master nodes using scp and a for loop
+
+<img width="1541" alt="Screenshot 2022-09-08 at 8 52 14 AM" src="https://user-images.githubusercontent.com/105562242/193374573-1217fc7e-5160-4824-b769-ed6dea6712f4.png">
