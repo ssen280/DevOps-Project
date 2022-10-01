@@ -967,3 +967,640 @@ sudo ETCDCTL_API=3 etcdctl member list \
 
 <img width="1537" alt="Screenshot 2022-09-08 at 9 20 30 AM" src="https://user-images.githubusercontent.com/105562242/193397621-feabcd17-26e5-4090-ba4a-e2b23012af26.png">
 
+#### STEP 9: Configuring The Components For The Control Plane On The Master/Controller Nodes. 
+#### Please note : We have follow on all three master nodes.
+------------------------------------------------------------------------
+
+* Creating the Kubernetes configuration directory:```$ sudo mkdir -p /etc/kubernetes/config```
+* Downloading the official Kubernetes release binaries:
+
+```
+wget -q --show-progress --https-only --timestamping \
+"https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kube-apiserver" \
+"https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kube-controller-manager" \
+"https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kube-scheduler" \
+"https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl"
+
+```
+* Installing the Kubernetes binaries:
+
+```
+{
+chmod +x kube-apiserver kube-controller-manager kube-scheduler kubectl
+sudo mv kube-apiserver kube-controller-manager kube-scheduler kubectl /usr/local/bin/
+}
+
+```
+
+* Configuring the Kubernetes API Server:
+
+```
+{
+sudo mkdir -p /var/lib/kubernetes/
+
+sudo mv ca.pem ca-key.pem master-kubernetes-key.pem master-kubernetes.pem \
+service-account-key.pem service-account.pem \
+encryption-config.yaml /var/lib/kubernetes/
+}
+
+```
+
+
+
+<img width="1537" alt="Screenshot 2022-09-08 at 9 23 09 AM" src="https://user-images.githubusercontent.com/105562242/193397858-baa67530-fd0a-4847-ba27-cb23efceaafd.png">
+
+* The instance internal IP address will be used to advertise the API Server to members of the cluster. Retrieving the internal IP address for the current compute instance:```$ export INTERNAL_IP=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)```
+* Creating the kube-apiserver.service systemd unit file:
+
+```
+cat <<EOF | sudo tee /etc/systemd/system/kube-apiserver.service
+[Unit]
+Description=Kubernetes API Server
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+ExecStart=/usr/local/bin/kube-apiserver \\
+  --advertise-address=${INTERNAL_IP} \\
+  --allow-privileged=true \\
+  --apiserver-count=3 \\
+  --audit-log-maxage=30 \\
+  --audit-log-maxbackup=3 \\
+  --audit-log-maxsize=100 \\
+  --audit-log-path=/var/log/audit.log \\
+  --authorization-mode=Node,RBAC \\
+  --bind-address=0.0.0.0 \\
+  --client-ca-file=/var/lib/kubernetes/ca.pem \\
+  --enable-admission-plugins=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \\
+  --etcd-cafile=/var/lib/kubernetes/ca.pem \\
+  --etcd-certfile=/var/lib/kubernetes/master-kubernetes.pem \\
+  --etcd-keyfile=/var/lib/kubernetes/master-kubernetes-key.pem\\
+  --etcd-servers=https://172.31.0.10:2379,https://172.31.0.11:2379,https://172.31.0.12:2379 \\
+  --event-ttl=1h \\
+  --encryption-provider-config=/var/lib/kubernetes/encryption-config.yaml \\
+  --kubelet-certificate-authority=/var/lib/kubernetes/ca.pem \\
+  --kubelet-client-certificate=/var/lib/kubernetes/master-kubernetes.pem \\
+  --kubelet-client-key=/var/lib/kubernetes/master-kubernetes-key.pem \\
+  --runtime-config='api/all=true' \\
+  --service-account-key-file=/var/lib/kubernetes/service-account.pem \\
+  --service-account-signing-key-file=/var/lib/kubernetes/service-account-key.pem \\
+  --service-account-issuer=https://${INTERNAL_IP}:6443 \\
+  --service-cluster-ip-range=172.32.0.0/24 \\
+  --service-node-port-range=30000-32767 \\
+  --tls-cert-file=/var/lib/kubernetes/master-kubernetes.pem \\
+  --tls-private-key-file=/var/lib/kubernetes/master-kubernetes-key.pem \\
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+```
+* Moving the kube-controller-manager kubeconfig into place:```$ sudo mv kube-controller-manager.kubeconfig /var/lib/kubernetes/```
+* Exporting some variables to retrieve the vpc_cidr which will be required for the bind-address flag:
+
+```
+export AWS_METADATA="http://169.254.169.254/latest/meta-data"
+export EC2_MAC_ADDRESS=$(curl -s $AWS_METADATA/network/interfaces/macs/ | head -n1 | tr -d '/')
+export VPC_CIDR=$(curl -s $AWS_METADATA/network/interfaces/macs/$EC2_MAC_ADDRESS/vpc-ipv4-cidr-block/)
+export NAME=k8s-cluster-from-ground-up
+
+```
+
+<img width="1293" alt="Screenshot 2022-09-08 at 9 24 23 AM" src="https://user-images.githubusercontent.com/105562242/193397975-dcd9055d-eca4-4c3e-a18a-48ac23c81852.png">
+
+* Creating the kube-controller-manager.service systemd unit file:
+
+```
+cat <<EOF | sudo tee /etc/systemd/system/kube-controller-manager.service
+[Unit]
+Description=Kubernetes Controller Manager
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+ExecStart=/usr/local/bin/kube-controller-manager \\
+  --bind-address=0.0.0.0 \\
+  --cluster-cidr=${VPC_CIDR} \\
+  --cluster-name=${NAME} \\
+  --cluster-signing-cert-file=/var/lib/kubernetes/ca.pem \\
+  --cluster-signing-key-file=/var/lib/kubernetes/ca-key.pem \\
+  --kubeconfig=/var/lib/kubernetes/kube-controller-manager.kubeconfig \\
+  --authentication-kubeconfig=/var/lib/kubernetes/kube-controller-manager.kubeconfig \\
+  --authorization-kubeconfig=/var/lib/kubernetes/kube-controller-manager.kubeconfig \\
+  --leader-elect=true \\
+  --root-ca-file=/var/lib/kubernetes/ca.pem \\
+  --service-account-private-key-file=/var/lib/kubernetes/service-account-key.pem \\
+  --service-cluster-ip-range=172.32.0.0/24 \\
+  --use-service-account-credentials=true \\
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+```
+* Moving the kube-scheduler kubeconfig into place:
+
+```
+sudo mv kube-scheduler.kubeconfig /var/lib/kubernetes/
+sudo mkdir -p /etc/kubernetes/config
+
+```
+* Creating the kube-scheduler.yaml configuration file:
+
+```
+cat <<EOF | sudo tee /etc/kubernetes/config/kube-scheduler.yaml
+apiVersion: kubescheduler.config.k8s.io/v1beta1
+kind: KubeSchedulerConfiguration
+clientConnection:
+  kubeconfig: "/var/lib/kubernetes/kube-scheduler.kubeconfig"
+leaderElection:
+  leaderElect: true
+EOF
+
+```
+
+* Creating the kube-scheduler.service systemd unit file:
+
+```
+cat <<EOF | sudo tee /etc/systemd/system/kube-scheduler.service
+[Unit]
+Description=Kubernetes Scheduler
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+ExecStart=/usr/local/bin/kube-scheduler \\
+  --config=/etc/kubernetes/config/kube-scheduler.yaml \\
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+```
+* Starting the Controller Services
+
+```
+{
+sudo systemctl daemon-reload
+sudo systemctl enable kube-apiserver kube-controller-manager kube-scheduler
+sudo systemctl start kube-apiserver kube-controller-manager kube-scheduler
+}
+
+```
+* Checking the status of the services
+
+```
+{
+sudo systemctl status kube-apiserver
+sudo systemctl status kube-controller-manager
+sudo systemctl status kube-scheduler
+}
+
+```
+
+<img width="1533" alt="Screenshot 2022-09-08 at 9 25 54 AM" src="https://user-images.githubusercontent.com/105562242/193398130-cb244d28-b4a5-4d3f-a9a2-3bc3d7ec0b97.png">
+
+<img width="1535" alt="Screenshot 2022-09-08 at 9 26 16 AM" src="https://user-images.githubusercontent.com/105562242/193398141-e4f7ec76-6e67-412c-a5d0-2f31408e0235.png">
+
+<img width="1537" alt="Screenshot 2022-09-08 at 9 30 22 AM" src="https://user-images.githubusercontent.com/105562242/193398150-fb024951-4f62-4c68-9694-45b32d1a4329.png">
+
+<img width="1542" alt="Screenshot 2022-09-08 at 9 33 49 AM" src="https://user-images.githubusercontent.com/105562242/193398186-ffe38db0-9b9d-428b-a0c0-bf3c3091dadf.png">
+
+#### STEP 10: Testing that Everything is working fine
+#### Please note : We have to perform below steps on all 3 master nodes.
+-------------------------------------
+
+* To get the cluster details run:```$ kubectl cluster-info --kubeconfig admin.kubeconfig```
+* To get the current namespaces:```$ kubectl get namespaces --kubeconfig admin.kubeconfig```
+
+<img width="1457" alt="Screenshot 2022-09-08 at 9 34 39 AM" src="https://user-images.githubusercontent.com/105562242/193398256-461e899e-28a7-4025-b9d7-1566bb69b5c2.png">
+
+<img width="1204" alt="Screenshot 2022-09-08 at 9 35 28 AM" src="https://user-images.githubusercontent.com/105562242/193398265-3ad54c0b-da38-45ba-b97d-6b6b9235add6.png">
+
+<img width="1264" alt="Screenshot 2022-09-08 at 9 36 49 AM" src="https://user-images.githubusercontent.com/105562242/193398270-37550160-8b69-431f-93d3-23641d6e703a.png">
+
+* To reach the Kubernetes API Server publicly:```$ curl --cacert /var/lib/kubernetes/ca.pem https://$INTERNAL_IP:6443/version```
+* To get the status of each component:$ kubectl get componentstatuses --kubeconfig admin.kubeconfig
+
+<img width="1047" alt="Screenshot 2022-09-08 at 9 38 26 AM" src="https://user-images.githubusercontent.com/105562242/193398287-52d96a63-1990-4a4b-af91-03199840595f.png">
+
+<img width="1308" alt="Screenshot 2022-09-08 at 9 39 01 AM" src="https://user-images.githubusercontent.com/105562242/193398296-ba01b847-2170-4030-b41f-7f9977e8fbe9.png">
+
+#### STEP 11: Configuring Role Based Access Control
+--------------------------------------------------------
+* Configuring Role Based Access Control (RBAC) on one of the controller(master) nodes so that the api-server has necessary authorization for for the kubelet.
+
+* Creating the ClusterRole
+
+```
+cat <<EOF | kubectl apply --kubeconfig admin.kubeconfig -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:kube-apiserver-to-kubelet
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - nodes/proxy
+      - nodes/stats
+      - nodes/log
+      - nodes/spec
+      - nodes/metrics
+    verbs:
+      - "*"
+EOF
+
+```
+<img width="1139" alt="Screenshot 2022-09-08 at 9 39 36 AM" src="https://user-images.githubusercontent.com/105562242/193398391-3de58b64-a179-48c0-bb31-883cecf14abc.png">
+
+* Creating the ClusterRoleBinding to bind the kubernetes user with the role created above
+
+```
+cat <<EOF | kubectl --kubeconfig admin.kubeconfig  apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: system:kube-apiserver
+  namespace: ""
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:kube-apiserver-to-kubelet
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: kubernetes
+EOF
+
+```
+<img width="1071" alt="Screenshot 2022-09-08 at 9 39 50 AM" src="https://user-images.githubusercontent.com/105562242/193398420-280b732e-3773-479a-8326-68aa9c91ef88.png">
+
+* The RBAC permissions is configured to allow the Kubernetes API Server to access the Kubelet API on each worker nodes. Creating the system:kube-apiserver-to-kubelet ClusterRole with permissions to access the Kubelet API and perform most common tasks associated with managing pods on the worker nodes:
+
+```
+cat <<EOF | kubectl apply --kubeconfig admin.kubeconfig -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:kube-apiserver-to-kubelet
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - nodes/proxy
+      - nodes/stats
+      - nodes/log
+      - nodes/spec
+      - nodes/metrics
+    verbs:
+      - "*"
+EOF
+
+```
+<img width="1027" alt="Screenshot 2022-09-08 at 9 40 17 AM" src="https://user-images.githubusercontent.com/105562242/193398458-3465646e-f3ae-4d66-84a2-a5bbab696e78.png">
+
+* Binding the system:kube-apiserver-to-kubelet ClusterRole to the kubernetes user so that API server can authenticate successfully to the kubelets on the worker nodes:
+
+```
+cat <<EOF | kubectl apply --kubeconfig admin.kubeconfig -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: system:kube-apiserver
+  namespace: ""
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:kube-apiserver-to-kubelet
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: kubernetes
+EOF
+
+```
+<img width="1015" alt="Screenshot 2022-09-08 at 9 40 37 AM" src="https://user-images.githubusercontent.com/105562242/193398490-5f2c4885-58e7-4e23-952c-3977f25118c9.png">
+
+
+#### STEP 12: Bootstraping components on the worker nodes
+---------------------------------------------------------------
+
+* Opening 3 panes and ssh into the 3 worker nodes and setting the synchronize-panes on.
+
+* For Worker node 1:
+
+```
+worker_1_ip=$(aws ec2 describe-instances \
+--filters "Name=tag:Name,Values=${NAME}-worker-0" \
+--output text --query 'Reservations[].Instances[].PublicIpAddress')
+ssh -i k8s-cluster-from-ground-up.id_rsa ubuntu@${worker_1_ip}
+
+```
+* For Worker node 2
+
+```
+worker_2_ip=$(aws ec2 describe-instances \
+--filters "Name=tag:Name,Values=${NAME}-worker-1" \
+--output text --query 'Reservations[].Instances[].PublicIpAddress')
+ssh -i k8s-cluster-from-ground-up.id_rsa ubuntu@${worker_2_ip}
+
+```
+
+* For Worker node 3
+
+```
+worker_3_ip=$(aws ec2 describe-instances \
+--filters "Name=tag:Name,Values=${NAME}-worker-2" \
+--output text --query 'Reservations[].Instances[].PublicIpAddress')
+ssh -i k8s-cluster-from-ground-up.id_rsa ubuntu@${worker_3_ip}
+
+```
+
+* Installing OS dependencies:
+
+```
+{
+  sudo apt-get update
+  sudo apt-get -y install socat conntrack ipset
+}
+
+```
+
+* Disabling Swap:```$ sudo swapoff -a```
+* Downloading and installing binaries of runc, cri-ctl and container runtime (Containerd)
+
+```
+ wget https://github.com/opencontainers/runc/releases/download/v1.0.0-rc93/runc.amd64 \
+  https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.21.0/crictl-v1.21.0-linux-amd64.tar.gz \
+  https://github.com/containerd/containerd/releases/download/v1.4.4/containerd-1.4.4-linux-amd64.tar.gz 
+  
+```
+* Configuring the containerd
+
+```
+{
+  mkdir containerd
+  tar -xvf crictl-v1.21.0-linux-amd64.tar.gz
+  tar -xvf containerd-1.4.4-linux-amd64.tar.gz -C containerd
+  sudo mv runc.amd64 runc
+  chmod +x  crictl runc  
+  sudo mv crictl runc /usr/local/bin/
+  sudo mv containerd/bin/* /bin/
+}
+
+```
+* Creating containerd directory:```$ sudo mkdir -p /etc/containerd/```
+
+* Inserting the following in it
+```
+cat << EOF | sudo tee /etc/containerd/config.toml
+[plugins]
+  [plugins.cri.containerd]
+    snapshotter = "overlayfs"
+    [plugins.cri.containerd.default_runtime]
+      runtime_type = "io.containerd.runtime.v1.linux"
+      runtime_engine = "/usr/local/bin/runc"
+      runtime_root = ""
+EOF
+
+```
+
+<img width="809" alt="Screenshot 2022-09-08 at 9 42 41 AM" src="https://user-images.githubusercontent.com/105562242/193398866-e6ceeee0-9573-4a01-bc8c-819e0f202241.png">
+
+
+* Creating the containerd.service systemd unit file:
+
+```
+cat << EOF | sudo tee /etc/systemd/system/containerd.service
+[Unit]
+Description=containerd container runtime
+Documentation=https://containerd.io
+After=network.target
+
+[Service]
+ExecStartPre=/sbin/modprobe overlay
+ExecStart=/bin/containerd
+Restart=always
+RestartSec=5
+Delegate=yes
+KillMode=process
+OOMScoreAdjust=-999
+LimitNOFILE=1048576
+LimitNPROC=infinity
+LimitCORE=infinity
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+```
+
+* Creating directories to configure kubelet, kube-proxy, cni, and a directory to keep the kubernetes root ca file:
+
+```
+sudo mkdir -p \
+  /var/lib/kubelet \
+  /var/lib/kube-proxy \
+  /etc/cni/net.d \
+  /opt/cni/bin \
+  /var/lib/kubernetes \
+  /var/run/kubernetes
+  
+```
+* Downloading Container Network Interface(CNI) plugins available from container networking’s GitHub repo:
+
+```
+wget -q --show-progress --https-only --timestamping \
+  https://github.com/containernetworking/plugins/releases/download/v0.9.1/cni-plugins-linux-amd64-v0.9.1.tgz
+  
+```
+* Installing CNI into /opt/cni/bin/:$ sudo tar -xvf cni-plugins-linux-amd64-v0.9.1.tgz -C /opt/cni/bin/
+* Downloading binaries for kubectl, kube-proxy, and kubelet
+
+```
+wget -q --show-progress --https-only --timestamping \
+  https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl \
+  https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kube-proxy \
+  https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubelet
+  
+```
+* Installing the downloaded binaries:
+
+```
+{
+  chmod +x  kubectl kube-proxy kubelet  
+  sudo mv  kubectl kube-proxy kubelet /usr/local/bin/
+}
+
+```
+#### STEP 13: Configuring The Worker Nodes Components
+------------------------------------------------------------
+
+* Configuring the network
+* Getting the POD_CIDR that will be used as part of network configuration:
+
+```
+POD_CIDR=$(curl -s http://169.254.169.254/latest/user-data/ \
+  | tr "|" "\n" | grep "^pod-cidr" | cut -d"=" -f2)
+echo "${POD_CIDR}"
+
+```
+* Configuring the bridge network:
+
+```
+cat > 172-20-bridge.conf <<EOF
+{
+    "cniVersion": "0.3.1",
+    "name": "bridge",
+    "type": "bridge",
+    "bridge": "cnio0",
+    "isGateway": true,
+    "ipMasq": true,
+    "ipam": {
+        "type": "host-local",
+        "ranges": [
+          [{"subnet": "${POD_CIDR}"}]
+        ],
+        "routes": [{"dst": "0.0.0.0/0"}]
+    }
+}
+EOF
+
+```
+<img width="1044" alt="Screenshot 2022-09-08 at 9 44 36 AM" src="https://user-images.githubusercontent.com/105562242/193399118-8ac30a44-a26a-4ce7-a341-dbf1e0e22274.png">
+
+
+* Configuring the loopback network:
+
+```
+cat > 99-loopback.conf <<EOF
+{
+    "cniVersion": "0.3.1",
+    "type": "loopback"
+}
+EOF
+
+```
+* Moving the files to the network configuration directory:```$ sudo mv 172-20-bridge.conf 99-loopback.conf /etc/cni/net.d/```
+* Storing the worker’s name in a variable:
+
+```
+NAME=k8s-cluster-from-ground-up
+WORKER_NAME=${NAME}-$(curl -s http://169.254.169.254/latest/user-data/ \
+  | tr "|" "\n" | grep "^name" | cut -d"=" -f2)
+echo "${WORKER_NAME}"
+
+```
+* Moving the certificates and kubeconfig file to their respective configuration directories:
+
+```
+sudo mv ${WORKER_NAME}-key.pem ${WORKER_NAME}.pem /var/lib/kubelet/
+sudo mv ${WORKER_NAME}.kubeconfig /var/lib/kubelet/kubeconfig
+sudo mv kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig
+sudo mv ca.pem /var/lib/kubernetes/
+
+```
+* Creating the kubelet-config.yaml file.
+
+* Ensuring the needed variables exist:
+
+```
+NAME=k8s-cluster-from-ground-up
+WORKER_NAME=${NAME}-$(curl -s http://169.254.169.254/latest/user-data/ \
+  | tr "|" "\n" | grep "^name" | cut -d"=" -f2)
+echo "${WORKER_NAME}"
+
+```
+<img width="1058" alt="Screenshot 2022-09-08 at 9 45 57 AM" src="https://user-images.githubusercontent.com/105562242/193399229-f3910ef6-7731-4a60-8c92-a1d68ee1a6ef.png">
+
+* Creating the kubelet-config.yaml file
+
+```
+cat <<EOF | sudo tee /var/lib/kubelet/kubelet-config.yaml
+kind: KubeletConfiguration
+apiVersion: kubelet.config.k8s.io/v1beta1
+authentication:
+  anonymous:
+    enabled: false
+  webhook:
+    enabled: true
+  x509:
+    clientCAFile: "/var/lib/kubernetes/ca.pem"
+authorization:
+  mode: Webhook
+clusterDomain: "cluster.local"
+clusterDNS:
+  - "10.32.0.10"
+resolvConf: "/etc/resolv.conf"
+runtimeRequestTimeout: "15m"
+tlsCertFile: "/var/lib/kubelet/${WORKER_NAME}.pem"
+tlsPrivateKeyFile: "/var/lib/kubelet/${WORKER_NAME}-key.pem"
+EOF
+
+```
+<img width="1029" alt="Screenshot 2022-09-08 at 9 46 12 AM" src="https://user-images.githubusercontent.com/105562242/193399276-72532736-9a0f-492f-9129-ce18ce2cb23e.png">
+
+* Configuring the kubelet systemd service:
+
+```
+cat <<EOF | sudo tee /etc/systemd/system/kubelet.service
+[Unit]
+Description=Kubernetes Kubelet
+Documentation=https://github.com/kubernetes/kubernetes
+After=containerd.service
+Requires=containerd.service
+[Service]
+ExecStart=/usr/local/bin/kubelet \\
+  --config=/var/lib/kubelet/kubelet-config.yaml \\
+  --cluster-domain=cluster.local \\
+  --container-runtime=remote \\
+  --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock \\
+  --image-pull-progress-deadline=2m \\
+  --kubeconfig=/var/lib/kubelet/kubeconfig \\
+  --network-plugin=cni \\
+  --register-node=true \\
+  --v=2
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
+EOF
+
+```
+
+
+<img width="1291" alt="Screenshot 2022-09-08 at 9 47 13 AM" src="https://user-images.githubusercontent.com/105562242/193399310-808ed03d-8051-4e8f-967d-ef7baa68a2a4.png">
+
+
+* Creating the kube-proxy.yaml file:
+
+```
+cat <<EOF | sudo tee /var/lib/kube-proxy/kube-proxy-config.yaml
+kind: KubeProxyConfiguration
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+clientConnection:
+  kubeconfig: "/var/lib/kube-proxy/kubeconfig"
+mode: "iptables"
+clusterCIDR: "172.31.0.0/16"
+EOF
+
+```
+
+<img width="1291" alt="Screenshot 2022-09-08 at 9 47 13 AM" src="https://user-images.githubusercontent.com/105562242/193399348-b2826ff1-4911-443e-aeb2-4c7171aadfb0.png">
+
+
