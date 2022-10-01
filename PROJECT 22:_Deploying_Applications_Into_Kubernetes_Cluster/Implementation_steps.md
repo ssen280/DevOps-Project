@@ -28,3 +28,18 @@ This project demonstrates how containerised applications are deployed as pods in
 
 <img width="1383" alt="Screenshot 2022-09-10 at 2 37 07 PM" src="https://user-images.githubusercontent.com/105562242/193415670-9517c7c8-a78f-427b-9136-251e8d055dcc.png">
 
+* Now Let's try and access the application through the browser, but first we need to create a service for the Nginx pod.
+* Creating service for the nginx pod by applying the manifest file:$ kubectl apply -f nginx-service.yaml
+
+<img width="792" alt="Screenshot 2022-09-10 at 2 39 29 PM" src="https://user-images.githubusercontent.com/105562242/193415832-e69c1f22-ce6f-443e-bcef-a755006cdf84.png">
+
+<img width="779" alt="Screenshot 2022-09-10 at 2 44 22 PM" src="https://user-images.githubusercontent.com/105562242/193415840-2f329a31-e629-4633-9487-725c79880502.png">
+
+<img width="931" alt="Screenshot 2022-09-10 at 2 44 40 PM" src="https://user-images.githubusercontent.com/105562242/193415845-c7514593-7cf4-44fd-9f5e-65403e41564f.png">
+
+<img width="1193" alt="Screenshot 2022-09-10 at 2 50 59 PM" src="https://user-images.githubusercontent.com/105562242/193415925-faa7d5be-ca5f-45b1-adde-9a3e77c5475c.png">
+
+* Another way of accessing the Nginx app through browser is the use of NodePort which is a type of service that exposes the service on a static port on the node’s IP address and they range from 30000-32767 by default.
+
+* Editing the nginx-service.yml manifest file to expose the Nginx service in order to be accessible to the browser by adding NodePort as a type of service:
+
