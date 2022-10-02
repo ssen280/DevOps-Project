@@ -51,3 +51,86 @@ This project demonstrates how containerised applications are deployed as pods in
 
 #### STEP 3: Creating Deployment
 ------------------------------------
+A Deployment is another layer above ReplicaSets and Pods, It manages the deployment of ReplicaSets and allows for easy updating of a ReplicaSet as well as the ability to roll back to a previous version of deployment. To see it in action:
+
+<img width="1231" alt="Screenshot 2022-09-10 at 3 49 29 PM" src="https://user-images.githubusercontent.com/105562242/193435625-0ee9ef86-d62d-4420-bfac-5d04e714153d.png">
+
+<img width="1231" alt="Screenshot 2022-09-10 at 3 49 29 PM" src="https://user-images.githubusercontent.com/105562242/193435655-b2b0b866-0a8b-4fe5-bb21-3e7841008b89.png">
+
+<img width="1190" alt="Screenshot 2022-09-10 at 3 53 41 PM" src="https://user-images.githubusercontent.com/105562242/193435665-a503ff9a-0c62-48cd-81f8-ace30ddacb49.png">
+
+<img width="1127" alt="Screenshot 2022-09-10 at 4 00 04 PM" src="https://user-images.githubusercontent.com/105562242/193435670-fa2ceb80-a293-4070-a688-7fea40b82716.png">
+
+<img width="1315" alt="Screenshot 2022-09-10 at 4 01 17 PM" src="https://user-images.githubusercontent.com/105562242/193435681-6936bb4e-1130-41cf-bddc-b9ac384efaf2.png">
+
+* We can easily scale our deployment up by specifying the desired number of replicas in an imperative command, like this:
+
+<img width="1085" alt="Screenshot 2022-09-10 at 4 10 39 PM" src="https://user-images.githubusercontent.com/105562242/193435722-17b05917-0727-4d32-8f9e-1e0678ce3b7f.png">
+
+<img width="1136" alt="Screenshot 2022-09-10 at 4 14 02 PM" src="https://user-images.githubusercontent.com/105562242/193435741-a3ba7879-e922-499b-a151-d9e53a8af0e5.png">
+
+#### STEP 5: Deploying Tooling Application With Kubernetes
+----------------------------------------------------------------------------------
+The tooling application that was containerised with Docker on Project 20, the following shows how the image is pulled and deployed as pods in Kubernetes:
+
+* We will create service for tooling pod to access it from browser 
+
+<img width="1321" alt="Screenshot 2022-09-10 at 4 34 00 PM" src="https://user-images.githubusercontent.com/105562242/193435859-f5208709-77d7-4b6a-8bc7-de372a4bcb23.png">
+
+* Here we can see we are getting error 
+
+<img width="1442" alt="Screenshot 2022-09-10 at 4 34 23 PM" src="https://user-images.githubusercontent.com/105562242/193436027-daccabd2-53e9-41a8-b8cb-0785b05d7d26.png">
+
+* we will deploy mysql and configure service to connect to tooling deployment
+* our mysql deployment file looks like as below :
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: mysql-deployment
+ labels:
+   tier: mysql-db
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     tier: mysql-db
+ template:
+   metadata:
+     labels:
+       tier: mysql-db
+   spec:
+     containers:
+     - name: mysql
+       image: mysql:5.7
+       env:
+       - name: MYSQL_DATABASE
+         value: toolingdb
+       - name: MYSQL_USER
+         value: saikat
+       - name: MYSQL_PASSWORD
+         value: password123
+       - name: MYSQL_ROOT_PASSWORD
+         value: password1234
+       ports:
+       - containerPort: 3306
+       
+```
+
+<img width="1202" alt="Screenshot 2022-09-10 at 5 13 47 PM" src="https://user-images.githubusercontent.com/105562242/193436096-3375c57e-6a73-49f7-baeb-449bd97452bf.png">
+
+<img width="1144" alt="Screenshot 2022-09-10 at 5 14 19 PM" src="https://user-images.githubusercontent.com/105562242/193436104-44aaabdc-cb36-49e6-9a1d-62656b69e93e.png">
+
+<img width="1149" alt="Screenshot 2022-09-10 at 5 20 20 PM" src="https://user-images.githubusercontent.com/105562242/193436116-0cd1aa0e-5e31-4a9b-983e-d2dc2fd09b85.png">
+
+<img width="1496" alt="Screenshot 2022-09-10 at 5 20 40 PM" src="https://user-images.githubusercontent.com/105562242/193436125-4fe1537f-3cc5-44c1-bf42-3c876492737d.png">
+
+<img width="1221" alt="Screenshot 2022-09-10 at 5 21 16 PM" src="https://user-images.githubusercontent.com/105562242/193436130-348bf178-7747-4162-85e9-f2fec49b4c2d.png">
+
+<img width="1269" alt="Screenshot 2022-09-10 at 5 21 28 PM" src="https://user-images.githubusercontent.com/105562242/193436144-1cccc010-79d4-4388-9a8c-58e1639450da.png">
+
+<img width="1343" alt="Screenshot 2022-09-10 at 8 51 58 PM" src="https://user-images.githubusercontent.com/105562242/193436164-d714f753-2eaa-43a0-bd43-b75e4e86d4b7.png">
+
+<img width="1256" alt="Screenshot 2022-09-10 at 8 52 23 PM" src="https://user-images.githubusercontent.com/105562242/193436183-efe14fe8-60a0-4b63-ab68-fc25d7e02e49.png">
+
