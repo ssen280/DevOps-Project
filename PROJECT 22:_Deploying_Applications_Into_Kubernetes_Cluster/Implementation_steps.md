@@ -147,3 +147,32 @@ spec:
 
 <img width="1256" alt="Screenshot 2022-09-10 at 8 52 23 PM" src="https://user-images.githubusercontent.com/105562242/193436183-efe14fe8-60a0-4b63-ab68-fc25d7e02e49.png">
 
+#### STEP 6: Using AWS Load Balancer To Access The Nginx Application
+-----------------------------------------------------
+
+* We will doploy ningx and try to access it with LoadBlanacer service type 
+
+<img width="1218" alt="Screenshot 2022-09-11 at 12 22 52 AM" src="https://user-images.githubusercontent.com/105562242/193436491-64ccc025-f95d-40a0-a7f0-2cd0b1969db4.png">
+
+<img width="1189" alt="Screenshot 2022-09-11 at 12 41 24 AM" src="https://user-images.githubusercontent.com/105562242/193436499-05f36a5e-af7e-4ebd-9442-9ea4a0e6b507.png">
+
+<img width="1184" alt="Screenshot 2022-09-11 at 12 49 44 AM" src="https://user-images.githubusercontent.com/105562242/193436505-97c45b3b-575b-44fc-89af-32ab3cdf0a11.png">
+
+<img width="1469" alt="Screenshot 2022-09-11 at 12 49 57 AM" src="https://user-images.githubusercontent.com/105562242/193436511-e6adfab4-c8de-4723-a1c8-95b118577ea2.png">
+
+<img width="1395" alt="Screenshot 2022-09-11 at 12 50 13 AM" src="https://user-images.githubusercontent.com/105562242/193436515-cad462dd-12bf-4567-a618-c486adb047fb.png">
+
+<img width="1072" alt="Screenshot 2022-09-11 at 12 50 59 AM" src="https://user-images.githubusercontent.com/105562242/193436517-f7159a60-8d06-46f2-9130-0abb9797f855.png">
+
+<img width="1116" alt="Screenshot 2022-09-11 at 12 54 27 AM" src="https://user-images.githubusercontent.com/105562242/193436521-217e89ef-3bf6-42cd-bde7-ca5d83cc586e.png">
+
+
+#### STEP 7: PERSISTING DATA FOR PODS
+--------------------------------------
+* We will deploy nginx pod and modify its default web page. We will see that custom web page only work until that pods are running state. When we will destry the pods and deployment will re-create the pods we will lost the custom config data. 
+
+<img width="1493" alt="Screenshot 2022-09-11 at 12 59 19 AM" src="https://user-images.githubusercontent.com/105562242/193436610-1ece8e7d-1092-4ece-a096-78263c9dc7e0.png">
+
+<img width="1441" alt="Screenshot 2022-09-11 at 1 03 50 AM" src="https://user-images.githubusercontent.com/105562242/193436616-09b58ebd-445f-4404-bf53-8bd42ba1edf2.png">
+
+<img width="1295" alt="Screenshot 2022-09-11 at 1 05 15 AM" src="https://user-images.githubusercontent.com/105562242/193436622-36e71300-1bd8-40c8-b2e9-366f3d58a26a.png">
