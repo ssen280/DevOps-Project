@@ -82,13 +82,13 @@ The tooling application that was containerised with Docker on Project 20, the fo
 <img width="1442" alt="Screenshot 2022-09-10 at 4 34 23 PM" src="https://user-images.githubusercontent.com/105562242/193436027-daccabd2-53e9-41a8-b8cb-0785b05d7d26.png">
 
 * we will deploy mysql and configure service to connect to tooling deployment
-* our mysql deployment file looks like as below :
+* our mysql deployment and mysql service files look like as below :
 
 ```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: mysql-deployment
+ name: mysql
  labels:
    tier: mysql-db
 spec:
@@ -117,7 +117,20 @@ spec:
        - containerPort: 3306
        
 ```
-
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  selector:
+    tier: mysql-db
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+      
+```
 <img width="1202" alt="Screenshot 2022-09-10 at 5 13 47 PM" src="https://user-images.githubusercontent.com/105562242/193436096-3375c57e-6a73-49f7-baeb-449bd97452bf.png">
 
 <img width="1144" alt="Screenshot 2022-09-10 at 5 14 19 PM" src="https://user-images.githubusercontent.com/105562242/193436104-44aaabdc-cb36-49e6-9a1d-62656b69e93e.png">
