@@ -150,7 +150,7 @@ spec:
 #### STEP 6: Using AWS Load Balancer To Access The Nginx Application
 -----------------------------------------------------
 
-* We will doploy ningx and try to access it with LoadBlanacer service type 
+* We will deploy ningx and try to access it with LoadBlanacer service type 
 
 <img width="1218" alt="Screenshot 2022-09-11 at 12 22 52 AM" src="https://user-images.githubusercontent.com/105562242/193436491-64ccc025-f95d-40a0-a7f0-2cd0b1969db4.png">
 
