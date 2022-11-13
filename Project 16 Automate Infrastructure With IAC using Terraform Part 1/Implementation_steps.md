@@ -39,5 +39,6 @@ After creating an IAM user with AdministrativeAccess permissions in AWS and acqu
 
 * Inorder to check to see what terraform intends to create before we tell it to go ahead and create the aws_vpc resource the following command is run: terraform plan
 
-![Uploading Screenshot 2022-08-23 at 8.16.45 PM.png…]()
+<img width="961" alt="Screenshot 2022-08-23 at 8 16 45 PM" src="https://user-images.githubusercontent.com/105562242/201542097-b66ab400-f734-401a-a81e-e3bb7542cd1c.png">
+
 
