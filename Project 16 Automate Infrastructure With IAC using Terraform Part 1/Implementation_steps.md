@@ -6,4 +6,6 @@
 #### INTRODUCTION
 ------------------------------------------------------------------
 
+This project demonstrates how the AWS infrastructure for 2 websites that was built manually in project 15 is automated with the use of Terraform.
 
+The following outlines the steps taken:
