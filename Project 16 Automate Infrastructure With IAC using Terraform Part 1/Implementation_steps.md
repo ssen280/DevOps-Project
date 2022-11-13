@@ -22,3 +22,10 @@ After creating an IAM user with AdministrativeAccess permissions in AWS and acqu
 
 
 <img width="840" alt="Screenshot 2022-08-23 at 7 52 29 PM" src="https://user-images.githubusercontent.com/105562242/201541913-4f3425e2-96a1-4663-ae5a-eac44fc29d7a.png">
+
+
+#### STEP 1: Creating VPC Resource
+------------------------------------
+* Creating a folder called PBL
+* Creating a file in the PBL folder and naming it main.tf
+* Entering the following configuration which adds AWS as a provider and a resource to create a VPC in the main.tf file:
