@@ -13,5 +13,12 @@ The following outlines the steps taken:
 
 -----------------------------------
 
-STEP 0: Setting Up AWS CLI And S3 Buckets
+#### STEP 0: Setting Up AWS CLI 
+-----------------------------------
+After creating an IAM user with AdministrativeAccess permissions in AWS and acquiring the access key and secret access key, the following step was taken:
 
+
+<img width="788" alt="Screenshot 2022-08-23 at 7 52 19 PM" src="https://user-images.githubusercontent.com/105562242/201541901-c8df4869-74cf-491f-ba25-c425c09d9c0c.png">
+
+
+<img width="840" alt="Screenshot 2022-08-23 at 7 52 29 PM" src="https://user-images.githubusercontent.com/105562242/201541913-4f3425e2-96a1-4663-ae5a-eac44fc29d7a.png">
