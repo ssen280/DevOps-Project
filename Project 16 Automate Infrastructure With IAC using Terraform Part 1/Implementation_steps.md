@@ -29,3 +29,15 @@ After creating an IAM user with AdministrativeAccess permissions in AWS and acqu
 * Creating a folder called PBL
 * Creating a file in the PBL folder and naming it main.tf
 * Entering the following configuration which adds AWS as a provider and a resource to create a VPC in the main.tf file:
+
+<img width="1273" alt="Screenshot 2022-08-23 at 8 13 39 PM" src="https://user-images.githubusercontent.com/105562242/201542019-de895489-eea7-4ee2-8bae-0c52f53bf63a.png">
+
+
+* Running the following command which downloads the necessary plugins for Terraform to work: terraform init
+
+<img width="1222" alt="Screenshot 2022-08-23 at 8 14 06 PM" src="https://user-images.githubusercontent.com/105562242/201542041-00136623-5c45-41d9-9192-06c3656a9b34.png">
+
+* Inorder to check to see what terraform intends to create before we tell it to go ahead and create the aws_vpc resource the following command is run: terraform plan
+
+![Uploading Screenshot 2022-08-23 at 8.16.45 PM.png…]()
+
