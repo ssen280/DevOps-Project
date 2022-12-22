@@ -17,3 +17,14 @@ Creating AWS S3 bucket from a CLI to store the Terraform state:
 <img width="1308" alt="Screenshot 2022-09-14 at 9 23 57 PM" src="https://user-images.githubusercontent.com/105562242/209226523-51e166a6-b771-4677-b3d0-5b9520564a44.png">
 
 <img width="1476" alt="Screenshot 2022-09-14 at 9 53 43 PM" src="https://user-images.githubusercontent.com/105562242/209226784-04c198fd-56a8-45df-9578-49199a422c96.png">
+
+
+STEP 2: Installing Helm From Script
+------------------------------------------------------------------------
+
+* Fetching the script:$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+* Changing the permission of the script:$ chmod 700 get_helm.sh
+* Executing the script:$ ./get_helm.sh
+
+<img width="1485" alt="Screenshot 2022-09-14 at 10 26 11 PM" src="https://user-images.githubusercontent.com/105562242/209227056-3d4e4e18-da70-4b27-90ce-f08200cb3f20.png">
+
