@@ -40,3 +40,18 @@ STEP 3: Deploying Jenkins With Helm
 
 <img width="1482" alt="Screenshot 2022-09-14 at 10 31 18 PM" src="https://user-images.githubusercontent.com/105562242/209227495-5d88344d-e7e1-4614-8ccf-22b5d1ca7a80.png">
 
+* Running some commands to inspect the installation:
+
+<img width="1463" alt="Screenshot 2022-09-14 at 10 31 36 PM" src="https://user-images.githubusercontent.com/105562242/209227941-a5e09fc4-ecef-42fb-b216-788ea7014ea0.png">
+
+<img width="806" alt="Screenshot 2022-09-14 at 10 32 11 PM" src="https://user-images.githubusercontent.com/105562242/209227971-b3faac9e-a4bb-4dc4-9a12-3f19daad7cc7.png">
+
+<img width="1465" alt="Screenshot 2022-09-14 at 10 32 52 PM" src="https://user-images.githubusercontent.com/105562242/209228055-8215379f-7013-4975-8970-2dca00509193.png">
+
+<img width="1481" alt="Screenshot 2022-09-14 at 10 34 11 PM" src="https://user-images.githubusercontent.com/105562242/209228169-fd0a4f4a-8dbd-4a7b-b9bd-d2f6cb5f15bd.png">
+
+
+* Testing it:$ kubectl get po
+* To display the current context in use:$ kubectl config get-context
+
+<img width="1486" alt="Screenshot 2022-09-14 at 10 36 33 PM" src="https://user-images.githubusercontent.com/105562242/209228522-f6be21c5-2255-46ef-b63c-6837be87d906.png">
