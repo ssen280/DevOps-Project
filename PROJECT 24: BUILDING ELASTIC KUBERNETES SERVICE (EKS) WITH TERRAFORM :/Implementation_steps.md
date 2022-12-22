@@ -55,3 +55,10 @@ STEP 3: Deploying Jenkins With Helm
 * To display the current context in use:$ kubectl config get-context
 
 <img width="1486" alt="Screenshot 2022-09-14 at 10 36 33 PM" src="https://user-images.githubusercontent.com/105562242/209228522-f6be21c5-2255-46ef-b63c-6837be87d906.png">
+
+* To acquire the Jenkins administrator's password credential:$ kubectl exec --namespace default -it svc/jenkins -c jenkins -- /bin/cat /run/secrets/chart-admin-password && echo
+
+* Port forwarding to access Jenkins from the UI:$ kubectl --namespace default port-forward svc/myjenkins 8080:8080
+
+<img width="1482" alt="Screenshot 2022-09-14 at 10 37 56 PM" src="https://user-images.githubusercontent.com/105562242/209233107-9a641287-2f60-4a09-b373-8648c1ff2bd0.png">
+
