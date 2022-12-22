@@ -15,3 +15,5 @@ Creating AWS S3 bucket from a CLI to store the Terraform state:
 <img width="1169" alt="Screenshot 2022-09-14 at 8 22 43 PM" src="https://user-images.githubusercontent.com/105562242/209226347-2dc9ca90-7738-470d-b123-f014a81aefbd.png">
 
 <img width="1308" alt="Screenshot 2022-09-14 at 9 23 57 PM" src="https://user-images.githubusercontent.com/105562242/209226523-51e166a6-b771-4677-b3d0-5b9520564a44.png">
+
+<img width="1476" alt="Screenshot 2022-09-14 at 9 53 43 PM" src="https://user-images.githubusercontent.com/105562242/209226784-04c198fd-56a8-45df-9578-49199a422c96.png">
