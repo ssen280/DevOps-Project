@@ -62,6 +62,9 @@ STEP 3: Deploying Jenkins With Helm
 
 <img width="1482" alt="Screenshot 2022-09-14 at 10 37 56 PM" src="https://user-images.githubusercontent.com/105562242/209233107-9a641287-2f60-4a09-b373-8648c1ff2bd0.png">
 
+<img width="1519" alt="Screenshot 2022-12-23 at 4 33 35 AM" src="https://user-images.githubusercontent.com/105562242/209240099-9972c72a-63f9-4386-9592-bc647c0ffc52.png">
+
+
 STEP 4: Deploying Artifactory With Helm
 ---------------------------------------------------------
 * Adding the Artifactory's repository to helm:$ helm repo add jfrog https://charts.jfrog.io 
