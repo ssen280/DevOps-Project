@@ -130,7 +130,7 @@ STEP 6: Deploying Prometheus With Helm
 
 <img width="1726" alt="Screenshot 2022-09-14 at 11 17 27 PM" src="https://user-images.githubusercontent.com/105562242/209237617-c69871cd-bcfa-40c5-9b4a-d50b1d4a49cd.png">
 
-STEP 6: Deploying Grafana With Helm
+STEP 7: Deploying Grafana With Helm
 ---------------------------------------------------------------
 
 * Adding the grafana's repository to helm:$ helm repo add grafana https://grafana.github.io/helm-charts
