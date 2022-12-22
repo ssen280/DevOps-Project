@@ -28,3 +28,15 @@ STEP 2: Installing Helm From Script
 
 <img width="1485" alt="Screenshot 2022-09-14 at 10 26 11 PM" src="https://user-images.githubusercontent.com/105562242/209227056-3d4e4e18-da70-4b27-90ce-f08200cb3f20.png">
 
+
+STEP 3: Deploying Jenkins With Helm
+-------------------------------------------------------------------------
+* Adding the Jenkins' repository to helm so it can be easily downloaded and deployed:$ helm repo add jenkins https://charts.jenkins.io
+* Updating helm repo:$ helm repo update
+
+<img width="1128" alt="Screenshot 2022-09-14 at 10 27 10 PM" src="https://user-images.githubusercontent.com/105562242/209227416-f4d7ae29-70e8-4001-8f6e-3ce71793f8ab.png">
+
+* Installing the chart:$ helm install myjenkins jenkins/jenkins
+
+<img width="1482" alt="Screenshot 2022-09-14 at 10 31 18 PM" src="https://user-images.githubusercontent.com/105562242/209227495-5d88344d-e7e1-4614-8ccf-22b5d1ca7a80.png">
+
