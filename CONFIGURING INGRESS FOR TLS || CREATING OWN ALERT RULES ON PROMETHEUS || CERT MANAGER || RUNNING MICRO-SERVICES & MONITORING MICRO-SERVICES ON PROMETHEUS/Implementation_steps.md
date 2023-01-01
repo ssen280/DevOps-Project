@@ -95,3 +95,5 @@ spec:
         summary: "Kubernetes pod crash looping"
         
    ```
+
+<img width="1275" alt="Screenshot 2023-01-02 at 12 52 24 AM" src="https://user-images.githubusercontent.com/105562242/210182347-3ecf859b-8529-49bc-92c8-3b1e0c0f5cbf.png">
