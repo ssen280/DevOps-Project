@@ -44,3 +44,5 @@ IN THIS PROJECT WE WILL USE BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTIVES
 
     * When pods will restart 5 times, it will generate alerts
     * when CPU utilization is reach certain level, it will generate alerts
+
+     In below screenshots we are trying to build our custom queries to see if
