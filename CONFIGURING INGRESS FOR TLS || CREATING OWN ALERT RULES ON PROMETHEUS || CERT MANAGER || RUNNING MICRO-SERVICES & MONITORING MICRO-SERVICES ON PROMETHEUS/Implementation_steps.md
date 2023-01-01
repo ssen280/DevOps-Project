@@ -13,7 +13,7 @@ IN THIS PROJECT WE WILL INSTALL BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTI
 
 1. We will spin up EKS cluster and deploy micro service website 
 
-https://github.com/ssen280/microservices-demo
+   https://github.com/ssen280/microservices-demo
 
 
 
