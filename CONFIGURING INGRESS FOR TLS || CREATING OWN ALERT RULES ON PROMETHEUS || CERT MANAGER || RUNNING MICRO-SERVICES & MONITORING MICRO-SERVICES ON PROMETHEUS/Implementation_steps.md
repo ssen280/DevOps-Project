@@ -32,3 +32,4 @@ IN THIS PROJECT WE WILL USE BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTIVES
 -----------------------------------------------------------------------------------------------
  **We will install prometheus and configure custom alart rules and monitor our own mico-services**
  
+<img width="1183" alt="Screenshot 2022-12-31 at 3 09 42 PM" src="https://user-images.githubusercontent.com/105562242/210181560-44aa2853-14e9-4407-9279-e7a8c63ea2f0.png">
