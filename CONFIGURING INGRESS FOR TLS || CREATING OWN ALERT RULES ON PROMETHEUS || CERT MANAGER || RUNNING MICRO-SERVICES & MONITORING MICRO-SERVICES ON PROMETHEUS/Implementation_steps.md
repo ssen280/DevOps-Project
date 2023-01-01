@@ -60,4 +60,38 @@ IN THIS PROJECT WE WILL USE BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTIVES
 <img width="1727" alt="Screenshot 2022-12-31 at 5 39 11 PM" src="https://user-images.githubusercontent.com/105562242/210182175-3705826f-fb10-4dd0-ada9-68e66c16c199.png">
 
 
- **We will create below rule**
+ **We will create below rule :**
+ 
+ ```
+ apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: main-rules
+  namespace: monitor
+  labels:
+    app: kube-prometheus-stack 
+    release: monitoring
+spec:
+  groups:
+  - name: main.rules
+    rules:
+    - alert: HostHighCpuLoad
+      expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 50
+      for: 2m
+      labels:
+        severity: warning
+        namespace: monitor
+      annotations:
+        description: "CPU load on host is over 50%\n Value = {{ $value }}\n Instance = {{ $labels.instance }}\n"
+        summary: "Host CPU load high"
+    - alert: KubernetesPodCrashLooping
+      expr: kube_pod_container_status_restarts_total > 5
+      for: 0m
+      labels:
+        severity: critical
+        namespace: monitoring
+      annotations: 
+        description: "Pod {{ $labels.pod }} is crash looping\n Value = {{ $value }}"
+        summary: "Kubernetes pod crash looping"
+        
+   ```
