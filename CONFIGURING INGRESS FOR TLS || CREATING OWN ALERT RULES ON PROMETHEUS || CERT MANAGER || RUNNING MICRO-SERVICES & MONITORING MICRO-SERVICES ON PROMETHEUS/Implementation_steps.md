@@ -26,3 +26,5 @@ IN THIS PROJECT WE WILL USE BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTIVES
 3. **Below is arcitecture of micro-services website and ports used by it micro services**
 
 <img width="1125" alt="Screenshot 2023-01-01 at 11 49 53 PM" src="https://user-images.githubusercontent.com/105562242/210180917-130f8f5c-ecfa-40f3-99ec-b47b4d893459.png">
+
+<img width="1289" alt="Screenshot 2023-01-01 at 11 54 28 PM" src="https://user-images.githubusercontent.com/105562242/210181097-7092a3c5-cebd-4e85-95fb-4546dc3baaa6.png">
