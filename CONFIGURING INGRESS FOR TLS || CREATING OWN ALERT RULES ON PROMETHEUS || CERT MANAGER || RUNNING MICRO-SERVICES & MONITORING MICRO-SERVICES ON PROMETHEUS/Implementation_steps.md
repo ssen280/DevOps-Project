@@ -36,6 +36,6 @@ IN THIS PROJECT WE WILL USE BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTIVES
 
 <img width="1408" alt="Screenshot 2023-01-02 at 12 20 27 AM" src="https://user-images.githubusercontent.com/105562242/210181647-24cb969c-121c-4d9b-a2c9-d9f5749bb88e.png">
 
-1. **We will create our own custom alert rules : In below screenshot we can see below rule format, we will use it to create our own alert rules. **
+1. **We will create our own custom alert rules : In below screenshot we can see below rule format, we will use it to create our own alert rules.**
 
 <img width="1723" alt="Screenshot 2023-01-02 at 12 24 13 AM" src="https://user-images.githubusercontent.com/105562242/210181743-e043c673-afe7-4558-bb01-9d904cd06fbc.png">
