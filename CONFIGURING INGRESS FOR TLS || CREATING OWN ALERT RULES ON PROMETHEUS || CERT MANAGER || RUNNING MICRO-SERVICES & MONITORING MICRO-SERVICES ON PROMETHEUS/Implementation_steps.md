@@ -99,3 +99,7 @@ spec:
 <img width="1275" alt="Screenshot 2023-01-02 at 12 52 24 AM" src="https://user-images.githubusercontent.com/105562242/210182347-3ecf859b-8529-49bc-92c8-3b1e0c0f5cbf.png">
 
 <img width="1225" alt="Screenshot 2022-12-31 at 5 43 19 PM" src="https://user-images.githubusercontent.com/105562242/210182449-c1c2bd24-7c8c-47ec-b285-e44215ddd8d8.png">
+
+ **In below screenshot we can see configuration is updated in pod logs**
+ 
+ <img width="1302" alt="Screenshot 2022-12-31 at 10 26 40 PM" src="https://user-images.githubusercontent.com/105562242/210182547-480c5295-c8b9-46b6-a54f-1cf345ad7496.png">
