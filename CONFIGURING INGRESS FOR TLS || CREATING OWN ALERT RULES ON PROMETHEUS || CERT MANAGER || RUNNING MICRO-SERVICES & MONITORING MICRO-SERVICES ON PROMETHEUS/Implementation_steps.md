@@ -109,3 +109,10 @@ spec:
  <img width="1725" alt="Screenshot 2022-12-31 at 5 51 25 PM" src="https://user-images.githubusercontent.com/105562242/210182610-7d34299b-ef4f-4d2e-a7c0-129bab53081b.png">
 
 <img width="1726" alt="Screenshot 2022-12-31 at 5 51 57 PM" src="https://user-images.githubusercontent.com/105562242/210182620-ddd3e022-8869-48f7-9215-9bb70b34da6e.png">
+
+**There are two alerts mode : 1. pending 2.firing. Prometheus keep alerts in pending state forbore firing alerts.**
+**To check if our alerts are working or not we will download cpustress from docker and run it as k8s command as pod**
+
+<img width="1227" alt="Screenshot 2022-12-31 at 6 25 42 PM" src="https://user-images.githubusercontent.com/105562242/210183038-7da4c989-073a-46f7-b538-677b5738f509.png">
+
+
