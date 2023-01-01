@@ -11,7 +11,7 @@ IN THIS PROJECT WE WILL USE BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTIVES
 
 -------------------------------------------------------------------------------------------
 
-1. We will spin up EKS cluster and deploy micro service website 
+1. **We will spin up EKS cluster and deploy micro service website** 
 
    Link of micro-services website:- https://github.com/ssen280/microservices-demo
 
