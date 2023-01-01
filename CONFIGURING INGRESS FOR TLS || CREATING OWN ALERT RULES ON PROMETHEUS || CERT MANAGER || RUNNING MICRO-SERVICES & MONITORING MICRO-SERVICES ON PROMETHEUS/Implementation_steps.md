@@ -48,4 +48,14 @@ IN THIS PROJECT WE WILL USE BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTIVES
     * When pods will restart 5 times, it will generate alerts
     * when CPU utilization is reach certain level, it will generate alerts
 
-   **In below screenshots we are trying to build our custom queries to see if**
+   **In below screenshots we are trying to build our custom queries to create alerts**
+   
+   
+<img width="1725" alt="Screenshot 2022-12-31 at 5 21 04 PM" src="https://user-images.githubusercontent.com/105562242/210182151-7d6213b7-fa86-4fb3-bcce-944e9326f2a9.png">
+
+<img width="1725" alt="Screenshot 2022-12-31 at 5 21 20 PM" src="https://user-images.githubusercontent.com/105562242/210182162-9f2ff183-2cd9-4d29-b7b3-078cc408812e.png">
+
+<img width="1725" alt="Screenshot 2022-12-31 at 5 38 54 PM" src="https://user-images.githubusercontent.com/105562242/210182169-f33e2bc7-5f5d-4c66-a50e-fbcc2931d80b.png">
+
+<img width="1727" alt="Screenshot 2022-12-31 at 5 39 11 PM" src="https://user-images.githubusercontent.com/105562242/210182175-3705826f-fb10-4dd0-ada9-68e66c16c199.png">
+
