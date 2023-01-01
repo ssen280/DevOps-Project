@@ -60,7 +60,7 @@ IN THIS PROJECT WE WILL USE BELOW TOOLS AND WILL TRY TO ACHIVE BELOW OBJECTIVES
 <img width="1727" alt="Screenshot 2022-12-31 at 5 39 11 PM" src="https://user-images.githubusercontent.com/105562242/210182175-3705826f-fb10-4dd0-ada9-68e66c16c199.png">
 
 
- **We will create below rule :**
+ **We will create below rule and apply this rule yaml file:**
  
  ```
  apiVersion: monitoring.coreos.com/v1
@@ -97,3 +97,5 @@ spec:
    ```
 
 <img width="1275" alt="Screenshot 2023-01-02 at 12 52 24 AM" src="https://user-images.githubusercontent.com/105562242/210182347-3ecf859b-8529-49bc-92c8-3b1e0c0f5cbf.png">
+
+<img width="1225" alt="Screenshot 2022-12-31 at 5 43 19 PM" src="https://user-images.githubusercontent.com/105562242/210182449-c1c2bd24-7c8c-47ec-b285-e44215ddd8d8.png">
