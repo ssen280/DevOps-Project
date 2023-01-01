@@ -103,3 +103,9 @@ spec:
  **In below screenshot we can see configuration is updated in pod logs**
  
  <img width="1302" alt="Screenshot 2022-12-31 at 10 26 40 PM" src="https://user-images.githubusercontent.com/105562242/210182547-480c5295-c8b9-46b6-a54f-1cf345ad7496.png">
+
+ **In below screenshot we can see our custom configured alert rules are visible in portel**
+ 
+ <img width="1725" alt="Screenshot 2022-12-31 at 5 51 25 PM" src="https://user-images.githubusercontent.com/105562242/210182610-7d34299b-ef4f-4d2e-a7c0-129bab53081b.png">
+
+<img width="1726" alt="Screenshot 2022-12-31 at 5 51 57 PM" src="https://user-images.githubusercontent.com/105562242/210182620-ddd3e022-8869-48f7-9215-9bb70b34da6e.png">
