@@ -206,4 +206,49 @@ data:
 
 <img width="1721" alt="Screenshot 2023-01-02 at 8 59 32 AM" src="https://user-images.githubusercontent.com/105562242/210273950-a1eacf1d-479e-42a6-9d35-c92aaa6c6b50.png">
 
+**Now we will configure our alart rule to monitor our micro-services specially redis which use as a chache**
+**To achive this we have to use redis exporter for this**
+
+```
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: redis-rules
+  namespace: monitor
+  labels:
+    app: kube-prometheus-stack 
+    release: monitoring
+    
+spec:
+  groups:
+  - name: redis.rules
+    rules:
+    - alert: RedisDown
+      expr: redis_up == 0
+      for: 0m
+      labels:
+        severity: critical
+      annotations:
+        summary: Redis down (instance {{ $labels.instance }})
+        description: "Redis instance is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    - alert: RedisTooManyConnections
+      expr: redis_connected_clients > 100
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Redis too many connections (instance {{ $labels.instance }})
+        description: "Redis instance has {{ $value }} connections\n LABELS = {{ $labels }}"
+        
+```
+
+```
+serviceMonitor:
+  enabled: true
+  labels:
+    release: monitoring
+
+redisAddress: redis://redis-cart:6379
+
+```
 
