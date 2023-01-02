@@ -202,7 +202,7 @@ data:
 
 <img width="1713" alt="Screenshot 2023-01-02 at 8 59 21 AM" src="https://user-images.githubusercontent.com/105562242/210273758-71577cb7-e5fe-4b17-a575-0135ac39506a.png">
 
-**Here we can on alart manager portal, it triggered alart to send: we have to access this alart manager link : Localhost:9093/api/v2/alerts **
+**Here we can on alart manager portal, it triggered alart to send: we have to access this alart manager link : Localhost:9093/api/v2/alerts**
 
 <img width="1721" alt="Screenshot 2023-01-02 at 8 59 32 AM" src="https://user-images.githubusercontent.com/105562242/210273950-a1eacf1d-479e-42a6-9d35-c92aaa6c6b50.png">
 
