@@ -282,11 +282,156 @@ redisAddress: redis://redis-cart:6379
   * We will install helm cert-manager with our own value yaml file which having eks.amazonaws.com/role-arn configuration
   * We will install helm ingress.
   * We will have to install ingress with cert-manager.io/issuer value.
-  * We will have to install issuer to iniciate certification process. ( for both HTTP01, DNS01)
+  * We will have to install issuer to iniciate certification process. (for both HTTP01, DNS01)
   * Certificate goes through below steps :
-       * Issuer
+       * Issuer ( have to mention route53 details in it for DNS01)
        * Certificate
        * CertificateRequest
        * Order
        * Challenge
+  
+  <img width="1313" alt="Screenshot 2023-01-03 at 4 23 55 AM" src="https://user-images.githubusercontent.com/105562242/210283181-0d25c6f3-20e1-444b-a084-6d17ae7badd7.png">
+
+<img width="1158" alt="Screenshot 2023-01-03 at 4 24 50 AM" src="https://user-images.githubusercontent.com/105562242/210283249-f21d4d0c-5f81-4af2-b191-b17ef9da4c7f.png">
+
+<img width="1370" alt="Screenshot 2023-01-03 at 4 25 42 AM" src="https://user-images.githubusercontent.com/105562242/210283293-06d6b566-6858-40f7-a5ad-974de0b7c692.png">
+
+<img width="1375" alt="Screenshot 2023-01-03 at 4 26 53 AM" src="https://user-images.githubusercontent.com/105562242/210283347-4fea688e-0cc0-4e3d-bc6a-8f5e14a1d6ef.png">
+
+<img width="1385" alt="Screenshot 2023-01-03 at 4 27 42 AM" src="https://user-images.githubusercontent.com/105562242/210283385-474595f7-9072-4b20-8e3f-fb6106ea30cd.png">
+
+```
+#HTTP01 ISSUER
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-http01-prod
+  namespace: monitor
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: saikats2810@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-http01-key-pair
+    solvers:
+    - http01:
+        ingress:
+          class:  external-nginx
+```
+```
+#DNS01 ISSUER
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-dns01-prod
+  namespace: monitoring
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: saikats2810@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-staging-dns01-key-pair
+    solvers:
+    - dns01:
+        route53:
+          region: us-east-1
+          hostedZoneID: Z031762920PPGKBQDT844
+ ```
+ ```
+ #CERT-MANAGER VALUE
+installCRDs: true
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: true
     
+    namespace: monitor
+# DNS-01 Route53
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::811613581700:role/cert-manager-acme
+extraArgs: 
+- --issuer-ambient-credentials
+
+```
+```
+#HTTP01 INGRESS
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: monitor
+  annotations:
+    cert-manager.io/issuer: letsencrypt-http01-prod
+spec:
+  ingressClassName: external-nginx
+  tls:
+  - hosts:
+    - grafana.saikat-devops.click
+    secretName: grafana-v4-devopsbyexample-io-key-pair
+  rules:
+  - host: grafana.saikat-devops.click
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: monitoring-grafana
+            port:
+              number: 3000
+```
+```
+#DNS01 WEBSTE INGRESS
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shopping
+  namespace: website
+  annotations:
+    cert-manager.io/issuer: letsencrypt-dns01-prod
+spec:
+  ingressClassName: external-nginx
+  tls:
+  - hosts:
+    - shopping.saikat-devops.click
+    secretName: shopping-v4-devopsbyexample-io-key-pair
+  rules:
+  - host: shopping.saikat-devops.click
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-external
+            port:
+              number: 80
+```
+```
+#DNS01 INGRESS
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus
+  namespace: monitor
+  annotations:
+    cert-manager.io/issuer: letsencrypt-dns01-prod
+spec:
+  ingressClassName: external-nginx
+  tls:
+  - hosts:
+    - prometheus.saikat-devops.click
+    secretName: prometheus-monitoring-devopsbyexample-io-key-pair
+  rules:
+  - host: prometheus.saikat-devops.click
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-operated
+            port:
+              number: 9090
+```
