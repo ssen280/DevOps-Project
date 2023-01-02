@@ -192,6 +192,9 @@ data:
 <img width="1159" alt="Screenshot 2023-01-02 at 8 40 48 AM" src="https://user-images.githubusercontent.com/105562242/210272840-0b1e216e-9cf3-475b-ba82-ee22b00536e3.png">
 
 **Now we will check if we are getting alart motification to our gmail inbox, to do that we will run again cpu stress pod again**
+**To get email to our gmail we have to enable it but unfortunately gmail disabled it due to security risk hence we may not get alart in gmail**
+
+<img width="1054" alt="Screenshot 2023-01-02 at 8 58 23 AM" src="https://user-images.githubusercontent.com/105562242/210273544-00495109-16fe-44c1-9626-d0e8da0b125f.png">
 
 
 
