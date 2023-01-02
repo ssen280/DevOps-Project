@@ -273,7 +273,7 @@ redisAddress: redis://redis-cart:6379
 #### NOW WE WILL CONFIGURE INGRESS WITH TLS:
 
 **We will install cert-manager helm and use lets encrypt to generate certificate**
-**We will use DNS01 and HTTP01 methods to generate certificates.
+**We will use DNS01 and HTTP01 methods to generate certificates.**
 **Below are the steps/process to enable certificates to our subdomains**
   
   * First we will buy our domain. In our case : saikat-devops.click
@@ -283,4 +283,10 @@ redisAddress: redis://redis-cart:6379
   * We will install helm ingress.
   * We will have to install ingress with cert-manager.io/issuer value.
   * We will have to install issuer to iniciate certification process. ( for both HTTP01, DNS01)
-  * We
+  * Certificate goes through below steps :
+       * Issuer
+       * Certificate
+       * CertificateRequest
+       * Order
+       * Challenge
+    
