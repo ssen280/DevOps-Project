@@ -271,3 +271,16 @@ redisAddress: redis://redis-cart:6379
 ----------------------------------------------------------
 
 #### NOW WE WILL CONFIGURE INGRESS WITH TLS:
+
+**We will install cert-manager helm and use lets encrypt to generate certificate**
+**We will use DNS01 and HTTP01 methods to generate certificates.
+**Below are the steps/process to enable certificates to our subdomains**
+  
+  * First we will buy our domain. In our case : saikat-devops.click
+  * We will create our sub-domains for our tooling websites
+  * We will have to create IAM policy, OpenID Connect (Identity providers), roles to our aws account to atached our aws account
+  * We will install helm cert-manager with our own value yaml file which having eks.amazonaws.com/role-arn configuration
+  * We will install helm ingress.
+  * We will have to install ingress with cert-manager.io/issuer value.
+  * We will have to install issuer to iniciate certification process. ( for both HTTP01, DNS01)
+  * We
