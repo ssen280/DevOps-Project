@@ -263,3 +263,8 @@ redisAddress: redis://redis-cart:6379
 <img width="1713" alt="Screenshot 2023-01-02 at 10 43 00 AM" src="https://user-images.githubusercontent.com/105562242/210275029-329d5bd0-da43-4d92-8971-994d69d8693a.png">
 
 <img width="1720" alt="Screenshot 2023-01-02 at 10 01 10 AM" src="https://user-images.githubusercontent.com/105562242/210275105-3f0f54f1-78c4-4d93-92dd-0e45a34d5802.png">
+
+**We will import redis dashboard on portal**
+
+<img width="1118" alt="Screenshot 2023-01-02 at 10 04 55 AM" src="https://user-images.githubusercontent.com/105562242/210275193-9c2a0b3f-80b5-44e5-8196-2bd8f56f4595.png">
+
