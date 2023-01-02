@@ -165,5 +165,23 @@ spec:
        key: password
 ```
 
+<img width="1024" alt="Screenshot 2023-01-03 at 1 07 59 AM" src="https://user-images.githubusercontent.com/105562242/210272499-ec8a7c24-ccb7-4bbe-8cbb-7709e5a0a2f4.png">
 
+**We can not expose our gmail username and password openly hence we will configure secret to store our username and email password as base64 format**
+**We will apply these yaml files**
+
+```
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: gmail-auth
+  namespace: monitor
+data:
+  password: QnVOdFkwbyExMjM0
+```
+
+<img width="718" alt="Screenshot 2023-01-03 at 1 10 01 AM" src="https://user-images.githubusercontent.com/105562242/210272630-95affbfd-9f92-4827-8afb-3f560c3c8bed.png">
+
+<img width="1235" alt="Screenshot 2023-01-02 at 8 35 03 AM" src="https://user-images.githubusercontent.com/105562242/210272710-5364fdca-8abb-4337-bd24-28b61e836df8.png">
 
