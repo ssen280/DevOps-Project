@@ -121,3 +121,49 @@ spec:
 <img width="1723" alt="Screenshot 2022-12-31 at 6 19 21 PM" src="https://user-images.githubusercontent.com/105562242/210183145-5c4073a6-42b9-4bea-88a9-8c5bcbd96657.png">
 
 <img width="1727" alt="Screenshot 2022-12-31 at 6 19 42 PM" src="https://user-images.githubusercontent.com/105562242/210183160-b92fff65-ecb3-4b6b-a12a-7e1ff482dfa6.png">
+
+
+**We will configure email notification when alerts will be firing : for that we have to use alart manager**
+**Here we will run alert manager service and we can access alart manager portal with relevent port and we will get configuration details from alert manager portal and use the same to configure our own configuration*
+
+<img width="1228" alt="Screenshot 2023-01-02 at 7 40 39 AM" src="https://user-images.githubusercontent.com/105562242/210272053-f35a7ba6-35f8-43ca-b39a-663c6a4ef5b6.png">
+
+**We will get api details from below link**
+
+https://docs.openshift.com/container-platform/4.11/rest_api/monitoring_apis/monitoring-apis-index.html#alertmanagerconfig-monitoring-coreos-comv1beta1
+
+**below is our custom alert manager configuration**
+
+```
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: main-rules-alert-config
+  namespace: monitor
+spec:
+  route:
+    receiver: 'email'
+    repeatInterval: 30m
+    routes:
+    - matchers:
+      - name: alertname
+        value: HostHighCpuLoad
+    - matchers:
+      - name: alertname
+        value: KubernetesPodCrashLooping
+      repeatInterval: 10m
+  receivers:
+  - name: 'email'
+    emailConfigs:
+    - to: 'milansenaws@gmail.com'
+      from: 'milansenaws@gmail.com'
+      smarthost: 'smtp.gmail.com:587'
+      authUsername: 'milansenaws@gmail.com'
+      authIdentity: 'milansenaws@gmail.com'
+      authPassword:
+       name: gmail-auth
+       key: password
+```
+
+
+
