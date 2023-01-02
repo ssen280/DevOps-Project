@@ -196,5 +196,14 @@ data:
 
 <img width="1054" alt="Screenshot 2023-01-02 at 8 58 23 AM" src="https://user-images.githubusercontent.com/105562242/210273544-00495109-16fe-44c1-9626-d0e8da0b125f.png">
 
+**Here in alart manager pod log we can see error to send email and same we can see on portal**
+
+<img width="1252" alt="Screenshot 2023-01-02 at 8 57 12 AM" src="https://user-images.githubusercontent.com/105562242/210273740-6d18f569-c5c3-425f-a16b-6cc6e9d86972.png">
+
+<img width="1713" alt="Screenshot 2023-01-02 at 8 59 21 AM" src="https://user-images.githubusercontent.com/105562242/210273758-71577cb7-e5fe-4b17-a575-0135ac39506a.png">
+
+**Here we can on alart manager portal, it triggered alart to send: we have to access this alart manager link : Localhost:9093/api/v2/alerts **
+
+<img width="1721" alt="Screenshot 2023-01-02 at 8 59 32 AM" src="https://user-images.githubusercontent.com/105562242/210273950-a1eacf1d-479e-42a6-9d35-c92aaa6c6b50.png">
 
 
