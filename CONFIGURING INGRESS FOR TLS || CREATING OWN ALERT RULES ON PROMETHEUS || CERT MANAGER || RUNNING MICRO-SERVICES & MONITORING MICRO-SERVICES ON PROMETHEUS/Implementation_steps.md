@@ -185,3 +185,13 @@ data:
 
 <img width="1235" alt="Screenshot 2023-01-02 at 8 35 03 AM" src="https://user-images.githubusercontent.com/105562242/210272710-5364fdca-8abb-4337-bd24-28b61e836df8.png">
 
+<img width="1205" alt="Screenshot 2023-01-02 at 8 36 38 AM" src="https://user-images.githubusercontent.com/105562242/210272823-f1973694-fef4-4313-94bf-00db4a6dbd2f.png">
+
+**We can see our configuration updated to default configuration on alert manager portal**
+
+<img width="1159" alt="Screenshot 2023-01-02 at 8 40 48 AM" src="https://user-images.githubusercontent.com/105562242/210272840-0b1e216e-9cf3-475b-ba82-ee22b00536e3.png">
+
+**Now we will check if we are getting alart motification to our gmail inbox, to do that we will run again cpu stress pod again**
+
+
+
