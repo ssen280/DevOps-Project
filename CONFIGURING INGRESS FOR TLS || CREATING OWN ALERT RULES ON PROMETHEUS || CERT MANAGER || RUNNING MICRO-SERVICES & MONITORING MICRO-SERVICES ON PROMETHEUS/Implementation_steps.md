@@ -268,3 +268,6 @@ redisAddress: redis://redis-cart:6379
 
 <img width="1118" alt="Screenshot 2023-01-02 at 10 04 55 AM" src="https://user-images.githubusercontent.com/105562242/210275193-9c2a0b3f-80b5-44e5-8196-2bd8f56f4595.png">
 
+----------------------------------------------------------
+
+#### NOW WE WILL CONFIGURE INGRESS WITH TLS:
