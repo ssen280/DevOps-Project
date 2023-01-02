@@ -208,6 +208,7 @@ data:
 
 **Now we will configure our alart rule to monitor our micro-services specially redis which use as a chache**
 **To achive this we have to use redis exporter for this**
+**We can see alert rules as redis rule on portal and we will down redis pod to fire alert**
 
 ```
 apiVersion: monitoring.coreos.com/v1
@@ -252,3 +253,13 @@ redisAddress: redis://redis-cart:6379
 
 ```
 
+<img width="661" alt="Screenshot 2023-01-03 at 1 45 50 AM" src="https://user-images.githubusercontent.com/105562242/210274953-c98313f6-c159-477c-81d2-e7a43ef2ad70.png">
+
+<img width="1072" alt="Screenshot 2023-01-03 at 1 46 09 AM" src="https://user-images.githubusercontent.com/105562242/210274973-294b1394-54a1-48ed-ba93-cdea6ab0f98e.png">
+
+
+<img width="1536" alt="Screenshot 2023-01-02 at 9 52 17 AM" src="https://user-images.githubusercontent.com/105562242/210274995-fbb2adbb-7088-477d-ba30-cfa712209640.png">
+
+<img width="1713" alt="Screenshot 2023-01-02 at 10 43 00 AM" src="https://user-images.githubusercontent.com/105562242/210275029-329d5bd0-da43-4d92-8971-994d69d8693a.png">
+
+<img width="1720" alt="Screenshot 2023-01-02 at 10 01 10 AM" src="https://user-images.githubusercontent.com/105562242/210275105-3f0f54f1-78c4-4d93-92dd-0e45a34d5802.png">
