@@ -492,6 +492,9 @@ https://github.com/ssen280/Micorservices-website-helm-custom-chart/tree/main/onl
 **Now we will install Jfrog & Jenkins helm so that we can push our custom helm file through Jenkins to Artifactory**
 
 **Artifactory installtion :**
+**Please refer below link for Auto-generated Passwords (Internal PostgreSQL)**
+
+https://www.jfrog.com/confluence/display/JFROG/Helm+Charts+for+Advanced+Users#HelmChartsforAdvancedUsers-Auto-generatedPasswords(InternalPostgreSQL)
 
 <img width="1118" alt="Screenshot 2023-01-04 at 6 42 11 PM" src="https://user-images.githubusercontent.com/105562242/210823801-07c31e20-7d2c-4d38-a6d0-0952fb62f6fd.png">
 
