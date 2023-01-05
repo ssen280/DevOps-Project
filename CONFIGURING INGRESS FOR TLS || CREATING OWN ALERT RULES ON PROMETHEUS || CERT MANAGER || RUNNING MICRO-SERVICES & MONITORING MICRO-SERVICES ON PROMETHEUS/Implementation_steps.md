@@ -528,4 +528,13 @@ https://github.com/ssen280/Micorservices-website-helm-custom-chart/tree/main/onl
  ```
  <img width="1214" alt="Screenshot 2023-01-05 at 9 32 10 PM" src="https://user-images.githubusercontent.com/105562242/210825294-0f32a60f-9d74-4b0f-b019-d263fa600ea1.png">
 
+**Now in our prevous pojects we have intergareted jenkins with artifacotry to push our custom build file to artifactory. We will do the same here with jenkinfiles**
+
+<img width="1456" alt="Screenshot 2023-01-04 at 10 34 02 PM" src="https://user-images.githubusercontent.com/105562242/210827981-12b770f9-5ae4-41fe-b42a-43057e641b36.png">
+
+<img width="1723" alt="Screenshot 2023-01-05 at 9 43 37 PM" src="https://user-images.githubusercontent.com/105562242/210827848-fbeb691e-2b24-4159-9fc7-b45f5c0b48af.png">
+
+<img width="1705" alt="Screenshot 2023-01-05 at 12 03 02 AM" src="https://user-images.githubusercontent.com/105562242/210827920-3735b359-94e2-441a-b877-8eac16a53f22.png">
+
+<img width="1718" alt="Screenshot 2023-01-05 at 12 03 54 AM" src="https://user-images.githubusercontent.com/105562242/210828085-b234d8ca-4d99-466f-aa5c-9c0534644f87.png">
 
