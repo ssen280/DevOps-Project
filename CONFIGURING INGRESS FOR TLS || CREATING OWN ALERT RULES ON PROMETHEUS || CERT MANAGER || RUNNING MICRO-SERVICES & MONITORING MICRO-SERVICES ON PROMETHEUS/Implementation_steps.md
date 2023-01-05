@@ -495,6 +495,8 @@ https://github.com/ssen280/Micorservices-website-helm-custom-chart/tree/main/onl
 
 <img width="1118" alt="Screenshot 2023-01-04 at 6 42 11 PM" src="https://user-images.githubusercontent.com/105562242/210823801-07c31e20-7d2c-4d38-a6d0-0952fb62f6fd.png">
 
+<img width="1222" alt="Screenshot 2023-01-05 at 9 33 40 PM" src="https://user-images.githubusercontent.com/105562242/210825579-94f1b337-88d0-42fb-ac04-77abaa4c30e5.png">
+
 
 <img width="1720" alt="Screenshot 2023-01-04 at 6 54 03 PM" src="https://user-images.githubusercontent.com/105562242/210823867-6f500cf5-e214-4bb0-8399-c549da06dd1e.png">
 
