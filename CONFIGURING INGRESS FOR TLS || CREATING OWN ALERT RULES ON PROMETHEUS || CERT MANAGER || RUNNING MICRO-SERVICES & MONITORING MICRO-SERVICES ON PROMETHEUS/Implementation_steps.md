@@ -473,7 +473,7 @@ https://github.com/ssen280/Micorservices-website-helm-custom-chart/tree/main/onl
   kind: Ingress
   metadata:
     name: website-ingress
-    #namespace: jenkins
+    
   spec:
     ingressClassName: nginx
     rules:
@@ -489,5 +489,41 @@ https://github.com/ssen280/Micorservices-website-helm-custom-chart/tree/main/onl
                     number: 80
 ```
 
+**Now we will install Jfrog & Jenkins helm so that we can push our custom helm file through Jenkins to Artifactory**
+
+**Artifactory installtion :**
+
+<img width="1118" alt="Screenshot 2023-01-04 at 6 42 11 PM" src="https://user-images.githubusercontent.com/105562242/210823801-07c31e20-7d2c-4d38-a6d0-0952fb62f6fd.png">
+
+
+<img width="1720" alt="Screenshot 2023-01-04 at 6 54 03 PM" src="https://user-images.githubusercontent.com/105562242/210823867-6f500cf5-e214-4bb0-8399-c549da06dd1e.png">
+
+**Jenkins installation, Ingress installation & 
+
+<img width="1176" alt="Screenshot 2023-01-05 at 9 29 17 PM" src="https://user-images.githubusercontent.com/105562242/210824674-51ecbeae-37bd-4adb-b7db-8885da9a5f9a.png">
+
+<img width="1407" alt="Screenshot 2023-01-05 at 9 30 10 PM" src="https://user-images.githubusercontent.com/105562242/210824873-0eadb31e-5a4f-49e2-b617-63911105f531.png">
+
+```
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: jenkin-ingress
+    namespace: jenkins
+  spec:
+    ingressClassName: nginx
+    rules:
+      - host: 172-105-45-200.ip.linodeusercontent.com
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: jenkins
+                  port:
+                    number: 8080
+ ```
+ <img width="1214" alt="Screenshot 2023-01-05 at 9 32 10 PM" src="https://user-images.githubusercontent.com/105562242/210825294-0f32a60f-9d74-4b0f-b019-d263fa600ea1.png">
 
 
