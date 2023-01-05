@@ -448,4 +448,46 @@ spec:
 
 <img width="1355" alt="Screenshot 2023-01-01 at 10 22 56 PM" src="https://user-images.githubusercontent.com/105562242/210284394-d6cb6b98-8049-47f8-99be-4106a104265f.png">
 
+--------------------------------------------------------------------
+#### Now we will create our helm file from micro-services website. 
+
+**We have created coustom helm file, Please refer below link :**
+
+https://github.com/ssen280/Micorservices-website-helm-custom-chart/tree/main/online-shop-microservices-deployment-helm-file
+
+**We will deploy our custom helm file on our cluster to see if everything is working fine**
+**We have created script so that we can install all micro-services charts at one go**
+
+<img width="1229" alt="Screenshot 2023-01-05 at 9 19 54 PM" src="https://user-images.githubusercontent.com/105562242/210822685-c4e4528a-435f-49b6-948b-c31f5369722b.png">
+
+**Here we can see all micro-services pods are running file and we are able to access website with Ingress**
+
+<img width="1430" alt="Screenshot 2023-01-04 at 10 08 51 PM" src="https://user-images.githubusercontent.com/105562242/210822983-8b29c1da-8b40-40de-bc64-982cacd5be6b.png">
+
+<img width="1502" alt="Screenshot 2023-01-04 at 10 18 17 PM" src="https://user-images.githubusercontent.com/105562242/210823048-26d9a072-0f19-4b1d-b247-53e39f8544ca.png">
+
+**Ingress file**
+
+```
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: website-ingress
+    #namespace: jenkins
+  spec:
+    ingressClassName: nginx
+    rules:
+      - host: 172-105-44-18.ip.linodeusercontent.com
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: frontend
+                  port:
+                    number: 80
+```
+
+
 
