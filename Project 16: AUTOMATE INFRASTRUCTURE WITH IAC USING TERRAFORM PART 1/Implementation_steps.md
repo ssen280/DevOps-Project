@@ -193,3 +193,49 @@ resource "aws_subnet" "public" {
 }
 
 ```
+#### STEP 4: Introducing Variables.tf And terraform.tfvars
+------------------------------
+* To make the code a lot more readable and better structured instead of having a long list of variables in main.tf file, the variable declarations is moved to a separate file and a file for non-default values for each of the variables is created.
+* Creating a new file and naming it variables.tf
+* Moving all the variable declarations into the new file.
+* Creating another file and naming it terraform.tfvars
+* Setting values for each of the variables:
+
+```
+region = "us-east-1"
+
+vpc_cidr = "172.16.0.0/16" 
+
+enable_dns_support = "true" 
+
+enable_dns_hostnames = "true"  
+
+enable_classiclink = "false" 
+
+enable_classiclink_dns_support = "false" 
+
+preferred_number_of_public_subnets = 2
+
+```
+##### main.tf
+
+<img width="929" alt="Screenshot 2023-01-16 at 12 16 40 PM" src="https://user-images.githubusercontent.com/105562242/212614809-f062bb02-1253-4f6a-9cfa-adb1a42e0958.png">
+
+<img width="1033" alt="Screenshot 2023-01-16 at 12 17 33 PM" src="https://user-images.githubusercontent.com/105562242/212614935-b2b4bd42-c243-4624-91b2-554001ac3769.png">
+
+<img width="779" alt="Screenshot 2023-01-16 at 12 18 00 PM" src="https://user-images.githubusercontent.com/105562242/212614998-1062f1c2-a971-47c9-9c49-e5e33132247b.png">
+
+<img width="1056" alt="Screenshot 2023-01-16 at 12 21 54 PM" src="https://user-images.githubusercontent.com/105562242/212615582-7983a077-368c-4f2c-a681-bb27cb45f84d.png">
+
+
+##### variables.tf
+
+<img width="833" alt="Screenshot 2023-01-16 at 12 22 48 PM" src="https://user-images.githubusercontent.com/105562242/212615686-96d49cb2-5295-42eb-8200-4879b1dcfe78.png">
+
+##### terraform.tfvars
+
+<img width="755" alt="Screenshot 2023-01-16 at 12 23 23 PM" src="https://user-images.githubusercontent.com/105562242/212615786-2f60847a-f73f-488c-84eb-6559c5767b5f.png">
+
+##### terraform apply 
+<img width="1160" alt="Screenshot 2023-01-16 at 12 24 25 PM" src="https://user-images.githubusercontent.com/105562242/212615963-69f40287-1d44-4fc3-8de0-27eb4f5ba16c.png">
+
