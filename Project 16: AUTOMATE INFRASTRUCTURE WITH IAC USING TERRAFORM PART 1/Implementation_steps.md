@@ -54,7 +54,31 @@ resource "aws_vpc" "main" {
 
 <img width="1158" alt="Screenshot 2023-01-16 at 9 20 44 AM" src="https://user-images.githubusercontent.com/105562242/212606957-61f5811a-9d7d-4c5b-a9d0-6f7b9e8ebf0b.png">
 
+* A new file terraform.tfstate is created as a result of the above command which Terraform uses to keeps itself up to date with the exact state of the infrastructure and terraform.tfstate.lock.info file which Terraform uses to track who is running its code against the infrastructure at any point in time
+
+
 <img width="334" alt="Screenshot 2023-01-16 at 11 17 56 AM" src="https://user-images.githubusercontent.com/105562242/212607117-f33c2456-7286-4240-aa73-1d27382b19c7.png">
 
 #### STEP 2: Creating Subnet Resources
 ----------------------------------------------
+
+* According to the architectural design 6 subnets is required: 2 public 2 private for webservers 2 private for data layer
+* Creating the 2 public subnets by entering the following codes:
+```
+# Create public subnets1
+    resource "aws_subnet" "public1" {
+    vpc_id                     = aws_vpc.main.id
+    cidr_block                 = "172.16.0.0/24"
+    map_public_ip_on_launch    = true
+    availability_zone          = "eu-central-1a"
+
+}
+
+# Create public subnet2
+    resource "aws_subnet" "public2" {
+    vpc_id                     = aws_vpc.main.id
+    cidr_block                 = "172.16.1.0/24"
+    map_public_ip_on_launch    = true
+    availability_zone          = "eu-central-1b"
+}
+```
