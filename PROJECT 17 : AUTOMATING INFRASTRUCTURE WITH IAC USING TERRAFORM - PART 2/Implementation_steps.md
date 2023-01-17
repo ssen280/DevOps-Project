@@ -1226,3 +1226,226 @@ resource "aws_db_instance" "ACS-rds" {
 }
 ```
 
+
+
+```
+saikatsen@Saikats-MacBook-Pro PBL17 % terraform plan
+data.aws_availability_zones.available: Reading...
+data.aws_route53_zone.saikat: Reading...
+aws_iam_policy.policy: Refreshing state... [id=arn:aws:iam::811613581700:policy/ec2_instance_policy]
+aws_kms_key.ACS-kms: Refreshing state... [id=b9a0fce6-c0fc-4a97-9797-c534509cea04]
+aws_vpc.main: Refreshing state... [id=vpc-0c4013f17b37a5213]
+aws_sns_topic.saikat-sns: Refreshing state... [id=arn:aws:sns:us-east-1:811613581700:Default_CloudWatch_Alarms_Topic]
+aws_acm_certificate.saikat: Refreshing state... [id=arn:aws:acm:us-east-1:811613581700:certificate/4a30b558-914c-4440-98a6-ab08c7bc4896]
+aws_iam_role.ec2_instance_role: Refreshing state... [id=ec2_instance_role]
+data.aws_availability_zones.available: Read complete after 0s [id=us-east-1]
+random_shuffle.az_list: Refreshing state... [id=-]
+data.aws_route53_zone.saikat: Read complete after 2s [id=Z031762920PPGKBQDT844]
+aws_route53_record.saikat["*.saikat-devops.click"]: Refreshing state... [id=Z031762920PPGKBQDT844__0bd2331c8182b3f520abc0aa54564b49.saikat-devops.click._CNAME]
+aws_iam_role_policy_attachment.test-attach: Refreshing state... [id=ec2_instance_role-20230117014752970100000002]
+aws_iam_instance_profile.ip: Refreshing state... [id=aws_instance_profile_test]
+aws_kms_alias.alias: Refreshing state... [id=alias/kms]
+aws_efs_file_system.ACS-efs: Refreshing state... [id=fs-0cccbe2987395f177]
+aws_acm_certificate_validation.saikat: Refreshing state... [id=2023-01-17 01:48:15.375 +0000 UTC]
+aws_internet_gateway.ig: Refreshing state... [id=igw-0bebf379fc11e7089]
+aws_subnet.private[3]: Refreshing state... [id=subnet-0bb4717832bff519e]
+aws_security_group.bastion_sg: Refreshing state... [id=sg-030075847036d548f]
+aws_subnet.private[2]: Refreshing state... [id=subnet-09caf8712b32dc16e]
+aws_subnet.private[0]: Refreshing state... [id=subnet-0bb4cef51b048e914]
+aws_route_table.private-rtb: Refreshing state... [id=rtb-05f0f8c1077eb3db5]
+aws_subnet.private[1]: Refreshing state... [id=subnet-0e4f4ef045734903f]
+aws_security_group.int-alb-sg: Refreshing state... [id=sg-0a45b7b95e295041d]
+aws_lb_target_group.tooling-tgt: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/saikat-tooling-tgt/dfe733266106ad8c]
+aws_security_group.webserver-sg: Refreshing state... [id=sg-08a7f6722841d0660]
+aws_security_group.datalayer-sg: Refreshing state... [id=sg-04f05f281781252c1]
+aws_subnet.public[0]: Refreshing state... [id=subnet-0a8c1e9ff8151ed42]
+aws_subnet.public[1]: Refreshing state... [id=subnet-039b237d2b39f0ee7]
+aws_lb_target_group.nginx-tgt: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/nginx-tgt/68c93702c4ee59ef]
+aws_route_table.public-rtb: Refreshing state... [id=rtb-040778f31bf74ac86]
+aws_lb_target_group.wordpress-tgt: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/wordpress-tgt/33f4fcd5bfc27e52]
+aws_security_group.nginx-sg: Refreshing state... [id=sg-042d25e10d2e9204d]
+aws_security_group.ext-alb-sg: Refreshing state... [id=sg-09c20452387bc6a46]
+aws_eip.nat_eip: Refreshing state... [id=eipalloc-052e1b8366c110276]
+aws_db_subnet_group.ACS-rds: Refreshing state... [id=acs-rds]
+aws_route_table_association.private-subnets-assoc[3]: Refreshing state... [id=rtbassoc-031924301c8778bda]
+aws_route_table_association.private-subnets-assoc[2]: Refreshing state... [id=rtbassoc-09d680545f0c0de0c]
+aws_route_table_association.private-subnets-assoc[1]: Refreshing state... [id=rtbassoc-0eb33900620535f83]
+aws_route_table_association.private-subnets-assoc[0]: Refreshing state... [id=rtbassoc-06c43cd86938cf1ed]
+aws_launch_template.bastion-launch-template: Refreshing state... [id=lt-0ae167430fcc0dad7]
+aws_lb.ialb: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:loadbalancer/app/ialb/3b6916006dd2283c]
+aws_launch_template.wordpress-launch-template: Refreshing state... [id=lt-01c570df5ee40218d]
+aws_security_group_rule.inbound-web-https: Refreshing state... [id=sgrule-1091876913]
+aws_security_group_rule.inbound-web-ssh: Refreshing state... [id=sgrule-2958450141]
+aws_launch_template.tooling-launch-template: Refreshing state... [id=lt-0f4ea7509e95088b3]
+aws_efs_access_point.wordpress: Refreshing state... [id=fsap-05c2f42e7607c5b18]
+aws_efs_access_point.tooling: Refreshing state... [id=fsap-0c57dbaadaa473183]
+aws_efs_mount_target.subnet-1: Refreshing state... [id=fsmt-09c9076f2e76b778c]
+aws_security_group_rule.inbound-mysql-bastion: Refreshing state... [id=sgrule-2655927309]
+aws_security_group_rule.inbound-mysql-webserver: Refreshing state... [id=sgrule-2119730572]
+aws_security_group_rule.inbound-nfs-port: Refreshing state... [id=sgrule-3986560262]
+aws_efs_mount_target.subnet-2: Refreshing state... [id=fsmt-0f3ca87dfa14bdd08]
+aws_route.public-rtb-route: Refreshing state... [id=r-rtb-040778f31bf74ac861080289494]
+aws_route_table_association.public-subnets-assoc[0]: Refreshing state... [id=rtbassoc-04164cc105cffd9bc]
+aws_route_table_association.public-subnets-assoc[1]: Refreshing state... [id=rtbassoc-0f7caee9f51c6bc6f]
+aws_security_group_rule.inbound-bastion-ssh: Refreshing state... [id=sgrule-3488766914]
+aws_launch_template.nginx-launch-template: Refreshing state... [id=lt-02070bc11a825c366]
+aws_security_group_rule.inbound-ialb-https: Refreshing state... [id=sgrule-3710512551]
+aws_security_group_rule.inbound-nginx-http: Refreshing state... [id=sgrule-4143344385]
+aws_lb.ext-alb: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:loadbalancer/app/ext-alb/e1e8d6e3e203fe45]
+aws_nat_gateway.nat: Refreshing state... [id=nat-0fcba80facdd222bd]
+aws_autoscaling_group.bastion-asg: Refreshing state... [id=bastion-asg]
+aws_autoscaling_group.tooling-asg: Refreshing state... [id=tooling-asg]
+aws_autoscaling_group.wordpress-asg: Refreshing state... [id=wordpress-asg]
+aws_db_instance.ACS-rds: Refreshing state... [id=terraform-2023011701482502350000000b]
+aws_lb_listener.web-listener: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:listener/app/ialb/3b6916006dd2283c/07f12dd7a030af94]
+aws_autoscaling_group.nginx-asg: Refreshing state... [id=nginx-asg]
+aws_lb_listener_rule.tooling-listener: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:listener-rule/app/ialb/3b6916006dd2283c/07f12dd7a030af94/29e022b6d8681367]
+aws_route53_record.tooling: Refreshing state... [id=Z031762920PPGKBQDT844_tooling.saikat-devops.click_A]
+aws_route53_record.wordpress: Refreshing state... [id=Z031762920PPGKBQDT844_wordpress.saikat-devops.click_A]
+aws_lb_listener.nginx-listner: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:listener/app/ext-alb/e1e8d6e3e203fe45/1d4ee547b3a7df36]
+aws_route.private-rtb-route: Refreshing state... [id=r-rtb-05f0f8c1077eb3db51080289494]
+aws_autoscaling_attachment.asg_attachment_tooling: Refreshing state... [id=tooling-asg-20230117021237609700000005]
+aws_autoscaling_attachment.asg_attachment_wordpress: Refreshing state... [id=wordpress-asg-20230117021237629100000006]
+aws_autoscaling_notification.saikat_notifications: Refreshing state... [id=arn:aws:sns:us-east-1:811613581700:Default_CloudWatch_Alarms_Topic]
+aws_autoscaling_attachment.asg_attachment_nginx: Refreshing state... [id=nginx-asg-20230117021310982700000007]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_autoscaling_attachment.asg_attachment_nginx will be created
+  + resource "aws_autoscaling_attachment" "asg_attachment_nginx" {
+      + autoscaling_group_name = "nginx-asg"
+      + id                     = (known after apply)
+      + lb_target_group_arn    = "arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/nginx-tgt/68c93702c4ee59ef"
+    }
+
+  # aws_autoscaling_attachment.asg_attachment_tooling will be created
+  + resource "aws_autoscaling_attachment" "asg_attachment_tooling" {
+      + autoscaling_group_name = "tooling-asg"
+      + id                     = (known after apply)
+      + lb_target_group_arn    = "arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/saikat-tooling-tgt/dfe733266106ad8c"
+saikatsen@Saikats-MacBook-Pro PBL17 % terraform plan
+data.aws_availability_zones.available: Reading...
+data.aws_route53_zone.saikat: Reading...
+aws_sns_topic.saikat-sns: Refreshing state... [id=arn:aws:sns:us-east-1:811613581700:Default_CloudWatch_Alarms_Topic]
+aws_kms_key.ACS-kms: Refreshing state... [id=b9a0fce6-c0fc-4a97-9797-c534509cea04]
+aws_acm_certificate.saikat: Refreshing state... [id=arn:aws:acm:us-east-1:811613581700:certificate/4a30b558-914c-4440-98a6-ab08c7bc4896]
+aws_vpc.main: Refreshing state... [id=vpc-0c4013f17b37a5213]
+aws_iam_policy.policy: Refreshing state... [id=arn:aws:iam::811613581700:policy/ec2_instance_policy]
+aws_iam_role.ec2_instance_role: Refreshing state... [id=ec2_instance_role]
+data.aws_availability_zones.available: Read complete after 0s [id=us-east-1]
+random_shuffle.az_list: Refreshing state... [id=-]
+data.aws_route53_zone.saikat: Read complete after 2s [id=Z031762920PPGKBQDT844]
+aws_route53_record.saikat["*.saikat-devops.click"]: Refreshing state... [id=Z031762920PPGKBQDT844__0bd2331c8182b3f520abc0aa54564b49.saikat-devops.click._CNAME]
+aws_iam_role_policy_attachment.test-attach: Refreshing state... [id=ec2_instance_role-20230117014752970100000002]
+aws_iam_instance_profile.ip: Refreshing state... [id=aws_instance_profile_test]
+aws_kms_alias.alias: Refreshing state... [id=alias/kms]
+aws_efs_file_system.ACS-efs: Refreshing state... [id=fs-0cccbe2987395f177]
+aws_acm_certificate_validation.saikat: Refreshing state... [id=2023-01-17 01:48:15.375 +0000 UTC]
+aws_route_table.private-rtb: Refreshing state... [id=rtb-05f0f8c1077eb3db5]
+aws_security_group.datalayer-sg: Refreshing state... [id=sg-04f05f281781252c1]
+aws_lb_target_group.tooling-tgt: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/saikat-tooling-tgt/dfe733266106ad8c]
+aws_subnet.public[1]: Refreshing state... [id=subnet-039b237d2b39f0ee7]
+aws_subnet.public[0]: Refreshing state... [id=subnet-0a8c1e9ff8151ed42]
+aws_security_group.int-alb-sg: Refreshing state... [id=sg-0a45b7b95e295041d]
+aws_lb_target_group.nginx-tgt: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/nginx-tgt/68c93702c4ee59ef]
+aws_security_group.ext-alb-sg: Refreshing state... [id=sg-09c20452387bc6a46]
+aws_security_group.webserver-sg: Refreshing state... [id=sg-08a7f6722841d0660]
+aws_route_table.public-rtb: Refreshing state... [id=rtb-040778f31bf74ac86]
+aws_internet_gateway.ig: Refreshing state... [id=igw-0bebf379fc11e7089]
+aws_security_group.nginx-sg: Refreshing state... [id=sg-042d25e10d2e9204d]
+aws_subnet.private[2]: Refreshing state... [id=subnet-09caf8712b32dc16e]
+aws_security_group.bastion_sg: Refreshing state... [id=sg-030075847036d548f]
+aws_subnet.private[1]: Refreshing state... [id=subnet-0e4f4ef045734903f]
+aws_lb_target_group.wordpress-tgt: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/wordpress-tgt/33f4fcd5bfc27e52]
+aws_subnet.private[0]: Refreshing state... [id=subnet-0bb4cef51b048e914]
+aws_subnet.private[3]: Refreshing state... [id=subnet-0bb4717832bff519e]
+aws_efs_access_point.tooling: Refreshing state... [id=fsap-0c57dbaadaa473183]
+aws_lb.ext-alb: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:loadbalancer/app/ext-alb/e1e8d6e3e203fe45]
+aws_efs_access_point.wordpress: Refreshing state... [id=fsap-05c2f42e7607c5b18]
+aws_launch_template.tooling-launch-template: Refreshing state... [id=lt-0f4ea7509e95088b3]
+aws_security_group_rule.inbound-nfs-port: Refreshing state... [id=sgrule-3986560262]
+aws_launch_template.wordpress-launch-template: Refreshing state... [id=lt-01c570df5ee40218d]
+aws_security_group_rule.inbound-web-https: Refreshing state... [id=sgrule-1091876913]
+aws_security_group_rule.inbound-mysql-webserver: Refreshing state... [id=sgrule-2119730572]
+aws_route_table_association.public-subnets-assoc[0]: Refreshing state... [id=rtbassoc-04164cc105cffd9bc]
+aws_route_table_association.public-subnets-assoc[1]: Refreshing state... [id=rtbassoc-0f7caee9f51c6bc6f]
+aws_eip.nat_eip: Refreshing state... [id=eipalloc-052e1b8366c110276]
+aws_route.public-rtb-route: Refreshing state... [id=r-rtb-040778f31bf74ac861080289494]
+aws_security_group_rule.inbound-nginx-http: Refreshing state... [id=sgrule-4143344385]
+aws_security_group_rule.inbound-ialb-https: Refreshing state... [id=sgrule-3710512551]
+aws_launch_template.nginx-launch-template: Refreshing state... [id=lt-02070bc11a825c366]
+aws_security_group_rule.inbound-bastion-ssh: Refreshing state... [id=sgrule-3488766914]
+aws_security_group_rule.inbound-mysql-bastion: Refreshing state... [id=sgrule-2655927309]
+aws_launch_template.bastion-launch-template: Refreshing state... [id=lt-0ae167430fcc0dad7]
+aws_security_group_rule.inbound-web-ssh: Refreshing state... [id=sgrule-2958450141]
+aws_db_subnet_group.ACS-rds: Refreshing state... [id=acs-rds]
+aws_lb.ialb: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:loadbalancer/app/ialb/3b6916006dd2283c]
+aws_efs_mount_target.subnet-1: Refreshing state... [id=fsmt-09c9076f2e76b778c]
+aws_efs_mount_target.subnet-2: Refreshing state... [id=fsmt-0f3ca87dfa14bdd08]
+aws_route_table_association.private-subnets-assoc[0]: Refreshing state... [id=rtbassoc-06c43cd86938cf1ed]
+aws_route_table_association.private-subnets-assoc[3]: Refreshing state... [id=rtbassoc-031924301c8778bda]
+aws_route_table_association.private-subnets-assoc[1]: Refreshing state... [id=rtbassoc-0eb33900620535f83]
+aws_route_table_association.private-subnets-assoc[2]: Refreshing state... [id=rtbassoc-09d680545f0c0de0c]
+aws_autoscaling_group.wordpress-asg: Refreshing state... [id=wordpress-asg]
+aws_nat_gateway.nat: Refreshing state... [id=nat-0fcba80facdd222bd]
+aws_autoscaling_group.tooling-asg: Refreshing state... [id=tooling-asg]
+aws_lb_listener.nginx-listner: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:listener/app/ext-alb/e1e8d6e3e203fe45/1d4ee547b3a7df36]
+aws_route53_record.tooling: Refreshing state... [id=Z031762920PPGKBQDT844_tooling.saikat-devops.click_A]
+aws_route53_record.wordpress: Refreshing state... [id=Z031762920PPGKBQDT844_wordpress.saikat-devops.click_A]
+aws_autoscaling_group.nginx-asg: Refreshing state... [id=nginx-asg]
+aws_autoscaling_group.bastion-asg: Refreshing state... [id=bastion-asg]
+aws_lb_listener.web-listener: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:listener/app/ialb/3b6916006dd2283c/07f12dd7a030af94]
+aws_route.private-rtb-route: Refreshing state... [id=r-rtb-05f0f8c1077eb3db51080289494]
+aws_db_instance.ACS-rds: Refreshing state... [id=terraform-2023011701482502350000000b]
+aws_lb_listener_rule.tooling-listener: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:811613581700:listener-rule/app/ialb/3b6916006dd2283c/07f12dd7a030af94/29e022b6d8681367]
+aws_autoscaling_attachment.asg_attachment_wordpress: Refreshing state... [id=wordpress-asg-20230117021237629100000006]
+aws_autoscaling_attachment.asg_attachment_nginx: Refreshing state... [id=nginx-asg-20230117021310982700000007]
+aws_autoscaling_attachment.asg_attachment_tooling: Refreshing state... [id=tooling-asg-20230117021237609700000005]
+aws_autoscaling_notification.saikat_notifications: Refreshing state... [id=arn:aws:sns:us-east-1:811613581700:Default_CloudWatch_Alarms_Topic]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_autoscaling_attachment.asg_attachment_nginx will be created
+  + resource "aws_autoscaling_attachment" "asg_attachment_nginx" {
+      + autoscaling_group_name = "nginx-asg"
+      + id                     = (known after apply)
+      + lb_target_group_arn    = "arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/nginx-tgt/68c93702c4ee59ef"
+    }
+
+  # aws_autoscaling_attachment.asg_attachment_tooling will be created
+  + resource "aws_autoscaling_attachment" "asg_attachment_tooling" {
+      + autoscaling_group_name = "tooling-asg"
+      + id                     = (known after apply)
+      + lb_target_group_arn    = "arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/saikat-tooling-tgt/dfe733266106ad8c"
+    }
+
+  # aws_autoscaling_attachment.asg_attachment_wordpress will be created
+  + resource "aws_autoscaling_attachment" "asg_attachment_wordpress" {
+      + autoscaling_group_name = "wordpress-asg"
+      + id                     = (known after apply)
+      + lb_target_group_arn    = "arn:aws:elasticloadbalancing:us-east-1:811613581700:targetgroup/wordpress-tgt/33f4fcd5bfc27e52"
+    }
+
+  # aws_route.private-rtb-route will be updated in-place
+  ~ resource "aws_route" "private-rtb-route" {
+      + gateway_id             = "nat-0fcba80facdd222bd"
+        id                     = "r-rtb-05f0f8c1077eb3db51080289494"
+      - nat_gateway_id         = "nat-0fcba80facdd222bd" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+Plan: 3 to add, 1 to change, 0 to destroy.
+
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+```
