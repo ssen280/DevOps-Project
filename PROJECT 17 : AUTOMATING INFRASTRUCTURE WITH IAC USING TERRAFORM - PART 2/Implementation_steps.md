@@ -3,6 +3,7 @@
 --------------------------------------
 
 In continuation to project 16, the remaining resources are created in this project in order to set up a secured infrastructure with Terraform
+Code repo : https://github.com/ssen280/PROJECT17-TERRAFORM-CODE.git
 --------------------------------------
 
 ##### STEP 1: Creating Private Subnet
