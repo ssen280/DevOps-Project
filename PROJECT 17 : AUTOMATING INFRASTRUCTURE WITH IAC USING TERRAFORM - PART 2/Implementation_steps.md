@@ -1226,8 +1226,8 @@ resource "aws_db_instance" "ACS-rds" {
 }
 ```
 
-
-
+#### STEP 12: Executing Terraform Apply
+------------------------------------------------------
 ```
 saikatsen@Saikats-MacBook-Pro PBL17 % terraform plan
 data.aws_availability_zones.available: Reading...
