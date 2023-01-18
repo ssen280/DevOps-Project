@@ -1,5 +1,7 @@
 
 #### AUTOMATING INFRASTRUCTURE WITH IAC USING TERRAFORM PART 3 – REFACTORING
+
+##### Link for terraform code : 
 ------------------------------------------------------------------------------------
 #### INTRODUCTION
 ------------------------------------------------------------------------------------
@@ -435,7 +437,7 @@ module "compute" {
 
 <img width="1072" alt="Screenshot 2023-01-18 at 8 54 05 AM" src="https://user-images.githubusercontent.com/105562242/213082790-878ea13d-9676-48a4-b646-7821cbdf7b40.png">
 
-
+```
 Acquiring state lock. This may take a few moments...
 var.environment
   Enviroment
@@ -2499,3 +2501,4 @@ Note: You didn't use the -out option to save this plan, so Terraform can't
 guarantee to take exactly these actions if you run "terraform apply" now.
 Releasing state lock. This may take a few moments...
 
+```
