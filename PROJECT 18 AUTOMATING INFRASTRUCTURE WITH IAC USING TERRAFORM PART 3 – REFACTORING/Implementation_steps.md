@@ -1,7 +1,7 @@
 
 #### AUTOMATING INFRASTRUCTURE WITH IAC USING TERRAFORM PART 3 – REFACTORING
 
-##### Link for terraform code : 
+##### Link for terraform code : https://github.com/ssen280/PROJECT18-TERRAFORM-CODE.git
 ------------------------------------------------------------------------------------
 #### INTRODUCTION
 ------------------------------------------------------------------------------------
