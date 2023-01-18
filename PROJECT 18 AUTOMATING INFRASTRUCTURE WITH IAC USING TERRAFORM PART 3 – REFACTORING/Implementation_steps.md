@@ -13,6 +13,7 @@ By default the Terraform state is stored locally, to store it remotely on AWS us
 
 * Creating a file called Backend.tf and entering the following code:
 
+##### backend.tf
 ```
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "project19-bucket-saikat"
@@ -64,9 +65,28 @@ terraform {
 * Now its time to re-initialize the backend. Run terraform init and confirm you are happy to change the backend by typing yes
 * Verify the changes
 
+<img width="1069" alt="Screenshot 2023-01-18 at 8 04 40 AM" src="https://user-images.githubusercontent.com/105562242/213070763-5c89bf9a-9d5a-4c32-9be3-09b322e7c235.png">
+
+
 <img width="1398" alt="Screenshot 2023-01-18 at 7 57 38 AM" src="https://user-images.githubusercontent.com/105562242/213070421-e28949f7-9b4d-4d23-8f63-19b16af7005e.png">
 
 <img width="1383" alt="Screenshot 2023-01-18 at 7 58 08 AM" src="https://user-images.githubusercontent.com/105562242/213070443-f21f6fc5-07a2-47be-a509-3f4a373f4c7d.png">
 
 <img width="1404" alt="Screenshot 2023-01-18 at 8 21 10 AM" src="https://user-images.githubusercontent.com/105562242/213070593-bba1a694-0f32-497d-9304-7b85505995c4.png">
 
+* Add Terraform Output. Before to run terraform apply let us add an output so that the S3 bucket Amazon Resource Names ARN and DynamoDB table name can be displayed.
+
+##### output.tf
+
+```
+output "s3_bucket_arn" {
+  value       = aws_s3_bucket.terraform_state.arn
+  description = "The ARN of the S3 bucket"
+}
+output "dynamodb_table_name" {
+  value       = aws_dynamodb_table.terraform_locks.name
+  description = "The name of the DynamoDB table"
+}
+
+```
+<img width="1060" alt="Screenshot 2023-01-18 at 8 12 51 AM" src="https://user-images.githubusercontent.com/105562242/213071221-d8dd611d-3e8f-4542-aa6b-6e276146102d.png">
