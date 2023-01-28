@@ -50,3 +50,7 @@ We will follow same and launch few more AMIs
 
 <img width="982" alt="Screenshot 2023-01-28 at 11 12 52 AM" src="https://user-images.githubusercontent.com/105562242/215248419-98699114-233c-44a0-a053-fd0b4bc2c633.png">
 
+
+Update the new AMI's ID from the packer build in the terraform script
+
+<img width="1488" alt="Screenshot 2023-01-28 at 11 17 32 AM" src="https://user-images.githubusercontent.com/105562242/215248564-031fc833-0d49-4b64-87f2-b8cb8be7ab36.png">
