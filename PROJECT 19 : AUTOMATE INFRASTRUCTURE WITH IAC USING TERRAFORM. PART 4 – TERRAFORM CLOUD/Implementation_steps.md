@@ -34,5 +34,9 @@ We will install packer on our system and create AMIs. We have have to make sure 
 
 <img width="1012" alt="Screenshot 2023-01-28 at 10 46 14 AM" src="https://user-images.githubusercontent.com/105562242/215243543-e6c79d98-77d1-4036-800e-a6df504fb2fe.png">
 
+We will follow same and launch few more AMIs
+
+<img width="1016" alt="Screenshot 2023-01-28 at 10 48 32 AM" src="https://user-images.githubusercontent.com/105562242/215243915-98157b59-566e-4ed4-9e11-355ef0eaff67.png">
+
 
 
