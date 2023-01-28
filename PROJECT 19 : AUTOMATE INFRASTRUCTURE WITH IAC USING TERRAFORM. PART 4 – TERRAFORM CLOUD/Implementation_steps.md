@@ -39,4 +39,11 @@ We will follow same and launch few more AMIs
 <img width="1016" alt="Screenshot 2023-01-28 at 10 48 32 AM" src="https://user-images.githubusercontent.com/105562242/215243915-98157b59-566e-4ed4-9e11-355ef0eaff67.png">
 
 
+<img width="1016" alt="Screenshot 2023-01-28 at 10 54 46 AM" src="https://user-images.githubusercontent.com/105562242/215246270-4cf50ee3-00ec-4ebf-b999-d99e687ffa8a.png">
+
+
+<img width="1017" alt="Screenshot 2023-01-28 at 10 56 21 AM" src="https://user-images.githubusercontent.com/105562242/215246981-2e0f1629-3f7e-4da0-8dde-eea4b49b093b.png">
+
+<img width="1186" alt="Screenshot 2023-01-28 at 11 02 37 AM" src="https://user-images.githubusercontent.com/105562242/215247973-7569c91c-b86c-4997-9f7e-7548c4eb4d50.png">
+
 
