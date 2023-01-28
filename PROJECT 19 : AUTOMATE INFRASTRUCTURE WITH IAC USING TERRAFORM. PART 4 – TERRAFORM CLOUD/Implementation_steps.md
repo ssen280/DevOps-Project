@@ -24,7 +24,7 @@ The files that would be addedd are:
 * check the website
 
 We will install packer on our system and create AMIs. We have have to make sure we are using correct owners who owns relevent images. 
-###### Please refer below. Here we can see owner 309956199498 refers to Redhat and thy own Redhat images.We will also make sure we are using correct image name which we can get from Amazon market place.
+##### Please refer below. Here we can see owner 309956199498 refers to Redhat and thy own Redhat images.We will also make sure we are using correct image name which we can get from Amazon market place.
 
 ##### Packer code : 
 
