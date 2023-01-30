@@ -54,3 +54,25 @@ We will follow same and launch few more AMIs
 Update the new AMI's ID from the packer build in the terraform script
 
 <img width="1488" alt="Screenshot 2023-01-28 at 11 17 32 AM" src="https://user-images.githubusercontent.com/105562242/215248564-031fc833-0d49-4b64-87f2-b8cb8be7ab36.png">
+
+
+<img width="862" alt="Screenshot 2023-01-30 at 7 01 49 PM" src="https://user-images.githubusercontent.com/105562242/215491227-2983b9b5-6dd9-4f0e-b984-f49aff119704.png">
+
+
+Now we will create terraform cloud account and backend. We will connect our github repo (containing the terraform script) with the cloud account and this will create a workspace on the account, which is where all terraform plan, apply, destroy and other commands will be executed. The workspace ensures that any changes made in the repo will be noticed by terraform cloud and it will run the code which is more like our running terraform plan and if we want to apply it, we will run it on the terraform cloud UI.
+
+##### GitHub Repo for terraform code : https://github.com/ssen280/TERRAFORM-PBL19
+
+<img width="1425" alt="Screenshot 2023-01-30 at 7 05 09 PM" src="https://user-images.githubusercontent.com/105562242/215491914-e24a2323-411b-47a1-a863-733861579cdf.png">
+
+<img width="1724" alt="Screenshot 2023-01-30 at 6 59 22 PM" src="https://user-images.githubusercontent.com/105562242/215492008-fdafae26-9569-42b2-a82f-eed84e44b53e.png">
+
+<img width="1444" alt="Screenshot 2023-01-30 at 6 59 39 PM" src="https://user-images.githubusercontent.com/105562242/215492036-45e283ba-29f6-48a9-bcfb-ba9ddaa0dc8c.png">
+
+<img width="1444" alt="Screenshot 2023-01-30 at 6 59 54 PM" src="https://user-images.githubusercontent.com/105562242/215492092-8ed8899b-902d-4571-8bfd-5f8018887ff6.png">
+
+<img width="1420" alt="Screenshot 2023-01-30 at 7 00 09 PM" src="https://user-images.githubusercontent.com/105562242/215492110-682d3ab9-ebd2-4408-a139-c08311df01e7.png">
+
+<img width="1401" alt="Screenshot 2023-01-30 at 7 00 24 PM" src="https://user-images.githubusercontent.com/105562242/215492142-104e67d2-4ae8-47fd-b7c6-6b37ea39b4b2.png">
+
+<img width="1420" alt="Screenshot 2023-01-30 at 7 00 40 PM" src="https://user-images.githubusercontent.com/105562242/215492163-96bfe111-f2ec-436d-abbb-362fdc452a44.png">
