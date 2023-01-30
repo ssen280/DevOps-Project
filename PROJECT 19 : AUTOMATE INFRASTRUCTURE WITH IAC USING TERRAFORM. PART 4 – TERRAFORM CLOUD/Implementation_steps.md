@@ -76,3 +76,11 @@ Now we will create terraform cloud account and backend. We will connect our gith
 <img width="1401" alt="Screenshot 2023-01-30 at 7 00 24 PM" src="https://user-images.githubusercontent.com/105562242/215492142-104e67d2-4ae8-47fd-b7c6-6b37ea39b4b2.png">
 
 <img width="1420" alt="Screenshot 2023-01-30 at 7 00 40 PM" src="https://user-images.githubusercontent.com/105562242/215492163-96bfe111-f2ec-436d-abbb-362fdc452a44.png">
+
+<img width="1486" alt="Screenshot 2023-01-30 at 7 10 43 PM" src="https://user-images.githubusercontent.com/105562242/215493448-766851da-cdea-4856-a91a-37dc93537b33.png">
+
+<img width="1411" alt="Screenshot 2023-01-30 at 7 11 15 PM" src="https://user-images.githubusercontent.com/105562242/215493511-28a655d7-bcf9-4986-9d4c-0c9235b68516.png">
+
+<img width="1455" alt="Screenshot 2023-01-30 at 7 11 28 PM" src="https://user-images.githubusercontent.com/105562242/215493539-3407cde6-bb6b-4517-ae3c-d132469079af.png">
+
+<img width="1288" alt="Screenshot 2023-01-30 at 7 13 15 PM" src="https://user-images.githubusercontent.com/105562242/215493742-0c3498c0-f31c-45b0-b1a5-99dbff3bfd03.png">
