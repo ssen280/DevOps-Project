@@ -84,3 +84,23 @@ Now we will create terraform cloud account and backend. We will connect our gith
 <img width="1455" alt="Screenshot 2023-01-30 at 7 11 28 PM" src="https://user-images.githubusercontent.com/105562242/215493539-3407cde6-bb6b-4517-ae3c-d132469079af.png">
 
 <img width="1288" alt="Screenshot 2023-01-30 at 7 13 15 PM" src="https://user-images.githubusercontent.com/105562242/215493742-0c3498c0-f31c-45b0-b1a5-99dbff3bfd03.png">
+
+
+On our workspace, the states files created when an apply is made on the terraform script is kept on the account compared to having it locally and the backend.
+
+Run apply on the terraform script via the account UI.
+
+After the apply is run, ensure that all resources are created as expected.
+
+SSH into the Bastion instance and clone https://github.com/Taiwolawal/ansible-deploy-pbl-19.git which contains Ansible scripts which will be used to configure the infrastructure as required.
+
+To ensure the Ansible file can get all the required information from our AWS account such as our instance IP addresses, tags for each instances, we need to run aws configure and enter all required credentials.
+
+Ensure that we have ssh-agent enabled on our bastion instance, so that we can easily SSH into Nginx and Webservers.
+
+Update the ansible script with values such as:
+
+* RDS endpoints for wordpress and tooling
+* Database name, password and username for wordpress and tooling
+* Access point ID for wordpress and tooling
+* Internal load balancee DNS for nginx reverse proxy
