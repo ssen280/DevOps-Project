@@ -113,7 +113,8 @@ We will check if we are able to access rest of servers from jump server using ss
 
 We will do AWS configuration on jump server with our access details :
 
-<img width="1018" alt="Screenshot 2023-01-31 at 9 38 59 AM" src="https://user-images.githubusercontent.com/105562242/215723425-1ffa0dd9-967d-43ff-b5e6-cb1c57323ae0.png">
+<img width="1018" alt="Screenshot 2023-01-31 at 9 38 59 AM" src="https://user-images.githubusercontent.com/105562242/215723809-209f4792-3f93-4ba1-969e-c7073eab9717.png">
+
 
 
 
