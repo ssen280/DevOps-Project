@@ -1,7 +1,7 @@
-terraform-aws-cloud
+#### terraform-aws-cloud
+-----------------------------------------------
 AWS Cloud Solution For 2 Company Websites Using A Reverse Proxy Technology
 
-WARNING: This infrastructure set up is NOT covered by AWS free tier. Therefore, ensure to DELETE ALL the resources created immediately after finishing the project. Monthly cost may be shockingly high if resources are not deleted. Also, it is strongly recommended to set up a budget and configure notifications when your spendings reach a predefined limit. Watch this video to learn how to configure AWS budget.
 
 The sole aim of this project to build the infrastructure in AWS using terraform.
 
@@ -13,7 +13,8 @@ The tooling code is stored in this repository
 
 Always refer to the given diagram
 
-project image
+
+<img width="962" alt="Screenshot 2023-02-01 at 4 23 40 AM" src="https://user-images.githubusercontent.com/105562242/215902247-60cacb04-2698-49eb-ad48-cc2f36b98f35.png">
 
 install graphviz
 sudo apt install graphviz
