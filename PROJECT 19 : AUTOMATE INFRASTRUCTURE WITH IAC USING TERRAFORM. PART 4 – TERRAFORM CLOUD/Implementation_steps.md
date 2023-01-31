@@ -104,3 +104,16 @@ Update the ansible script with values such as:
 * Database name, password and username for wordpress and tooling
 * Access point ID for wordpress and tooling
 * Internal load balancee DNS for nginx reverse proxy
+
+We will check if we are able to access rest of servers from jump server using ssh 
+
+<img width="1020" alt="Screenshot 2023-01-31 at 9 32 40 AM" src="https://user-images.githubusercontent.com/105562242/215722600-b0c9a9a7-a2c6-4d89-982d-fc9bd86ee7b1.png">
+
+<img width="885" alt="Screenshot 2023-01-31 at 9 32 56 AM" src="https://user-images.githubusercontent.com/105562242/215722657-25dad568-19df-440f-a43d-2fdea703afa8.png">
+
+We will do AWS configuration on jump server with our access details :
+
+<img width="1018" alt="Screenshot 2023-01-31 at 9 38 59 AM" src="https://user-images.githubusercontent.com/105562242/215723425-1ffa0dd9-967d-43ff-b5e6-cb1c57323ae0.png">
+
+
+
