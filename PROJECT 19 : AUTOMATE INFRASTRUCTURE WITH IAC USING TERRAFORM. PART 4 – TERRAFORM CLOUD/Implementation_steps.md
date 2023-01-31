@@ -100,6 +100,8 @@ Ensure that we have ssh-agent enabled on our bastion instance, so that we can ea
 
 Update the ansible script with values such as:
 
+##### GitHub link : https://github.com/ssen280/PBL-project-19/tree/main/Ansible
+
 * RDS endpoints for wordpress and tooling
 * Database name, password and username for wordpress and tooling
 * Access point ID for wordpress and tooling
@@ -114,6 +116,12 @@ We will check if we are able to access rest of servers from jump server using ss
 We will do AWS configuration on jump server with our access details :
 
 <img width="1018" alt="Screenshot 2023-01-31 at 9 38 59 AM" src="https://user-images.githubusercontent.com/105562242/215723809-209f4792-3f93-4ba1-969e-c7073eab9717.png">
+
+Now We will check if Ansible able to fetch all ec2 hosts 
+
+'ansible-inventory -i inventory/aws_ec2.ym --graph'
+
+Here we can see we are getting error. we will fix it by installing boto3
 
 
 
