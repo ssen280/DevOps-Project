@@ -92,7 +92,7 @@ Run apply on the terraform script via the account UI.
 
 After the apply is run, ensure that all resources are created as expected.
 
-SSH into the Bastion instance and clone https://github.com/Taiwolawal/ansible-deploy-pbl-19.git which contains Ansible scripts which will be used to configure the infrastructure as required.
+SSH into the Bastion instance and clone https://github.com/ssen280/PBL-project-19/tree/main/Ansible which contains Ansible scripts which will be used to configure the infrastructure as required.
 
 To ensure the Ansible file can get all the required information from our AWS account such as our instance IP addresses, tags for each instances, we need to run aws configure and enter all required credentials.
 
