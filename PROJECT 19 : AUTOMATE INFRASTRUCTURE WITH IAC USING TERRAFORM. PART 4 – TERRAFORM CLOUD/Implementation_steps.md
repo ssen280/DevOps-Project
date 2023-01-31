@@ -119,10 +119,21 @@ We will do AWS configuration on jump server with our access details :
 
 Now We will check if Ansible able to fetch all ec2 hosts 
 
-'ansible-inventory -i inventory/aws_ec2.ym --graph'
+`ansible-inventory -i inventory/aws_ec2.ym --graph`
 
 Here we can see we are getting error. we will fix it by installing boto3
 
 
+<img width="1098" alt="Screenshot 2023-01-31 at 10 02 08 AM" src="https://user-images.githubusercontent.com/105562242/215724550-689aad29-ce55-4bed-b7a9-8637606ed352.png">
 
+<img width="1098" alt="Screenshot 2023-01-31 at 10 02 30 AM" src="https://user-images.githubusercontent.com/105562242/215724707-58287931-0eca-4d81-9de1-6b1986bb29b0.png">
+
+
+<img width="1098" alt="Screenshot 2023-01-31 at 10 02 49 AM" src="https://user-images.githubusercontent.com/105562242/215724723-9f9771bb-059e-458f-ad5d-50920be0b09d.png">
+
+<img width="1098" alt="Screenshot 2023-01-31 at 10 03 10 AM" src="https://user-images.githubusercontent.com/105562242/215724780-22bb3411-b8ee-4779-be16-3e518f8b540a.png">
+
+<img width="965" alt="Screenshot 2023-01-31 at 10 03 21 AM" src="https://user-images.githubusercontent.com/105562242/215724829-64bdb21c-16f2-48c4-9766-a654cb54964f.png">
+
+<img width="1308" alt="Screenshot 2023-01-31 at 10 03 42 AM" src="https://user-images.githubusercontent.com/105562242/215724871-f259b2f4-d27e-4d77-8c6d-b78b424efaa7.png">
 
