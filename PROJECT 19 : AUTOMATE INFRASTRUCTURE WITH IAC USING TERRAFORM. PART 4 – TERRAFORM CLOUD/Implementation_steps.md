@@ -26,7 +26,7 @@ The files that would be addedd are:
 We will install packer on our system and create AMIs. We have have to make sure we are using correct owners who owns relevent images. 
 ##### Please refer below. Here we can see owner 309956199498 refers to Redhat and thy own Redhat images.We will also make sure we are using correct image name which we can get from Amazon market place.
 
-##### Packer code : 
+##### Packer code : https://github.com/ssen280/packer-ami-project-19.git
 
 <img width="879" alt="Screenshot 2023-01-28 at 10 43 59 AM" src="https://user-images.githubusercontent.com/105562242/215243450-8808e956-179a-49d3-b0cf-9dba3c73e685.png">
 
