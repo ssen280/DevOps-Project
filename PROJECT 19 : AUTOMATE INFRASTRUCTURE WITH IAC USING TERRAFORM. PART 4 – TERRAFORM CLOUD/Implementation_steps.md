@@ -157,3 +157,407 @@ Now we have to update EFS endpoints to respective wordpress and tooling asible c
 <img width="1657" alt="Screenshot 2023-01-31 at 10 24 31 AM" src="https://user-images.githubusercontent.com/105562242/215726827-eaefc9e6-710a-4b44-b2a0-faacf0b8eb55.png">
 
 <img width="1647" alt="Screenshot 2023-01-31 at 10 26 29 AM" src="https://user-images.githubusercontent.com/105562242/215726862-3a44e841-52eb-4f21-8c9f-e6c832f09fec.png">
+
+Now we will update internal elb to nginx aisible code file 
+
+<img width="1444" alt="Screenshot 2023-01-31 at 10 19 16 AM" src="https://user-images.githubusercontent.com/105562242/215727939-3b191591-cdf5-49c9-9755-67b9c4032ef5.png">
+
+<img width="1163" alt="Screenshot 2023-01-31 at 3 26 59 PM" src="https://user-images.githubusercontent.com/105562242/215728025-a2a4f322-0924-4080-b874-05e742df9628.png">
+
+
+Now we will run ```Ansiblel$ ansible-playbook -i inventory/aws_ec2.yml playbooks/site. yml``` to do installation
+
+<img width="1110" alt="Screenshot 2023-01-31 at 10 44 24 AM" src="https://user-images.githubusercontent.com/105562242/215727365-cc5748a8-f98d-4860-a2c1-71497802ddc8.png">
+
+Here we can see we are getting error while installing Install PyMySQL for wordpress and tooling.
+```
+[ec2-user@ip-10-0-4-40 Ansible]$ ansible-playbook -i inventory/aws_ec2.yml playbooks/site.yml 
+[DEPRECATION WARNING]: [defaults]callback_whitelist option, normalizing names to new standard, use callbacks_enabled 
+instead. This feature will be removed from ansible-core in version 2.15. Deprecation warnings can be disabled by 
+setting deprecation_warnings=False in ansible.cfg.
+
+PLAY [tag_Name_ACS_nginx] ********************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************
+Tuesday 31 January 2023  05:13:54 +0000 (0:00:00.024)       0:00:00.024 ******* 
+ok: [10.0.2.232]
+
+PLAY [tag_Name_ACS_nginx] ********************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************
+Tuesday 31 January 2023  05:13:57 +0000 (0:00:03.683)       0:00:03.707 ******* 
+ok: [10.0.2.232]
+
+TASK [nginx : install nginx on the webserver] ************************************************************************
+Tuesday 31 January 2023  05:13:58 +0000 (0:00:01.074)       0:00:04.781 ******* 
+changed: [10.0.2.232]
+
+TASK [nginx : ensure nginx is started and enabled] *******************************************************************
+Tuesday 31 January 2023  05:14:03 +0000 (0:00:04.740)       0:00:09.522 ******* 
+changed: [10.0.2.232]
+
+TASK [nginx : create html directory] *********************************************************************************
+Tuesday 31 January 2023  05:14:04 +0000 (0:00:01.425)       0:00:10.947 ******* 
+changed: [10.0.2.232]
+
+TASK [nginx : rename the defualt configurarion file] *****************************************************************
+Tuesday 31 January 2023  05:14:05 +0000 (0:00:00.683)       0:00:11.631 ******* 
+changed: [10.0.2.232]
+
+TASK [nginx : create new nginx file] *********************************************************************************
+Tuesday 31 January 2023  05:14:06 +0000 (0:00:00.689)       0:00:12.320 ******* 
+changed: [10.0.2.232]
+
+TASK [nginx : configure nginx config file] ***************************************************************************
+Tuesday 31 January 2023  05:14:06 +0000 (0:00:00.500)       0:00:12.820 ******* 
+changed: [10.0.2.232]
+
+PLAY [tag_Name_ACS_tooling] ******************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************
+Tuesday 31 January 2023  05:14:08 +0000 (0:00:01.280)       0:00:14.101 ******* 
+ok: [10.0.1.94]
+
+PLAY [tag_Name_ACS_tooling] ******************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************
+Tuesday 31 January 2023  05:14:11 +0000 (0:00:02.899)       0:00:17.001 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : mounting share(s)] ***********************************************************************************
+Tuesday 31 January 2023  05:14:12 +0000 (0:00:01.095)       0:00:18.096 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : install httpd on the webserver] **********************************************************************
+Tuesday 31 January 2023  05:14:17 +0000 (0:00:04.999)       0:00:23.096 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : install mod_ssl on the webserver] ********************************************************************
+Tuesday 31 January 2023  05:14:21 +0000 (0:00:03.943)       0:00:27.039 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : install PHP] *****************************************************************************************
+Tuesday 31 January 2023  05:14:22 +0000 (0:00:01.544)       0:00:28.583 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : ensure php-fpm is started and enabled] ***************************************************************
+Tuesday 31 January 2023  05:14:27 +0000 (0:00:04.710)       0:00:33.294 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : Clone the repository] ********************************************************************************
+Tuesday 31 January 2023  05:14:28 +0000 (0:00:01.318)       0:00:34.612 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : copy the html from tooling to /var/www/html] *********************************************************
+Tuesday 31 January 2023  05:14:30 +0000 (0:00:01.467)       0:00:36.080 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : create healthstatus file] ****************************************************************************
+Tuesday 31 January 2023  05:14:31 +0000 (0:00:00.994)       0:00:37.075 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : Allow apache to modify /var/www/html] ****************************************************************
+Tuesday 31 January 2023  05:14:31 +0000 (0:00:00.634)       0:00:37.709 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : Install PyMySQL] *************************************************************************************
+Tuesday 31 January 2023  05:14:35 +0000 (0:00:03.463)       0:00:41.173 ******* 
+fatal: [10.0.1.94]: FAILED! => {"changed": false, "msg": "Unable to find any of pip3 to use.  pip needs to be installed."}
+
+RUNNING HANDLER [tooling : Restart httpd] ****************************************************************************
+Tuesday 31 January 2023  05:14:36 +0000 (0:00:00.867)       0:00:42.040 ******* 
+
+RUNNING HANDLER [tooling : Restart php-fpm] **************************************************************************
+Tuesday 31 January 2023  05:14:36 +0000 (0:00:00.000)       0:00:42.041 ******* 
+
+PLAY RECAP ***********************************************************************************************************
+10.0.1.94                  : ok=11   changed=8    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+10.0.2.232                 : ok=8    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Tuesday 31 January 2023  05:14:36 +0000 (0:00:00.004)       0:00:42.045 ******* 
+=============================================================================== 
+tooling : mounting share(s) ----------------------------------------------------------------------------------- 5.00s
+nginx : install nginx on the webserver ------------------------------------------------------------------------ 4.74s
+tooling : install PHP ----------------------------------------------------------------------------------------- 4.71s
+tooling : install httpd on the webserver ---------------------------------------------------------------------- 3.94s
+Gathering Facts ----------------------------------------------------------------------------------------------- 3.68s
+tooling : Allow apache to modify /var/www/html ---------------------------------------------------------------- 3.46s
+Gathering Facts ----------------------------------------------------------------------------------------------- 2.90s
+tooling : install mod_ssl on the webserver -------------------------------------------------------------------- 1.54s
+tooling : Clone the repository -------------------------------------------------------------------------------- 1.47s
+nginx : ensure nginx is started and enabled ------------------------------------------------------------------- 1.43s
+tooling : ensure php-fpm is started and enabled --------------------------------------------------------------- 1.32s
+nginx : configure nginx config file --------------------------------------------------------------------------- 1.28s
+Gathering Facts ----------------------------------------------------------------------------------------------- 1.10s
+Gathering Facts ----------------------------------------------------------------------------------------------- 1.07s
+tooling : copy the html from tooling to /var/www/html --------------------------------------------------------- 0.99s
+tooling : Install PyMySQL ------------------------------------------------------------------------------------- 0.87s
+nginx : rename the defualt configurarion file ----------------------------------------------------------------- 0.69s
+nginx : create html directory --------------------------------------------------------------------------------- 0.68s
+tooling : create healthstatus file ---------------------------------------------------------------------------- 0.63s
+nginx : create new nginx file --------------------------------------------------------------------------------- 0.50s
+[ec2-user@ip-10-0-4-40 Ansible]$ 
+[ec2-user@ip-10-0-4-40 Ansible]$ 
+[ec2-user@ip-10-0-4-40 Ansible]$ 
+```
+To fix this error we will add below two lines of code to asible code 
+
+```
+- name: Install pip 
+  yum:
+   name: python3-pip 
+   state: present
+
+```
+
+<img width="582" alt="Screenshot 2023-01-31 at 12 23 02 PM" src="https://user-images.githubusercontent.com/105562242/215728994-8994f5eb-a613-40aa-b54d-ae94ce794b88.png">
+
+Now we will run Ansible again and we will see there is no error 
+
+```
+[ec2-user@ip-10-0-4-40 Ansible]$ ansible-playbook -i inventory/aws_ec2.yml playbooks/site.yml
+[DEPRECATION WARNING]: [defaults]callback_whitelist option, normalizing names to new standard, use 
+callbacks_enabled instead. This feature will be removed from ansible-core in version 2.15. Deprecation warnings
+ can be disabled by setting deprecation_warnings=False in ansible.cfg.
+
+PLAY [tag_Name_ACS_wordpress] **********************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+Tuesday 31 January 2023  06:28:33 +0000 (0:00:00.017)       0:00:00.017 ******* 
+ok: [10.0.3.159]
+
+PLAY [tag_Name_ACS_wordpress] **********************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+Tuesday 31 January 2023  06:28:35 +0000 (0:00:01.723)       0:00:01.740 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : mounting share(s)] ***************************************************************************
+Tuesday 31 January 2023  06:28:36 +0000 (0:00:01.087)       0:00:02.828 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : install httpd on the webserver] **************************************************************
+Tuesday 31 January 2023  06:28:36 +0000 (0:00:00.788)       0:00:03.617 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : install PHP] *********************************************************************************
+Tuesday 31 January 2023  06:28:38 +0000 (0:00:01.755)       0:00:05.373 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : ensure php-fpm is started and enabled] *******************************************************
+Tuesday 31 January 2023  06:28:40 +0000 (0:00:01.580)       0:00:06.953 ******* 
+changed: [10.0.3.159]
+
+TASK [wordpress : Download wordpress compressed file] **********************************************************
+Tuesday 31 January 2023  06:28:41 +0000 (0:00:01.251)       0:00:08.204 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : unzip the compressed file] *******************************************************************
+Tuesday 31 January 2023  06:28:43 +0000 (0:00:02.038)       0:00:10.243 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : Copy config.php] *****************************************************************************
+Tuesday 31 January 2023  06:28:49 +0000 (0:00:06.282)       0:00:16.526 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : deploy the code] *****************************************************************************
+Tuesday 31 January 2023  06:28:50 +0000 (0:00:00.793)       0:00:17.319 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : create healthstatus file] ********************************************************************
+Tuesday 31 January 2023  06:28:55 +0000 (0:00:05.183)       0:00:22.503 ******* 
+changed: [10.0.3.159]
+
+TASK [wordpress : Allow apache to modify /var/www/html] ********************************************************
+Tuesday 31 January 2023  06:28:56 +0000 (0:00:00.803)       0:00:23.307 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : install httpd on the webserver] **************************************************************
+Tuesday 31 January 2023  06:28:57 +0000 (0:00:01.078)       0:00:24.385 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : install mod_ssl on the webserver] ************************************************************
+Tuesday 31 January 2023  06:28:59 +0000 (0:00:01.572)       0:00:25.958 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : install PHP] *********************************************************************************
+Tuesday 31 January 2023  06:29:00 +0000 (0:00:01.624)       0:00:27.582 ******* 
+ok: [10.0.3.159]
+
+TASK [wordpress : ensure php-fpm is started and enabled] *******************************************************
+Tuesday 31 January 2023  06:29:02 +0000 (0:00:01.578)       0:00:29.161 ******* 
+changed: [10.0.3.159]
+
+TASK [wordpress : Install pip] *********************************************************************************
+Tuesday 31 January 2023  06:29:03 +0000 (0:00:00.917)       0:00:30.078 ******* 
+changed: [10.0.3.159]
+
+TASK [wordpress : Install PyMySQL] *****************************************************************************
+Tuesday 31 January 2023  06:29:07 +0000 (0:00:03.988)       0:00:34.067 ******* 
+changed: [10.0.3.159]
+
+TASK [wordpress : create database] *****************************************************************************
+Tuesday 31 January 2023  06:29:09 +0000 (0:00:01.931)       0:00:35.998 ******* 
+changed: [10.0.3.159]
+
+TASK [wordpress : Input wordpress credentials] *****************************************************************
+Tuesday 31 January 2023  06:29:10 +0000 (0:00:00.836)       0:00:36.835 ******* 
+ok: [10.0.3.159] => (item={'regexp': '^localhost', 'line': 'terraform-20230131035310046700000010.cnsdq4a7pewm.us-east-1.rds.amazonaws.com'})
+ok: [10.0.3.159] => (item={'regexp': '^username_here', 'line': 'saikat'})
+ok: [10.0.3.159] => (item={'regexp': '^database_name_here', 'line': 'wordpressdb'})
+ok: [10.0.3.159] => (item={'regexp': '^password_here', 'line': 'devopspblproject'})
+
+RUNNING HANDLER [wordpress : Restart httpd] ********************************************************************
+Tuesday 31 January 2023  06:29:12 +0000 (0:00:02.608)       0:00:39.443 ******* 
+changed: [10.0.3.159]
+
+PLAY RECAP *****************************************************************************************************
+10.0.3.159                 : ok=21   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Tuesday 31 January 2023  06:29:14 +0000 (0:00:02.009)       0:00:41.453 ******* 
+=============================================================================== 
+wordpress : unzip the compressed file ------------------------------------------------------------------- 6.28s
+wordpress : deploy the code ----------------------------------------------------------------------------- 5.18s
+wordpress : Install pip --------------------------------------------------------------------------------- 3.99s
+wordpress : Input wordpress credentials ----------------------------------------------------------------- 2.61s
+wordpress : Download wordpress compressed file ---------------------------------------------------------- 2.04s
+wordpress : Restart httpd ------------------------------------------------------------------------------- 2.01s
+wordpress : Install PyMySQL ----------------------------------------------------------------------------- 1.93s
+wordpress : install httpd on the webserver -------------------------------------------------------------- 1.76s
+Gathering Facts ----------------------------------------------------------------------------------------- 1.72s
+wordpress : install mod_ssl on the webserver ------------------------------------------------------------ 1.62s
+wordpress : install PHP --------------------------------------------------------------------------------- 1.58s
+wordpress : install PHP --------------------------------------------------------------------------------- 1.58s
+wordpress : install httpd on the webserver -------------------------------------------------------------- 1.57s
+wordpress : ensure php-fpm is started and enabled ------------------------------------------------------- 1.25s
+Gathering Facts ----------------------------------------------------------------------------------------- 1.09s
+wordpress : Allow apache to modify /var/www/html -------------------------------------------------------- 1.08s
+wordpress : ensure php-fpm is started and enabled ------------------------------------------------------- 0.92s
+wordpress : create database ----------------------------------------------------------------------------- 0.84s
+wordpress : create healthstatus file -------------------------------------------------------------------- 0.80s
+wordpress : Copy config.php ----------------------------------------------------------------------------- 0.79s
+[ec2-user@ip-10-0-4-40 Ansible]$ 
+```
+```
+[ec2-user@ip-10-0-4-40 Ansible]$ ansible-playbook -i inventory/aws_ec2.yml playbooks/site.yml
+[DEPRECATION WARNING]: [defaults]callback_whitelist option, normalizing names to new standard, use 
+callbacks_enabled instead. This feature will be removed from ansible-core in version 2.15. Deprecation warnings
+ can be disabled by setting deprecation_warnings=False in ansible.cfg.
+
+PLAY [tag_Name_ACS_wordpress] **********************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+Tuesday 31 January 2023  06:35:08 +0000 (0:00:00.016)       0:00:00.016 ******* 
+ok: [10.0.3.159]
+
+PLAY [tag_Name_ACS_tooling] ************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+Tuesday 31 January 2023  06:35:09 +0000 (0:00:01.712)       0:00:01.729 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : mounting share(s)] *****************************************************************************
+Tuesday 31 January 2023  06:35:11 +0000 (0:00:01.249)       0:00:02.979 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : install httpd on the webserver] ****************************************************************
+Tuesday 31 January 2023  06:35:11 +0000 (0:00:00.795)       0:00:03.774 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : install mod_ssl on the webserver] **************************************************************
+Tuesday 31 January 2023  06:35:13 +0000 (0:00:01.748)       0:00:05.522 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : install PHP] ***********************************************************************************
+Tuesday 31 January 2023  06:35:15 +0000 (0:00:01.533)       0:00:07.056 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : ensure php-fpm is started and enabled] *********************************************************
+Tuesday 31 January 2023  06:35:16 +0000 (0:00:01.537)       0:00:08.594 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : Clone the repository] **************************************************************************
+Tuesday 31 January 2023  06:35:17 +0000 (0:00:01.247)       0:00:09.841 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : copy the html from tooling to /var/www/html] ***************************************************
+Tuesday 31 January 2023  06:35:18 +0000 (0:00:01.048)       0:00:10.889 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : create healthstatus file] **********************************************************************
+Tuesday 31 January 2023  06:35:19 +0000 (0:00:00.826)       0:00:11.715 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : Allow apache to modify /var/www/html] **********************************************************
+Tuesday 31 January 2023  06:35:20 +0000 (0:00:00.796)       0:00:12.512 ******* 
+ok: [10.0.1.94]
+
+TASK [tooling : Install pip] ***********************************************************************************
+Tuesday 31 January 2023  06:35:21 +0000 (0:00:01.074)       0:00:13.586 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : Install PyMySQL] *******************************************************************************
+Tuesday 31 January 2023  06:35:25 +0000 (0:00:03.560)       0:00:17.146 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : create database] *******************************************************************************
+Tuesday 31 January 2023  06:35:27 +0000 (0:00:01.914)       0:00:19.061 ******* 
+changed: [10.0.1.94]
+
+TASK [tooling : Input tooling credentials] *********************************************************************
+Tuesday 31 January 2023  06:35:27 +0000 (0:00:00.828)       0:00:19.889 ******* 
+ok: [10.0.1.94] => (item={'regexp': '^mysql.tooling.svc.cluster.local', 'line': 'terraform-20230131035310046700000010.cnsdq4a7pewm.us-east-1.rds.amazonaws.com'})
+ok: [10.0.1.94] => (item={'regexp': '^admin', 'line': 'saikat'})
+ok: [10.0.1.94] => (item={'regexp': '^tooling', 'line': 'toolingdb'})
+ok: [10.0.1.94] => (item={'regexp': '^admin', 'line': 'devopspblproject'})
+
+TASK [tooling : ensure httpd is started and enabled] ***********************************************************
+Tuesday 31 January 2023  06:35:30 +0000 (0:00:02.589)       0:00:22.479 ******* 
+ok: [10.0.1.94]
+
+RUNNING HANDLER [tooling : Restart php-fpm] ********************************************************************
+Tuesday 31 January 2023  06:35:31 +0000 (0:00:00.817)       0:00:23.297 ******* 
+changed: [10.0.1.94]
+
+PLAY RECAP *****************************************************************************************************
+10.0.1.94                  : ok=16   changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+10.0.3.159                 : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Tuesday 31 January 2023  06:35:32 +0000 (0:00:00.919)       0:00:24.216 ******* 
+=============================================================================== 
+tooling : Install pip ----------------------------------------------------------------------------------- 3.56s
+tooling : Input tooling credentials --------------------------------------------------------------------- 2.59s
+tooling : Install PyMySQL ------------------------------------------------------------------------------- 1.91s
+tooling : install httpd on the webserver ---------------------------------------------------------------- 1.75s
+Gathering Facts ----------------------------------------------------------------------------------------- 1.71s
+tooling : install PHP ----------------------------------------------------------------------------------- 1.54s
+tooling : install mod_ssl on the webserver -------------------------------------------------------------- 1.53s
+Gathering Facts ----------------------------------------------------------------------------------------- 1.25s
+tooling : ensure php-fpm is started and enabled --------------------------------------------------------- 1.25s
+tooling : Allow apache to modify /var/www/html ---------------------------------------------------------- 1.07s
+tooling : Clone the repository -------------------------------------------------------------------------- 1.05s
+tooling : Restart php-fpm ------------------------------------------------------------------------------- 0.92s
+tooling : create database ------------------------------------------------------------------------------- 0.83s
+tooling : copy the html from tooling to /var/www/html --------------------------------------------------- 0.83s
+tooling : ensure httpd is started and enabled ----------------------------------------------------------- 0.82s
+tooling : create healthstatus file ---------------------------------------------------------------------- 0.80s
+tooling : mounting share(s) ----------------------------------------------------------------------------- 0.80s
+[ec2-user@ip-10-0-4-40 Ansible]$ 
+```
+Please login to tooling,wordpress & nginx servers and make sure httpds and nginx serveces are running fine. 
+
+Here we are able to access tooling site. but wordpress is giving error
+
+<img width="1206" alt="Screenshot 2023-01-31 at 11 31 03 AM" src="https://user-images.githubusercontent.com/105562242/215729691-82a7aa48-17e6-47ad-880f-d4e2743de8ef.png">
+
+<img width="1177" alt="Screenshot 2023-01-31 at 12 13 40 PM" src="https://user-images.githubusercontent.com/105562242/215729749-4d38656d-7cdc-42ca-93f7-e8a0e880b304.png">
+
+We will check wordpress configuration and fix this db error issue. To fix this we have to update usename/password/hostame/db name to wordpress configuration as below 
+
+<img width="962" alt="Screenshot 2023-01-31 at 12 14 56 PM" src="https://user-images.githubusercontent.com/105562242/215730006-7da0be01-4161-4a78-8617-0e8a90983ab0.png">
+
+<img width="1024" alt="Screenshot 2023-01-31 at 12 17 52 PM" src="https://user-images.githubusercontent.com/105562242/215730071-4daf6a36-4bbc-4735-82ed-4cf871a20e81.png">
+
+Now we are able to access wordpress without any error
+
+<img width="1258" alt="Screenshot 2023-01-31 at 12 20 42 PM" src="https://user-images.githubusercontent.com/105562242/215730204-175fb498-2ed3-487d-9987-14acc33ba2a2.png">
