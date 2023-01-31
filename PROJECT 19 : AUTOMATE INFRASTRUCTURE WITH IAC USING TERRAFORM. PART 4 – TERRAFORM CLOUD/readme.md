@@ -25,26 +25,20 @@ terraform graph | dot -Tpng > graph.png
 Read More abot terrafrom graph
 https://www.terraform.io/docs/cli/commands/graph.html
 
-Action Plan for project 19
-Build images using packer
+##### Action Plan for project 19
 
-confirm the AMIs in the console
-
-update terrafrom script with new ami IDs generated from packer build
-
-create terraform cloud account and backend
-
-run terraform script
-
-update ansible script with values from teraform output
-
-RDS endpoints for wordpress and tooling
-Database name, password and username for wordpress and tooling
-Access point ID for wordpress and tooling
-Internal load balancee DNS for nginx reverse proxy
-run ansible script
-
-check the website
+ * Build images using packer
+ * confirm the AMIs in the console
+ * update terrafrom script with new ami IDs generated from packer build
+ * create terraform cloud account and backend
+ * run terraform script
+ * update ansible script with values from teraform output
+ * RDS endpoints for wordpress and tooling
+    Database name, password and username for wordpress and tooling
+    Access point ID for wordpress and tooling
+    Internal load balancee DNS for nginx reverse proxy
+    run ansible script
+    check the website
 
 Draw back in the scripts
 Direct hardcoding of values
