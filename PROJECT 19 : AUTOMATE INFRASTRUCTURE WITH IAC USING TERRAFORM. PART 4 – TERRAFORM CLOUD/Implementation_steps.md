@@ -139,7 +139,10 @@ Here we can see we are getting error. we will fix it by installing boto3
 
 <img width="939" alt="Screenshot 2023-01-31 at 10 03 49 AM" src="https://user-images.githubusercontent.com/105562242/215725057-828d3d7d-b446-4346-86b1-33d0901d933c.png">
 
-Now we will update RDS endpoints to tooling and wordpress ansible db configuration code file 
+Now we will update RDS endpoints to tooling and wordpress ansible db configuration code file. user and password we have to use from terraform.auto.tfvars.
+
+<img width="642" alt="Screenshot 2023-01-31 at 3 20 16 PM" src="https://user-images.githubusercontent.com/105562242/215726407-df98399b-8ac5-45a4-9250-e124bb50bfc0.png">
+
 
 <img width="1398" alt="Screenshot 2023-01-31 at 10 18 18 AM" src="https://user-images.githubusercontent.com/105562242/215725306-a90d7a80-b4e7-4374-9fff-9325108949bd.png">
 
