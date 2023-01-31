@@ -137,3 +137,12 @@ Here we can see we are getting error. we will fix it by installing boto3
 
 <img width="1308" alt="Screenshot 2023-01-31 at 10 03 42 AM" src="https://user-images.githubusercontent.com/105562242/215724871-f259b2f4-d27e-4d77-8c6d-b78b424efaa7.png">
 
+<img width="939" alt="Screenshot 2023-01-31 at 10 03 49 AM" src="https://user-images.githubusercontent.com/105562242/215725057-828d3d7d-b446-4346-86b1-33d0901d933c.png">
+
+Now we will update RDS endpoints to tooling and wordpress ansible db configuration code file 
+
+<img width="1398" alt="Screenshot 2023-01-31 at 10 18 18 AM" src="https://user-images.githubusercontent.com/105562242/215725306-a90d7a80-b4e7-4374-9fff-9325108949bd.png">
+
+<img width="1144" alt="Screenshot 2023-01-31 at 3 16 46 PM" src="https://user-images.githubusercontent.com/105562242/215725537-1c28a3da-7a56-4d39-b1c7-ecba15927cc3.png">
+
+<img width="1179" alt="Screenshot 2023-01-31 at 3 17 26 PM" src="https://user-images.githubusercontent.com/105562242/215725697-e4fdc284-25a8-4090-8e23-72a6a1ffc8f7.png">
