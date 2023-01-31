@@ -149,3 +149,11 @@ Now we will update RDS endpoints to tooling and wordpress ansible db configurati
 <img width="1144" alt="Screenshot 2023-01-31 at 3 16 46 PM" src="https://user-images.githubusercontent.com/105562242/215725537-1c28a3da-7a56-4d39-b1c7-ecba15927cc3.png">
 
 <img width="1179" alt="Screenshot 2023-01-31 at 3 17 26 PM" src="https://user-images.githubusercontent.com/105562242/215725697-e4fdc284-25a8-4090-8e23-72a6a1ffc8f7.png">
+
+Now we have to update EFS endpoints to respective wordpress and tooling asible code file 
+
+<img width="1725" alt="Screenshot 2023-01-31 at 10 19 55 AM" src="https://user-images.githubusercontent.com/105562242/215726752-c8458144-1681-4dab-bbaa-d4be72545515.png">
+
+<img width="1657" alt="Screenshot 2023-01-31 at 10 24 31 AM" src="https://user-images.githubusercontent.com/105562242/215726827-eaefc9e6-710a-4b44-b2a0-faacf0b8eb55.png">
+
+<img width="1647" alt="Screenshot 2023-01-31 at 10 26 29 AM" src="https://user-images.githubusercontent.com/105562242/215726862-3a44e841-52eb-4f21-8c9f-e6c832f09fec.png">
