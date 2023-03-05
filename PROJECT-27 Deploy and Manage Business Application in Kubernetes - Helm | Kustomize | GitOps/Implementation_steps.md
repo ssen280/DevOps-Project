@@ -601,12 +601,12 @@ server:
 
     activeService: true
     hosts:
-      - host: "vault.masterclass.dev.darey.io"
+      - host: "vault.saikat-devops.click"
         paths: [/]
     tls:
-     - secretName: vault.masterclass.dev.darey.io
+     - secretName: vault.saikat-devops.click
        hosts:
-         - vault.masterclass.dev.darey.io
+         - vault.saikat-devops.click
 
   terminationGracePeriodSeconds: 10
 
@@ -869,7 +869,7 @@ In this session we will see how we can securely inject the tooling application d
 To store the secrets we need to create a Vault secret of type **KV Version 2**, this is a versioned Key-Value store. You can exit out of the vault pod and install Vault on your local machine from [here](https://developer.hashicorp.com/vault/downloads) if you don't have vault installed on your system. Export the vault address and login.
 
 ```command
-export VAULT_ADDR="https://vault.masterclass.dev.darey.io"
+export VAULT_ADDR="https://vault.saikat-devops.click"
 
 vault login
 ```
