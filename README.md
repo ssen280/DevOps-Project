@@ -82,3 +82,8 @@ https://github.com/ssen280/DevOps-Project/tree/main/PROJECT%2024:%20BUILDING%20E
 #### PROJECT 25: CONFIGURING INGRESS FOR TLS :
 
 https://github.com/ssen280/DevOps-Project/tree/main/CONFIGURING%20INGRESS%20FOR%20TLS%20%7C%7C%20CREATING%20OWN%20ALERT%20RULES%20ON%20PROMETHEUS%20%7C%7C%20CERT%20MANAGER%20%7C%7C%20RUNNING%20MICRO-SERVICES%20%26%20MONITORING%20MICRO-SERVICES%20ON%20PROMETHEUS
+
+
+#### Deploy and Manage Business Application in Kubernetes - Helm | Kustomize | GitOps
+
+https://github.com/ssen280/DevOps-Project/blob/main/PROJECT-27%20Deploy%20and%20Manage%20Business%20Application%20in%20Kubernetes%20-%20Helm%20%7C%20Kustomize%20%7C%20GitOps/Implementation_steps.md
