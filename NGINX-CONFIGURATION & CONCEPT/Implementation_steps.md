@@ -18,17 +18,27 @@
 
 ##### We have to run ./configure script to check all necessay tools are installed.To install compiler and all necessary tools : ```tar -zxvf nginx-1.23.3.tar.gz``` need to run. Post we will run ./configure script again to check all are good. 
 
+
+
 <img width="740" alt="Screenshot 2023-03-06 at 6 07 54 AM" src="https://user-images.githubusercontent.com/105562242/222995659-44bf75b6-4de3-4fd3-a1fc-e31bf7fc8485.png">
 
 <img width="1087" alt="Screenshot 2023-03-06 at 6 06 19 AM" src="https://user-images.githubusercontent.com/105562242/222995559-56dc6017-4d12-419d-8dce-4f745722fe1a.png">
 
+
+
 ##### Below libary is missing. we will install it. ```apt-get install libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev``` We will run again ./configure script and we will see all good.
+
+
 
 <img width="860" alt="Screenshot 2023-03-06 at 6 10 48 AM" src="https://user-images.githubusercontent.com/105562242/222995862-60342105-9f63-49a7-94d3-654100184e0a.png">
 
 <img width="1089" alt="Screenshot 2023-03-06 at 6 14 12 AM" src="https://user-images.githubusercontent.com/105562242/222996123-5ac223aa-4f67-492a-9f7f-e2762cbd163f.png">
 
+
+
 ##### Please refer :- https://nginx.org/en/docs/configure.html. we will configure paths. 
+
+
 
 ``` ./configure --sbin-path=/usr/bin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --with-pcre --pid-path=/var/run/nginx.pid --with-http_ssl_module```
 
@@ -39,11 +49,17 @@
 
 ##### Now we will ```make``` and also run ```make install```
 
+
+
 <img width="1083" alt="Screenshot 2023-03-06 at 6 27 04 AM" src="https://user-images.githubusercontent.com/105562242/222997007-5465958e-a38d-4f71-8052-dff1a7ac28e3.png">
 
 <img width="1088" alt="Screenshot 2023-03-06 at 6 28 20 AM" src="https://user-images.githubusercontent.com/105562242/222997111-6ad30e38-59ac-44c6-a7cf-3842ff751cc6.png">
 
+
+
 ##### To verify we will check version and configuratin files under /etc/nginx. We will check nginx running or not post that.
+
+
 
 <img width="942" alt="Screenshot 2023-03-06 at 6 30 12 AM" src="https://user-images.githubusercontent.com/105562242/222997271-93096442-8c14-42e2-a6d7-5439b28261a2.png">
 
