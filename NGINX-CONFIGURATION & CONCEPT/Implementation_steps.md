@@ -1,5 +1,6 @@
 
-
+#### Connecting ec2 instace from VS Code. Installing Nginx with package manager, Building nginx from source & adding modules 
+---------------------------------------------
 
 <img width="1061" alt="Screenshot 2023-03-06 at 5 51 50 AM" src="https://user-images.githubusercontent.com/105562242/222994699-90c00899-d84b-4672-8de3-853767ec56f6.png">
 
@@ -34,3 +35,16 @@
 <img width="1091" alt="Screenshot 2023-03-06 at 6 23 39 AM" src="https://user-images.githubusercontent.com/105562242/222996775-783ec8d4-1c0d-40b3-aba9-ce6d1c0602fc.png">
 
 <img width="1018" alt="Screenshot 2023-03-06 at 6 23 59 AM" src="https://user-images.githubusercontent.com/105562242/222996800-e71e1d15-a829-4e41-bf92-6fffa3470ed9.png">
+
+
+##### Now we will ```make``` and also run ```make install```
+
+<img width="1083" alt="Screenshot 2023-03-06 at 6 27 04 AM" src="https://user-images.githubusercontent.com/105562242/222997007-5465958e-a38d-4f71-8052-dff1a7ac28e3.png">
+
+<img width="1088" alt="Screenshot 2023-03-06 at 6 28 20 AM" src="https://user-images.githubusercontent.com/105562242/222997111-6ad30e38-59ac-44c6-a7cf-3842ff751cc6.png">
+
+##### To verify we will check version and configuratin files under /etc/nginx. We will check nginx running or not post that.
+
+<img width="942" alt="Screenshot 2023-03-06 at 6 30 12 AM" src="https://user-images.githubusercontent.com/105562242/222997271-93096442-8c14-42e2-a6d7-5439b28261a2.png">
+
+<img width="1087" alt="Screenshot 2023-03-06 at 6 31 24 AM" src="https://user-images.githubusercontent.com/105562242/222997342-4cc9959e-b931-48d2-912c-4fdf5b30d504.png">
