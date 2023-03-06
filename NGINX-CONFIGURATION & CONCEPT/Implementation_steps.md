@@ -67,7 +67,7 @@
 
 
 
-#### Adding nginx service :
+### Adding nginx service :
 
 ##### To stop nginx service :
 
@@ -77,10 +77,14 @@
 
 
 
-##### We will add systemd service
+### We will add systemd service ( First we need to check if we are able to control nginx service with systemctl command. if we are able to control systemctl command then we can skip this part. we have to excute below steps in-case we are not able to control nginx service with systemctl command). To enable nginx service during boot. We have to enable with systemctl command ```systemctl enable nginx```
+--------------------------------------------------------------------
+
 
 https://www.freedesktop.org/wiki/Software/systemd/
+
 https://www.nginx.com/resources/wiki/start/topics/examples/initscripts/
+
 https://www.nginx.com/resources/wiki/start/topics/examples/systemd/
 
 ##### We will create and go to path /lib/systemd/system/nginx.service and do changes services paths as below
@@ -89,3 +93,6 @@ https://www.nginx.com/resources/wiki/start/topics/examples/systemd/
 
 
 <img width="1087" alt="Screenshot 2023-03-06 at 6 46 29 AM" src="https://user-images.githubusercontent.com/105562242/222998495-fe0de508-4d14-4d83-b730-6c7c84de1e8c.png">
+
+<img width="1072" alt="Screenshot 2023-03-06 at 7 02 30 AM" src="https://user-images.githubusercontent.com/105562242/222999978-6d054169-9c81-47cc-9b2a-93ee56273758.png">
+
