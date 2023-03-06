@@ -64,3 +64,28 @@
 <img width="942" alt="Screenshot 2023-03-06 at 6 30 12 AM" src="https://user-images.githubusercontent.com/105562242/222997271-93096442-8c14-42e2-a6d7-5439b28261a2.png">
 
 <img width="1087" alt="Screenshot 2023-03-06 at 6 31 24 AM" src="https://user-images.githubusercontent.com/105562242/222997342-4cc9959e-b931-48d2-912c-4fdf5b30d504.png">
+
+
+
+#### Adding nginx service :
+
+##### To stop nginx service :
+
+<img width="1087" alt="Screenshot 2023-03-06 at 6 39 23 AM" src="https://user-images.githubusercontent.com/105562242/222997859-836271a7-a18c-4c8e-a996-d96f557e716a.png">
+
+<img width="1086" alt="Screenshot 2023-03-06 at 6 39 40 AM" src="https://user-images.githubusercontent.com/105562242/222997893-a9e80846-2d59-4daa-aee1-b441484387a4.png">
+
+
+
+##### We will add systemd service
+
+https://www.freedesktop.org/wiki/Software/systemd/
+https://www.nginx.com/resources/wiki/start/topics/examples/initscripts/
+https://www.nginx.com/resources/wiki/start/topics/examples/systemd/
+
+##### We will create and go to path /lib/systemd/system/nginx.service and do changes services paths as below
+
+<img width="846" alt="Screenshot 2023-03-06 at 6 48 20 AM" src="https://user-images.githubusercontent.com/105562242/222998671-672ebe79-f018-435a-b4b4-ccf249fdcfcf.png">
+
+
+<img width="1087" alt="Screenshot 2023-03-06 at 6 46 29 AM" src="https://user-images.githubusercontent.com/105562242/222998495-fe0de508-4d14-4d83-b730-6c7c84de1e8c.png">
