@@ -134,3 +134,42 @@ http {
 ##### To fix any type we have to use mime.types. below we can see it includes all file types hence we have mentioned the same in nginx.conf file ```include mime.types;```
 
 <img width="713" alt="Screenshot 2023-03-06 at 8 59 38 AM" src="https://user-images.githubusercontent.com/105562242/223013182-8ac6fb25-5f90-4691-81dc-80c0effabb45.png">
+
+
+
+##### Location blocks : this is require when we navigate to another file. means static web page to another page. below we can see from static web page when we are navigating to another page its giving error which we will fix it. 
+
+
+<img width="1324" alt="Screenshot 2023-03-06 at 9 05 11 AM" src="https://user-images.githubusercontent.com/105562242/223013849-eaf7afc0-a386-42ed-b5b9-5c5eaf2a6312.png">
+
+<img width="1076" alt="Screenshot 2023-03-06 at 9 04 13 AM" src="https://user-images.githubusercontent.com/105562242/223013721-7aa523ee-7d35-401a-a394-9e9c2edcdd64.png">
+
+#### Please refer below sintex for prefix match to navigate to another page
+
+```
+   # Preferential Prefix match
+    location ^~ /Greet2 {
+      return 200 'Hello from NGINX "/greet" location.';
+    }
+
+    # # Exact match
+    # location = /greet {
+    #   return 200 'Hello from NGINX "/greet" location - EXACT MATCH.';
+    # }
+
+    # # REGEX match - case sensitive
+    # location ~ /greet[0-9] {
+    #   return 200 'Hello from NGINX "/greet" location - REGEX MATCH.';
+    # }
+
+    # REGEX match - case insensitive
+    location ~* /greet[0-9] {
+      return 200 'Hello from NGINX "/greet" location - REGEX MATCH INSENSITIVE.';
+      
+ ```
+
+<img width="906" alt="Screenshot 2023-03-06 at 9 34 46 AM" src="https://user-images.githubusercontent.com/105562242/223017097-391477e9-c3a5-44b1-a1df-7fa9b43ef8d9.png">
+
+<img width="793" alt="Screenshot 2023-03-06 at 9 35 01 AM" src="https://user-images.githubusercontent.com/105562242/223017128-443e4eaa-ccb4-4bd5-ba35-c76ffb95f420.png">
+
+<img width="863" alt="Screenshot 2023-03-06 at 9 35 30 AM" src="https://user-images.githubusercontent.com/105562242/223017168-529eb84b-c94b-4878-a797-bd273a05d48f.png">
