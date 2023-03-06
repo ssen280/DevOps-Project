@@ -99,4 +99,38 @@ https://www.nginx.com/resources/wiki/start/topics/examples/systemd/
 
 <img width="1072" alt="Screenshot 2023-03-06 at 7 02 30 AM" src="https://user-images.githubusercontent.com/105562242/222999978-6d054169-9c81-47cc-9b2a-93ee56273758.png">
 
-a
+
+
+#### Configuring vitual host : We will do configuration change in /etc/nginx/nginx.conf file and direct the path to our index file. Then we will reload nginx. please note : stop start needs downtime but reload does not hence we will use ```systemctl reload nginx```
+
+```
+events {}
+
+http {
+
+  include mime.types;
+
+  server {
+
+    listen 80;
+    server_name 34.234.201.126;
+
+    root /sites/demo;
+  }
+}
+
+```
+
+##### To check configuration is ok post changes. we will run ```nginx -t```
+
+<img width="866" alt="Screenshot 2023-03-06 at 8 55 09 AM" src="https://user-images.githubusercontent.com/105562242/223012638-ad1d52dd-2515-4c5c-9b0c-741d41deb1bb.png">
+
+<img width="798" alt="Screenshot 2023-03-06 at 8 54 30 AM" src="https://user-images.githubusercontent.com/105562242/223012557-19ddc601-6b78-4019-80c9-9175d8939c51.png">
+
+##### To verify if sytle.css file loaded perfeclty not we have to curl our web address. Here we can see Content-Type: text/css
+
+<img width="740" alt="Screenshot 2023-03-06 at 8 57 18 AM" src="https://user-images.githubusercontent.com/105562242/223012905-af2745c5-33d7-4a8b-b855-eb888e482ca4.png">
+
+##### To fix any type we have to use mime.types. below we can see it includes all file types hence we have mentioned the same in nginx.conf file ```include mime.types;```
+
+<img width="713" alt="Screenshot 2023-03-06 at 8 59 38 AM" src="https://user-images.githubusercontent.com/105562242/223013182-8ac6fb25-5f90-4691-81dc-80c0effabb45.png">
