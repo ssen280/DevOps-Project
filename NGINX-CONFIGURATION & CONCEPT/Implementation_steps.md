@@ -2,6 +2,9 @@
 #### Connecting ec2 instace from VS Code. Installing Nginx with package manager, Building nginx from source & adding modules 
 ---------------------------------------------
 
+<img width="871" alt="Screenshot 2023-03-06 at 8 23 31 AM" src="https://user-images.githubusercontent.com/105562242/223008772-64c5c175-afb8-4550-826f-d82fda95ef54.png">
+
+
 <img width="1061" alt="Screenshot 2023-03-06 at 5 51 50 AM" src="https://user-images.githubusercontent.com/105562242/222994699-90c00899-d84b-4672-8de3-853767ec56f6.png">
 
 <img width="1088" alt="Screenshot 2023-03-06 at 5 52 51 AM" src="https://user-images.githubusercontent.com/105562242/222994755-88466785-ddc5-40d9-8fc3-7a484aea9abd.png">
