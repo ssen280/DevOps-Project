@@ -19,7 +19,7 @@
 
 ```tar -zxvf nginx-1.23.3.tar.gz ``` 
 
-##### We have to run ./configure script to check all necessay tools are installed.To install compiler and all necessary tools : ```tar -zxvf nginx-1.23.3.tar.gz``` need to run. Post we will run ./configure script again to check all are good. 
+### We have to run ./configure script to check all necessay tools are installed.To install compiler and all necessary tools : ```tar -zxvf nginx-1.23.3.tar.gz``` need to run. Post we will run ./configure script again to check all are good. 
 
 
 
@@ -29,7 +29,7 @@
 
 
 
-##### Below libary is missing. we will install it. ```apt-get install libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev``` We will run again ./configure script and we will see all good.
+### Below libary is missing. we will install it. ```apt-get install libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev``` We will run again ./configure script and we will see all good.
 
 
 
@@ -39,7 +39,7 @@
 
 
 
-##### Please refer :- https://nginx.org/en/docs/configure.html. we will configure paths. 
+### Please refer :- https://nginx.org/en/docs/configure.html. we will configure paths. 
 
 
 
