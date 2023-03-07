@@ -260,3 +260,13 @@ http {
 <img width="974" alt="Screenshot 2023-03-07 at 8 34 37 PM" src="https://user-images.githubusercontent.com/105562242/223461613-c9d027fe-6403-4e6e-a722-78d331b67587.png">
 
 <img width="1187" alt="Screenshot 2023-03-07 at 8 36 32 PM" src="https://user-images.githubusercontent.com/105562242/223462169-f6238468-2bf3-44ab-aa36-315c54450527.png">
+
+#### Worker Processes : There are two processes 1. Master processes 2. worker processes. if we want we can increase workers processes. We can increase worer processes by mentoning it in nginx.conf file and we can set to auto as well 
+
+<img width="965" alt="Screenshot 2023-03-07 at 9 02 49 PM" src="https://user-images.githubusercontent.com/105562242/223469626-f0a5ae9e-0cbe-492d-b1d2-00982ac465df.png">
+
+<img width="509" alt="Screenshot 2023-03-07 at 9 06 29 PM" src="https://user-images.githubusercontent.com/105562242/223470658-711b03a3-299c-4a23-9c8e-31c02c677b29.png">
+
+<img width="575" alt="Screenshot 2023-03-07 at 9 10 18 PM" src="https://user-images.githubusercontent.com/105562242/223471869-518b23bd-a3f8-4c22-97db-f4f51676ba55.png">
+
+<img width="997" alt="Screenshot 2023-03-07 at 9 11 03 PM" src="https://user-images.githubusercontent.com/105562242/223472089-a47b4bf0-98cf-4a17-83a4-65d189ade69d.png">
