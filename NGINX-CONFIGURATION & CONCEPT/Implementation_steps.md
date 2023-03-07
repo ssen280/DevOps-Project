@@ -252,6 +252,11 @@ http {
 
 #### Here we can see nginx and php processs are running under same user hence there is not issue to access php info file. incase we get error while accessig info.php file then we have to check if both processes are running same user and we have to correct it. 
 
+#### Here we have added the user name in nginx.conf file instead of using chmod command to change user permission
+
+<img width="717" alt="Screenshot 2023-03-07 at 8 39 01 PM" src="https://user-images.githubusercontent.com/105562242/223462859-10bcc8c7-d73b-4f5e-86f2-cdb6a8302ac8.png">
+
+
 <img width="974" alt="Screenshot 2023-03-07 at 8 34 37 PM" src="https://user-images.githubusercontent.com/105562242/223461613-c9d027fe-6403-4e6e-a722-78d331b67587.png">
 
 <img width="1187" alt="Screenshot 2023-03-07 at 8 36 32 PM" src="https://user-images.githubusercontent.com/105562242/223462169-f6238468-2bf3-44ab-aa36-315c54450527.png">
