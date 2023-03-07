@@ -270,3 +270,10 @@ http {
 <img width="575" alt="Screenshot 2023-03-07 at 9 10 18 PM" src="https://user-images.githubusercontent.com/105562242/223471869-518b23bd-a3f8-4c22-97db-f4f51676ba55.png">
 
 <img width="997" alt="Screenshot 2023-03-07 at 9 11 03 PM" src="https://user-images.githubusercontent.com/105562242/223472089-a47b4bf0-98cf-4a17-83a4-65d189ade69d.png">
+
+### Adding dynamic modules : We have install nginx the way did at first tiime from same installation folder. and we have to search for the dynamic module and install with with ./configure scrpit followed by make and make install commands. 
+
+<img width="645" alt="Screenshot 2023-03-08 at 1 16 03 AM" src="https://user-images.githubusercontent.com/105562242/223535751-219b4675-c20c-41d9-91af-684838788c83.png">
+
+<img width="1107" alt="Screenshot 2023-03-08 at 1 18 35 AM" src="https://user-images.githubusercontent.com/105562242/223536394-1426125c-135e-432b-b9b4-ecdbe6fcd169.png">
+
