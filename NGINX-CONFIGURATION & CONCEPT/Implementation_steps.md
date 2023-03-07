@@ -229,3 +229,29 @@ http {
 <img width="723" alt="Screenshot 2023-03-07 at 9 04 32 AM" src="https://user-images.githubusercontent.com/105562242/223314075-d6582eea-8e48-471e-be24-417a6dd93404.png">
 
 
+### Inheritince & Directive Types : 1. Standard 2. Array 3. Action . Please refer github source code for code details 
+
+### PHP Processing : Here we see how to configure dynamic site content where we use php. here requiest goes to nginx first then nginx forward the request to php content and php concent then send the dynamic content to nginx and nginx shows the dynamic content to requester. 
+
+#### First we will install php on server 
+
+<img width="970" alt="Screenshot 2023-03-07 at 8 03 11 PM" src="https://user-images.githubusercontent.com/105562242/223452942-7bf8d253-f8ba-4d46-a335-8c6d16f71f43.png">
+
+<img width="977" alt="Screenshot 2023-03-07 at 8 04 32 PM" src="https://user-images.githubusercontent.com/105562242/223453298-ae1dc622-9d1f-418b-82c9-9286b7335695.png">
+
+<img width="974" alt="Screenshot 2023-03-07 at 8 05 15 PM" src="https://user-images.githubusercontent.com/105562242/223453508-c6e9ef14-08de-4847-befe-47cfdb9ccc4a.png">
+
+<img width="739" alt="Screenshot 2023-03-07 at 8 28 11 PM" src="https://user-images.githubusercontent.com/105562242/223459875-a11d853e-b5e1-44e0-b25a-d785e76b0af5.png">
+
+<img width="893" alt="Screenshot 2023-03-07 at 8 30 28 PM" src="https://user-images.githubusercontent.com/105562242/223460456-b4f62fc6-cb28-4d65-b6fa-4fc5d8f53c8d.png">
+
+<img width="1086" alt="Screenshot 2023-03-07 at 8 30 43 PM" src="https://user-images.githubusercontent.com/105562242/223460515-8b899a33-a8f2-4a23-88b4-a969ea82ee09.png">
+
+<img width="975" alt="Screenshot 2023-03-07 at 8 33 23 PM" src="https://user-images.githubusercontent.com/105562242/223461256-4402171c-7c4b-4e3a-a41e-2315bbd519b3.png">
+
+
+#### Here we can see nginx and php processs are running under same user hence there is not issue to access php info file. incase we get error while accessig info.php file then we have to check if both processes are running same user and we have to correct it. 
+
+<img width="974" alt="Screenshot 2023-03-07 at 8 34 37 PM" src="https://user-images.githubusercontent.com/105562242/223461613-c9d027fe-6403-4e6e-a722-78d331b67587.png">
+
+<img width="1187" alt="Screenshot 2023-03-07 at 8 36 32 PM" src="https://user-images.githubusercontent.com/105562242/223462169-f6238468-2bf3-44ab-aa36-315c54450527.png">
