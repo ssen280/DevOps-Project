@@ -175,3 +175,34 @@ http {
 <img width="863" alt="Screenshot 2023-03-06 at 9 35 30 AM" src="https://user-images.githubusercontent.com/105562242/223017168-529eb84b-c94b-4878-a797-bd273a05d48f.png">
 
 
+### Variables : There are two type of variables 1. We create our own variables 2. nginx in-build variables 
+
+### Nginx build in variables : https://nginx.org/en/docs/varindex.html
+
+### Here we can see below variables are in-build : $host , $uri, $args
+
+<img width="669" alt="Screenshot 2023-03-07 at 7 42 13 AM" src="https://user-images.githubusercontent.com/105562242/223301645-04cfa647-b0e0-4787-8712-552958aa6402.png">
+
+<img width="768" alt="Screenshot 2023-03-07 at 7 42 26 AM" src="https://user-images.githubusercontent.com/105562242/223301681-5e77c42a-d2bf-4690-8437-c94a67cbc1a0.png">
+
+### Here we can use our own variable and declare it. 
+
+<img width="701" alt="Screenshot 2023-03-07 at 8 03 09 AM" src="https://user-images.githubusercontent.com/105562242/223304666-022c39e3-c800-487c-81f1-d1537ef4452c.png">
+
+<img width="644" alt="Screenshot 2023-03-07 at 8 03 25 AM" src="https://user-images.githubusercontent.com/105562242/223304702-92f64115-be2b-4ba1-814a-738f27b4306f.png">
+
+### Few more exampls : https://github.com/ssen280/NGINX-CONFIGURATION-CONCEPT/blob/main/cnfiguration/03%2BVariables.conf
+
+### Rewrites & Redirects : return statement take a status code (200) and return a string but but with return statement takes a redirect code (307) then it return a path
+
+<img width="787" alt="Screenshot 2023-03-07 at 8 13 36 AM" src="https://user-images.githubusercontent.com/105562242/223306724-97645a8a-0a18-4c89-9e35-3a5bcae50077.png">
+
+<img width="776" alt="Screenshot 2023-03-07 at 8 15 14 AM" src="https://user-images.githubusercontent.com/105562242/223306951-49998987-11bc-41d6-9668-696f5fa37f09.png">
+
+<img width="771" alt="Screenshot 2023-03-07 at 8 16 25 AM" src="https://user-images.githubusercontent.com/105562242/223307126-7d220d96-2321-4e3e-9e2b-a58ab11a949b.png">
+
+<img width="462" alt="Screenshot 2023-03-07 at 8 19 01 AM" src="https://user-images.githubusercontent.com/105562242/223307512-bf3ecff3-478c-4fae-882a-c0eb4c2c1cac.png">
+
+<img width="1005" alt="Screenshot 2023-03-07 at 8 19 16 AM" src="https://user-images.githubusercontent.com/105562242/223307544-fd3625f5-e9f7-4d0e-b8ec-9b37702e8320.png">
+
+
