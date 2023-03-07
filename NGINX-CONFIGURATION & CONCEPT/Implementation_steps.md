@@ -1,5 +1,5 @@
 
-#### Connecting ec2 instace from VS Code. Installing Nginx with package manager, Building nginx from source & adding modules 
+### Connecting ec2 instace from VS Code. Installing Nginx with package manager, Building nginx from source & adding modules 
 ---------------------------------------------
 
 <img width="871" alt="Screenshot 2023-03-06 at 8 23 31 AM" src="https://user-images.githubusercontent.com/105562242/223008772-64c5c175-afb8-4550-826f-d82fda95ef54.png">
@@ -50,7 +50,7 @@
 <img width="1018" alt="Screenshot 2023-03-06 at 6 23 59 AM" src="https://user-images.githubusercontent.com/105562242/222996800-e71e1d15-a829-4e41-bf92-6fffa3470ed9.png">
 
 
-##### Now we will ```make``` and also run ```make install```
+### Now we will ```make``` and also run ```make install```
 
 
 
@@ -60,7 +60,7 @@
 
 
 
-##### To verify we will check version and configuratin files under /etc/nginx. We will check nginx running or not post that.
+### To verify we will check version and configuratin files under /etc/nginx. We will check nginx running or not post that.
 
 
 
@@ -72,7 +72,7 @@
 
 ### Adding nginx service :
 
-##### To stop nginx service :
+### To stop nginx service :
 
 <img width="1087" alt="Screenshot 2023-03-06 at 6 39 23 AM" src="https://user-images.githubusercontent.com/105562242/222997859-836271a7-a18c-4c8e-a996-d96f557e716a.png">
 
@@ -90,7 +90,7 @@ https://www.nginx.com/resources/wiki/start/topics/examples/initscripts/
 
 https://www.nginx.com/resources/wiki/start/topics/examples/systemd/
 
-##### We will create and go to path /lib/systemd/system/nginx.service and do changes services paths as below
+### We will create and go to path /lib/systemd/system/nginx.service and do changes services paths as below
 
 <img width="846" alt="Screenshot 2023-03-06 at 6 48 20 AM" src="https://user-images.githubusercontent.com/105562242/222998671-672ebe79-f018-435a-b4b4-ccf249fdcfcf.png">
 
@@ -101,7 +101,7 @@ https://www.nginx.com/resources/wiki/start/topics/examples/systemd/
 
 
 
-#### Configuring vitual host : We will do configuration change in /etc/nginx/nginx.conf file and direct the path to our index file. Then we will reload nginx. please note : stop start needs downtime but reload does not hence we will use ```systemctl reload nginx```
+### Configuring vitual host : We will do configuration change in /etc/nginx/nginx.conf file and direct the path to our index file. Then we will reload nginx. please note : stop start needs downtime but reload does not hence we will use ```systemctl reload nginx```
 
 ```
 events {}
@@ -121,23 +121,23 @@ http {
 
 ```
 
-##### To check configuration is ok post changes. we will run ```nginx -t```
+### To check configuration is ok post changes. we will run ```nginx -t```
 
 <img width="866" alt="Screenshot 2023-03-06 at 8 55 09 AM" src="https://user-images.githubusercontent.com/105562242/223012638-ad1d52dd-2515-4c5c-9b0c-741d41deb1bb.png">
 
 <img width="798" alt="Screenshot 2023-03-06 at 8 54 30 AM" src="https://user-images.githubusercontent.com/105562242/223012557-19ddc601-6b78-4019-80c9-9175d8939c51.png">
 
-##### To verify if sytle.css file loaded perfeclty not we have to curl our web address. Here we can see Content-Type: text/css
+### To verify if sytle.css file loaded perfeclty not we have to curl our web address. Here we can see Content-Type: text/css
 
 <img width="740" alt="Screenshot 2023-03-06 at 8 57 18 AM" src="https://user-images.githubusercontent.com/105562242/223012905-af2745c5-33d7-4a8b-b855-eb888e482ca4.png">
 
-##### To fix any type we have to use mime.types. below we can see it includes all file types hence we have mentioned the same in nginx.conf file ```include mime.types;```
+### To fix any type we have to use mime.types. below we can see it includes all file types hence we have mentioned the same in nginx.conf file ```include mime.types;```
 
 <img width="713" alt="Screenshot 2023-03-06 at 8 59 38 AM" src="https://user-images.githubusercontent.com/105562242/223013182-8ac6fb25-5f90-4691-81dc-80c0effabb45.png">
 
 
 
-##### Location blocks : this is require when we navigate to another file. means static web page to another page. below we can see from static web page when we are navigating to another page its giving error which we will fix it. 
+### Location blocks : this is require when we navigate to another file. means static web page to another page. below we can see from static web page when we are navigating to another page its giving error which we will fix it. 
 
 
 <img width="1324" alt="Screenshot 2023-03-06 at 9 05 11 AM" src="https://user-images.githubusercontent.com/105562242/223013849-eaf7afc0-a386-42ed-b5b9-5c5eaf2a6312.png">
