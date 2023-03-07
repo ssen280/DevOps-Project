@@ -205,4 +205,27 @@ http {
 
 <img width="1005" alt="Screenshot 2023-03-07 at 8 19 16 AM" src="https://user-images.githubusercontent.com/105562242/223307544-fd3625f5-e9f7-4d0e-b8ec-9b37702e8320.png">
 
+### try_files : it tries aurument one by one. and which is true display that. when we use $arg it checks absolute path and go each argument one by one and only last argument do the re-write. /nothing path does not exist hence last argument did the re-write
+
+
+<img width="791" alt="Screenshot 2023-03-07 at 8 47 11 AM" src="https://user-images.githubusercontent.com/105562242/223311597-1719eaec-7aad-4481-925a-a4d1d8cb1e3b.png">
+
+<img width="751" alt="Screenshot 2023-03-07 at 8 47 22 AM" src="https://user-images.githubusercontent.com/105562242/223311629-b692232c-8c47-4967-9842-ba8ef44c5f59.png">
+
+### Logging : Nginx provides two logs type : 1. error.log 2.access.log. log path : /var/log/nginx
+
+<img width="771" alt="Screenshot 2023-03-07 at 8 53 54 AM" src="https://user-images.githubusercontent.com/105562242/223312556-7be498b0-14dd-486a-a2f1-fe5e9bee0db4.png">
+
+
+<img width="832" alt="Screenshot 2023-03-07 at 8 59 09 AM" src="https://user-images.githubusercontent.com/105562242/223313336-8f730b57-ca48-42c5-a396-2f14c3a55517.png">
+
+
+
+<img width="686" alt="Screenshot 2023-03-07 at 9 02 22 AM" src="https://user-images.githubusercontent.com/105562242/223313780-4fdb89c1-4dcb-47f3-9960-45a903a84fa5.png">
+
+
+<img width="973" alt="Screenshot 2023-03-07 at 9 04 11 AM" src="https://user-images.githubusercontent.com/105562242/223314029-5113fe74-7f85-4ed7-8301-777e35a7b68c.png">
+
+<img width="723" alt="Screenshot 2023-03-07 at 9 04 32 AM" src="https://user-images.githubusercontent.com/105562242/223314075-d6582eea-8e48-471e-be24-417a6dd93404.png">
+
 
