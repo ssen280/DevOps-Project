@@ -277,3 +277,41 @@ http {
 
 <img width="1107" alt="Screenshot 2023-03-08 at 1 18 35 AM" src="https://user-images.githubusercontent.com/105562242/223536394-1426125c-135e-432b-b9b4-ecdbe6fcd169.png">
 
+
+#### ssl and http_v2 enable : we have to use ./configure scrpit from installtion folder and get the moudele for http_v2 and re-install it. 
+     1. got to installtion folder
+     2. get current configuration ```ningx -V``` and save it
+     3. get module details by running ```./configure --help | grep http_v2
+     4. get the module detals and run it with existing moudle with ./configure script
+     5. run ```make``
+     6. run ```make install```
+     
+#### We will create open-ssl self signed cert to use ssl. 
+
+
+<img width="972" alt="Screenshot 2023-03-08 at 9 41 05 AM" src="https://user-images.githubusercontent.com/105562242/223617589-2cde8e36-af52-443e-9a92-f422ca17b771.png">
+
+<img width="1401" alt="Screenshot 2023-03-08 at 9 47 03 AM" src="https://user-images.githubusercontent.com/105562242/223618295-ed3a7bde-c343-4ccb-be7b-a23a907a5d2a.png">
+
+<img width="839" alt="Screenshot 2023-03-08 at 9 47 48 AM" src="https://user-images.githubusercontent.com/105562242/223618411-af6bdbb1-4c7c-443d-854c-d1c87f0ed3e7.png">
+
+
+#### Server push : here we can see we are getting seperate files are send, not along with index.html. we will install server push to deal with it. 
+
+https://www.nginx.com/blog/nginx-1-13-9-http2-server-push/
+
+https://nghttp2.org/
+
+<img width="959" alt="Screenshot 2023-03-08 at 9 53 56 AM" src="https://user-images.githubusercontent.com/105562242/223619154-97f2c349-a23e-446e-a703-d765515a2c56.png">
+
+<img width="975" alt="Screenshot 2023-03-08 at 9 54 50 AM" src="https://user-images.githubusercontent.com/105562242/223619257-0b86bce4-62ec-47ad-88dc-df2dcff7524e.png">
+
+<img width="835" alt="Screenshot 2023-03-08 at 9 56 49 AM" src="https://user-images.githubusercontent.com/105562242/223619503-449c5e88-0707-4253-8503-8528768cc262.png">
+
+<img width="842" alt="Screenshot 2023-03-08 at 9 57 30 AM" src="https://user-images.githubusercontent.com/105562242/223619584-4a005a1d-9b92-4e31-95fd-5df302499b7a.png">
+
+#### we will add below two lines and reload nginx and run the test again. ```*``` means push response.
+
+<img width="786" alt="Screenshot 2023-03-08 at 10 00 05 AM" src="https://user-images.githubusercontent.com/105562242/223619920-8e3c6888-a271-49cb-bbab-f08d16cc8e41.png">
+
+<img width="981" alt="Screenshot 2023-03-08 at 10 01 13 AM" src="https://user-images.githubusercontent.com/105562242/223620085-c5904948-1b90-48fe-b8da-9ecd4c723798.png">
