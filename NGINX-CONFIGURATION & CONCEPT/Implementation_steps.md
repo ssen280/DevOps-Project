@@ -315,3 +315,37 @@ https://nghttp2.org/
 <img width="786" alt="Screenshot 2023-03-08 at 10 00 05 AM" src="https://user-images.githubusercontent.com/105562242/223619920-8e3c6888-a271-49cb-bbab-f08d16cc8e41.png">
 
 <img width="981" alt="Screenshot 2023-03-08 at 10 01 13 AM" src="https://user-images.githubusercontent.com/105562242/223620085-c5904948-1b90-48fe-b8da-9ecd4c723798.png">
+
+
+### Security : 
+
+#### Parameters :
+
+** Disable SSL (use TLS only)
+** Optimise cipher suits
+** Enable DH Praams
+** Enable HSTS
+** Cache SSL Sessions
+
+#### We will generate dhparam cert. same 2048 we have to use which we have to used to genereate self signed cert. 
+
+```openssl dhparam  -out /etc/nginx/ssl/dhparam.pem 2048```
+
+<img width="925" alt="Screenshot 2023-03-08 at 10 27 48 AM" src="https://user-images.githubusercontent.com/105562242/223623409-a1f70cf8-ba98-4008-9feb-d4ef77b21862.png">
+
+<img width="808" alt="Screenshot 2023-03-08 at 10 27 57 AM" src="https://user-images.githubusercontent.com/105562242/223623441-2d1ea2b8-2156-4c32-8dc4-de393f5b4bc1.png">
+
+<img width="878" alt="Screenshot 2023-03-08 at 10 34 25 AM" src="https://user-images.githubusercontent.com/105562242/223624249-09218732-2d98-484b-8230-41dd5c6c2dc5.png">
+
+<img width="809" alt="Screenshot 2023-03-08 at 10 34 36 AM" src="https://user-images.githubusercontent.com/105562242/223624257-58d304cc-3aeb-456e-9a01-e5fd1ff4d139.png">
+
+#### Rate limiting :
+
+ ##### Use for :
+
+** Security : Brute force protection
+** Reliability : Prevent traffic spikes
+** Shaping : Service priority
+
+
+<img width="972" alt="Screenshot 2023-03-08 at 10 41 53 AM" src="https://user-images.githubusercontent.com/105562242/223625198-6ad34509-cfa6-42ba-adb3-c255a976c810.png">
