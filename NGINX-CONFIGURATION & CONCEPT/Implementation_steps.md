@@ -349,3 +349,24 @@ https://nghttp2.org/
 
 
 <img width="972" alt="Screenshot 2023-03-08 at 10 41 53 AM" src="https://user-images.githubusercontent.com/105562242/223625198-6ad34509-cfa6-42ba-adb3-c255a976c810.png">
+
+<img width="900" alt="Screenshot 2023-03-08 at 10 55 44 AM" src="https://user-images.githubusercontent.com/105562242/223626902-6a5f9c08-d116-4de6-8201-d7ab90b31e52.png">
+
+<img width="773" alt="Screenshot 2023-03-08 at 10 55 57 AM" src="https://user-images.githubusercontent.com/105562242/223626914-1e7a22c8-5c74-41f9-84bb-831a91d057f6.png">
+
+<img width="879" alt="Screenshot 2023-03-08 at 11 04 48 AM" src="https://user-images.githubusercontent.com/105562242/223628045-dfe33b37-bb94-499e-a678-a0ba2bb260c7.png">
+
+
+#### Basic auth :
+
+<img width="963" alt="Screenshot 2023-03-08 at 11 11 16 AM" src="https://user-images.githubusercontent.com/105562242/223628902-b32e7b7f-d2c9-4bfc-af13-1f453d1ccdfb.png">
+
+<img width="903" alt="Screenshot 2023-03-08 at 11 12 48 AM" src="https://user-images.githubusercontent.com/105562242/223629106-b466fdfb-4999-4d9c-aa6c-24803f520a20.png">
+
+<img width="1102" alt="Screenshot 2023-03-08 at 11 15 12 AM" src="https://user-images.githubusercontent.com/105562242/223629469-87e4d64c-0488-420d-bf25-6d789bfd5f37.png">
+
+
+#### Hardening : Please refer shared github code link for more detials. we will remove build in without http auto index module
+
+### Reverse proxy & load-balancer : Please refer my projects in DevOps projects section regarding this
+
